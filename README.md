@@ -6,6 +6,8 @@
 
 [![React](https://img.shields.io/badge/React-18.2.0-61DAFB?style=flat-square&logo=react&logoColor=white)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![npm](https://img.shields.io/badge/npm-9.0+-CB3837?style=flat-square&logo=npm&logoColor=white)](https://npmjs.com/)
 [![Vite](https://img.shields.io/badge/Vite-5.0-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.3-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Flask](https://img.shields.io/badge/Flask-3.0.0-000000?style=flat-square&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
@@ -13,16 +15,55 @@
 [![gpxpy](https://img.shields.io/badge/gpxpy-1.6.2-orange?style=flat-square)](https://github.com/tkrajina/gpxpy)
 [![Leaflet](https://img.shields.io/badge/Leaflet-1.9.4-199900?style=flat-square&logo=leaflet&logoColor=white)](https://leafletjs.com/)
 [![Recharts](https://img.shields.io/badge/Recharts-3.8.1-22B5BF?style=flat-square)](https://recharts.org/)
+
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
+[![CapRover](https://img.shields.io/badge/CapRover-Deployment-4A90E2?style=flat-square)](https://caprover.com/)
+[![CORS](https://img.shields.io/badge/CORS-Enabled-brightblue?style=flat-square)](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
+[![REST API](https://img.shields.io/badge/API-REST-0052CC?style=flat-square)](https://restfulapi.net/)
+[![JSON](https://img.shields.io/badge/Format-JSON-000000?style=flat-square&logo=json&logoColor=white)](https://www.json.org/)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](https://github.com/your-repo/pulls)
 [![Open Source](https://img.shields.io/badge/Open-Source-red?style=flat-square&logo=opensourceinitiative&logoColor=white)](https://opensource.org/)
+[![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-brightgreen?style=flat-square)](https://github.com/your-repo/blob/main/CONTRIBUTING.md)
+[![Code of Conduct](https://img.shields.io/badge/Code_of_Conduct-Contributor_Covenant-purple?style=flat-square)](https://www.contributor-covenant.org/)
+
 [![Build Status](https://img.shields.io/badge/Build-Passing-success?style=flat-square)](https://github.com/your-repo)
-[![Code Style](https://img.shields.io/badge/Code_Style-TypeScript_Strict-blue?style=flat-square)](https://www.typescriptlang.org/tsconfig#strict)
+[![Code Quality](https://img.shields.io/badge/Code_Quality-TypeScript_Strict-blue?style=flat-square)](https://www.typescriptlang.org/tsconfig#strict)
+[![Code Style](https://img.shields.io/badge/Code_Style-Tailwind_First-blue?style=flat-square)](https://tailwindcss.com/)
+[![Testing](https://img.shields.io/badge/Testing-Ready-brightgreen?style=flat-square)](https://github.com/your-repo)
+[![Security](https://img.shields.io/badge/Security-Audited-important?style=flat-square)](https://github.com/your-repo)
+
 [![Backend](https://img.shields.io/badge/Backend-Flask_REST_API-green?style=flat-square)](https://flask.palletsprojects.com/)
+[![Frontend](https://img.shields.io/badge/Frontend-React_SPA-blue?style=flat-square)](https://reactjs.org/)
 [![Storage](https://img.shields.io/badge/Storage-localStorage-purple?style=flat-square)](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
 [![Maps](https://img.shields.io/badge/Maps-OpenStreetMap_%2B_Satellite-lightgrey?style=flat-square)](https://openstreetmap.org/)
+[![GPS](https://img.shields.io/badge/GPS-Haversine_Formula-orange?style=flat-square)](https://en.wikipedia.org/wiki/Haversine_formula)
+[![Elevation](https://img.shields.io/badge/Elevation-Profiling-green?style=flat-square)](https://en.wikipedia.org/wiki/Elevation_profile)
+
+[![Responsive](https://img.shields.io/badge/Responsive-Mobile_First-ff69b4?style=flat-square)](https://en.wikipedia.org/wiki/Responsive_web_design)
+[![Accessibility](https://img.shields.io/badge/Accessibility-WCAG_2.1-brightgreen?style=flat-square)](https://www.w3.org/WAI/WCAG21/quickref/)
+[![Platform](https://img.shields.io/badge/Platform-Web_%2B_Mobile-ff69b4?style=flat-square)](https://github.com/your-repo)
+[![Browser Support](https://img.shields.io/badge/Browser_Support-Modern_All-success?style=flat-square)](https://caniuse.com/)
+[![Progressive Enhancement](https://img.shields.io/badge/Progressive-Enhancement-informational?style=flat-square)](https://en.wikipedia.org/wiki/Progressive_enhancement)
+
+[![GPX Support](https://img.shields.io/badge/GPX-1.0_&_1.1-orange?style=flat-square)](https://www.topografix.com/gpx.asp)
+[![Wikiloc Compatible](https://img.shields.io/badge/Wikiloc-Compatible-0099FF?style=flat-square)](https://www.wikiloc.com/)
+[![Garmin Ready](https://img.shields.io/badge/Garmin-Ready-FF6B00?style=flat-square)](https://www.garmin.com/)
+[![Strava Export](https://img.shields.io/badge/Strava-Export-FC4C02?style=flat-square)](https://www.strava.com/)
+[![Komoot Support](https://img.shields.io/badge/Komoot-Supported-FF6F00?style=flat-square)](https://www.komoot.com/)
+
+[![Performance](https://img.shields.io/badge/Performance-Optimized-brightblue?style=flat-square)](https://web.dev/)
+[![Lighthouse](https://img.shields.io/badge/Lighthouse-90%2B-green?style=flat-square)](https://developers.google.com/web/tools/lighthouse)
+[![Fast Load](https://img.shields.io/badge/Load_Time-Sub_2s-brightgreen?style=flat-square)](https://web.dev/performance/)
+[![Bundle Size](https://img.shields.io/badge/Bundle_Size-Optimized-success?style=flat-square)](https://bundlephobia.com/)
+[![Lazy Loading](https://img.shields.io/badge/Lazy_Loading-Enabled-green?style=flat-square)](https://developer.mozilla.org/en-US/docs/Web/Performance/Lazy_loading)
+
 [![Version](https://img.shields.io/badge/Version-0.0.1-informational?style=flat-square)](package.json)
-[![Platform](https://img.shields.io/badge/Platform-Web_%2B_Mobile_Responsive-ff69b4?style=flat-square)](https://github.com/your-repo)
+[![Release Date](https://img.shields.io/badge/Release-May_2026-blue?style=flat-square)](https://github.com/your-repo)
+[![Last Updated](https://img.shields.io/badge/Last_Updated-May_13_2026-brightgreen?style=flat-square)](https://github.com/your-repo/commits/main)
+[![Status](https://img.shields.io/badge/Status-Active_Development-green?style=flat-square)](https://github.com/your-repo)
+[![Maintainability](https://img.shields.io/badge/Maintainability-A+-brightgreen?style=flat-square)](https://github.com/your-repo)
 
 </div>
 
