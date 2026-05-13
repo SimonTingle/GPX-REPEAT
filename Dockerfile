@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Copy frontend files
 COPY package*.json ./
-COPY tsconfig.json vite.config.ts tailwind.config.js postcss.config.js ./
+COPY tsconfig.json tsconfig.node.json vite.config.ts tailwind.config.js postcss.config.js ./
 COPY src ./src
 COPY index.html ./
 
