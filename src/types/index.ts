@@ -4,6 +4,14 @@ export interface Waypoint {
   ele?: number;
 }
 
+export interface ElevationStats {
+  elevationGain: number;
+  elevationLoss: number;
+  maxElevation: number;
+  minElevation: number;
+  avgElevation: number;
+}
+
 export interface Route {
   id: string;
   name: string;
@@ -11,7 +19,8 @@ export interface Route {
   waypoints: Waypoint[];
   distance: number;
   repetitions: number;
-  options: Record<string, unknown>;
+  elevationStats?: ElevationStats;
+  options?: Record<string, Option>;  // Custom user-added metadata
   createdAt: number;
   targetPace?: string;  // "MM:SS" per km
   startTime?: string;   // "HH:MM" wall-clock start

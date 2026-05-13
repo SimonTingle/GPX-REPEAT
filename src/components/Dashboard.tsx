@@ -83,13 +83,14 @@ export const Dashboard = ({
         waypoints,
         distance: data.distance,
         repetitions: 0,
-        options: {
+        elevationStats: {
           elevationGain: data.elevationGain,
           elevationLoss: data.elevationLoss,
           maxElevation: data.maxElevation,
           minElevation: data.minElevation,
           avgElevation: data.avgElevation,
         },
+        options: {},
         createdAt: Date.now(),
       };
 
@@ -143,7 +144,8 @@ export const Dashboard = ({
 
   const handleSaveRoute = () => {
     if (!editRoute) return;
-    const opts = Object.fromEntries(newOptions.map(o => [o.id, o.value]));
+    // Save custom options as Option objects
+    const opts = Object.fromEntries(newOptions.map(o => [o.id, o]));
     const updates = {
       name: editRoute.name,
       options: opts,
@@ -272,7 +274,7 @@ export const Dashboard = ({
               <div>Created: <span className="font-semibold">{new Date(selectedRoute.createdAt).toLocaleDateString()}</span></div>
               <div>Time: <span className="font-semibold">{new Date(selectedRoute.createdAt).toLocaleTimeString()}</span></div>
               <div>Name: <span className="font-semibold truncate">{selectedRoute.name}</span></div>
-              <div>Custom: <span className="font-semibold">{Object.keys(selectedRoute.options).length} opts</span></div>
+              <div>Custom: <span className="font-semibold">{Object.keys(selectedRoute.options || {}).length} opts</span></div>
             </div>
           </div>
         );
@@ -381,21 +383,36 @@ export const Dashboard = ({
             </div>
           </div>
 
-          {/* Options */}
-          <div className="text-xs font-semibold">Options</div>
+          {/* Elevation Stats (Read-Only) */}
+          {editRoute.elevationStats && (
+            <div className="p-2 bg-gray-50 rounded text-xs">
+              <div className="font-semibold mb-1">📊 Elevation Stats</div>
+              <div className="grid grid-cols-2 gap-1 text-xs text-gray-700">
+                <div>Gain: <span className="font-mono">{editRoute.elevationStats.elevationGain.toFixed(0)}m</span></div>
+                <div>Loss: <span className="font-mono">{editRoute.elevationStats.elevationLoss.toFixed(0)}m</span></div>
+                <div>Max: <span className="font-mono">{editRoute.elevationStats.maxElevation.toFixed(0)}m</span></div>
+                <div>Min: <span className="font-mono">{editRoute.elevationStats.minElevation.toFixed(0)}m</span></div>
+              </div>
+            </div>
+          )}
+
+          {/* Custom Options */}
+          <div className="text-xs font-semibold">Custom Options</div>
           {newOptions.map((opt, i) => (
-            <input
-              key={opt.id}
-              type={opt.type === 'number' ? 'number' : 'text'}
-              value={String(opt.value)}
-              onChange={e => {
-                const updated = [...newOptions];
-                updated[i].value = opt.type === 'number' ? e.target.value : e.target.value;
-                setNewOptions(updated);
-              }}
-              placeholder={opt.label}
-              className="w-full px-2 py-1 border rounded text-sm"
-            />
+            <div key={opt.id} className="space-y-1">
+              <label className="text-xs text-gray-600">{opt.label}</label>
+              <input
+                type={opt.type === 'number' ? 'number' : 'text'}
+                value={String(opt.value)}
+                onChange={e => {
+                  const updated = [...newOptions];
+                  updated[i].value = opt.type === 'number' ? parseFloat(e.target.value) : e.target.value;
+                  setNewOptions(updated);
+                }}
+                placeholder={opt.label}
+                className="w-full px-2 py-1 border rounded text-sm"
+              />
+            </div>
           ))}
 
           <div className="flex gap-2">
@@ -403,7 +420,7 @@ export const Dashboard = ({
               type="text"
               value={newOptionId}
               onChange={e => setNewOptionId(e.target.value)}
-              placeholder="Option ID"
+              placeholder="Custom option name"
               className="flex-1 px-2 py-1 border rounded text-xs"
             />
             <button
@@ -438,14 +455,24 @@ export const Dashboard = ({
             onClick={() => {
               if (selectedRoute) {
                 setEditRoute(selectedRoute);
-                setNewOptions(
-                  Object.entries(selectedRoute.options).map(([id, value]) => ({
-                    id,
-                    label: id.replace(/_/g, ' '),
-                    type: typeof value === 'number' ? 'number' : 'text',
-                    value: String(value),
-                  }))
-                );
+                // Load custom options (if they exist and are proper Option objects)
+                const customOpts = selectedRoute.options
+                  ? Object.entries(selectedRoute.options).map(([id, opt]) => {
+                      // Handle both old format (raw values) and new format (Option objects)
+                      if (typeof opt === 'object' && opt !== null && 'value' in opt) {
+                        return opt as any;
+                      } else {
+                        // Old format - convert to new format
+                        return {
+                          id,
+                          label: id.replace(/_/g, ' '),
+                          type: typeof opt === 'number' ? 'number' : 'text',
+                          value: opt,
+                        };
+                      }
+                    })
+                  : [];
+                setNewOptions(customOpts);
               }
             }}
             disabled={!selectedRoute}

@@ -46,7 +46,11 @@ export const generateGPX = (route: Route): string => {
   </metadata>
   <trk>
     <name>${escapeXml(route.name)}</name>
-    <desc>${Object.entries(route.options).map(([k, v]) => `${k}: ${v}`).join(', ') || 'Custom route'}</desc>
+    <desc>${route.options ? Object.entries(route.options).map(([k, v]) => {
+      // Handle both old format (raw value) and new format (Option object)
+      const val = typeof v === 'object' && v !== null && 'value' in v ? v.value : v;
+      return `${k}: ${val}`;
+    }).join(', ') : 'Custom route'}</desc>
     <trkseg>`;
 
   let globalIdx = 0;
