@@ -4,6 +4,7 @@ import { LatLngBounds } from 'leaflet';
 import { useMapStyle } from '../hooks/useMapStyle';
 import { ElevationProfile } from './ElevationProfile';
 import { Route, MapStyle } from '../types';
+import { generateColoredSegments } from '../utils/elevationColor';
 import 'leaflet/dist/leaflet.css';
 
 // Fix Leaflet marker icons
@@ -79,10 +80,21 @@ export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?
       >
         <TileLayer url={getTileUrl()} attribution={getAttribution()} />
         <MapUpdater route={route} />
+        {route && route.waypoints.length > 0 && (() => {
+          const segments = generateColoredSegments(route.waypoints);
+          return segments.map((seg, idx) => (
+            <Polyline
+              key={idx}
+              positions={seg.coordinates}
+              color={seg.color}
+              weight={3}
+              opacity={0.8}
+              title={`Gradient: ${seg.gradient.toFixed(1)}%`}
+            />
+          ));
+        })()}
         {polyline.length > 0 && (
-          <Polyline positions={polyline} color="blue" weight={3} opacity={0.7}>
-            <Popup>{route?.name || 'Route'}</Popup>
-          </Polyline>
+          <Popup position={[polyline[0][0], polyline[0][1]]}>{route?.name || 'Route'}</Popup>
         )}
       </MapContainer>
 
@@ -99,6 +111,7 @@ export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?
         </div>
       )}
 
+      {/* Map style selector (top-right) */}
       <div className="absolute top-4 right-4 bg-white rounded shadow-lg flex gap-2 p-2" style={{ zIndex: 9999 }}>
         {styleButtons.map(s => (
           <button
@@ -112,6 +125,43 @@ export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?
           </button>
         ))}
       </div>
+
+      {/* Elevation gradient legend (bottom-left) */}
+      {route && route.waypoints.length > 0 && (
+        <div className="absolute bottom-4 left-4 bg-white rounded shadow-lg p-3" style={{ zIndex: 9998 }}>
+          <div className="text-xs font-bold text-gray-700 mb-2">📈 Elevation Gradient</div>
+          <div className="space-y-1 text-xs">
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-2 rounded" style={{ backgroundColor: '#8B0000' }}></div>
+              <span>Very steep uphill (11%+)</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-2 rounded" style={{ backgroundColor: '#FF4444' }}></div>
+              <span>Steep uphill (7-10%)</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-2 rounded" style={{ backgroundColor: '#FFB3BA' }}></div>
+              <span>Gentle uphill (1-3%)</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-2 rounded" style={{ backgroundColor: '#CCCCCC' }}></div>
+              <span>Flat (±1%)</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-2 rounded" style={{ backgroundColor: '#87CEEB' }}></div>
+              <span>Gentle downhill (1-3%)</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-2 rounded" style={{ backgroundColor: '#0047AB' }}></div>
+              <span>Steep downhill (7-10%)</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-2 rounded" style={{ backgroundColor: '#00008B' }}></div>
+              <span>Very steep downhill (11%+)</span>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
