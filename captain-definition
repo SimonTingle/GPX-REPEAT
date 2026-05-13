@@ -1,7 +1,6 @@
 {
   "schemaVersion": 2,
   "dockerfilePath": "./Dockerfile",
-  "imageName": "gpx-repeat:latest",
   "ports": ["5000"],
   "volumes": [
     {
@@ -19,5 +18,5 @@
       "value": "1"
     }
   ],
-  "forceBuild": false
+  "forceBuild": true
 }
