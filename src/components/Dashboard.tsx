@@ -52,7 +52,7 @@ export const Dashboard = ({
 
       setProgress(30);
 
-      const response = await fetch('http://localhost:5000/parse-gpx', {
+      const response = await fetch('/parse-gpx', {
         method: 'POST',
         body: formData,
       });
