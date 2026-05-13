@@ -78,51 +78,51 @@ export const Mobile = ({
             <span className="text-3xl">⚙️</span>
             <span className="text-xs font-bold">MENU</span>
           </button>
-
-          {/* Dropdown Menu (appears above button) */}
-          {isMenuOpen && (
-            <div className="absolute bottom-24 right-0 bg-white rounded-lg shadow-xl border border-gray-200 min-w-max overflow-hidden pointer-events-auto" style={{ zIndex: 1001 }}>
-              <button
-                onClick={() => {
-                  setShowUpload(true);
-                  setIsMenuOpen(false);
-                }}
-                className="w-full px-4 py-3 text-left hover:bg-gray-50 border-b border-gray-200 text-sm transition-colors"
-              >
-                📥 Load GPX
-              </button>
-              <button
-                onClick={() => {
-                  setShowInfo(true);
-                  setIsMenuOpen(false);
-                }}
-                className="w-full px-4 py-3 text-left hover:bg-gray-50 border-b border-gray-200 text-sm transition-colors"
-              >
-                ℹ️ Info & Stats
-              </button>
-              <button
-                onClick={() => {
-                  setShowEdit(true);
-                  setIsMenuOpen(false);
-                }}
-                disabled={!selectedRoute}
-                className="w-full px-4 py-3 text-left hover:bg-gray-50 border-b border-gray-200 text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                ✏️ Edit Route
-              </button>
-              <button
-                onClick={() => {
-                  if (selectedRoute) downloadGPX(selectedRoute);
-                  setIsMenuOpen(false);
-                }}
-                disabled={!selectedRoute}
-                className="w-full px-4 py-3 text-left hover:bg-gray-50 text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                📤 Export GPX
-              </button>
-            </div>
-          )}
         </div>
+
+        {/* Dropdown Menu (positioned independently, appears above button) */}
+        {isMenuOpen && (
+          <div className="absolute bottom-64 right-4 bg-white rounded-lg shadow-xl border border-gray-200 min-w-max overflow-hidden pointer-events-auto" style={{ zIndex: 1001 }}>
+            <button
+              onClick={() => {
+                setShowUpload(true);
+                setIsMenuOpen(false);
+              }}
+              className="w-full px-4 py-3 text-left hover:bg-gray-50 border-b border-gray-200 text-sm transition-colors"
+            >
+              📥 Load GPX
+            </button>
+            <button
+              onClick={() => {
+                setShowInfo(true);
+                setIsMenuOpen(false);
+              }}
+              className="w-full px-4 py-3 text-left hover:bg-gray-50 border-b border-gray-200 text-sm transition-colors"
+            >
+              ℹ️ Info & Stats
+            </button>
+            <button
+              onClick={() => {
+                setShowEdit(true);
+                setIsMenuOpen(false);
+              }}
+              disabled={!selectedRoute}
+              className="w-full px-4 py-3 text-left hover:bg-gray-50 border-b border-gray-200 text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              ✏️ Edit Route
+            </button>
+            <button
+              onClick={() => {
+                if (selectedRoute) downloadGPX(selectedRoute);
+                setIsMenuOpen(false);
+              }}
+              disabled={!selectedRoute}
+              className="w-full px-4 py-3 text-left hover:bg-gray-50 text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              📤 Export GPX
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Modal: Upload */}
