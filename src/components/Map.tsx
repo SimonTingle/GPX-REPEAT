@@ -110,26 +110,31 @@ export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?
         </div>
       )}
 
-      {/* Map style selector (top-right) */}
-      <div className="absolute top-4 right-4 bg-white rounded shadow-lg flex gap-2 p-2" style={{ zIndex: 9999 }}>
-        {styleButtons.map(s => (
-          <button
-            key={s}
-            onClick={() => setStyle(s)}
-            className={`px-3 py-1 text-sm rounded capitalize ${
-              style === s ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'
-            }`}
-          >
-            {s}
-          </button>
-        ))}
-      </div>
+      {/* Map style selector and elevation legend (top-right) */}
+      <div className="absolute top-4 right-4 flex flex-col gap-3" style={{ zIndex: 9999 }}>
+        {/* Map style buttons */}
+        <div className="bg-white rounded shadow-lg flex gap-2 p-2">
+          {styleButtons.map(s => (
+            <button
+              key={s}
+              onClick={() => setStyle(s)}
+              className={`px-3 py-1 text-sm rounded capitalize ${
+                style === s ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'
+              }`}
+            >
+              {s}
+            </button>
+          ))}
+        </div>
 
-      {/* Elevation gradient legend (bottom-left) */}
-      {route && route.waypoints.length > 0 && (
-        <div className="absolute bottom-4 left-4 bg-white rounded shadow-lg p-3" style={{ zIndex: 9998 }}>
-          <div className="text-xs font-bold text-gray-700 mb-2">📈 Elevation Gradient</div>
-          <div className="space-y-1 text-xs">
+        {/* Elevation gradient legend */}
+        {route && route.waypoints.length > 0 && (
+          <div
+            className="bg-white rounded shadow-lg p-3 opacity-50 hover:opacity-100 transition-opacity duration-200"
+            style={{ zIndex: 9998 }}
+          >
+            <div className="text-xs font-bold text-gray-700 mb-2">📈 Elevation Gradient</div>
+            <div className="space-y-1 text-xs">
             <div className="flex items-center gap-2">
               <div className="w-6 h-2 rounded" style={{ backgroundColor: '#8B0000' }}></div>
               <span>Very steep uphill (11%+)</span>
@@ -159,8 +164,9 @@ export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?
               <span>Very steep downhill (11%+)</span>
             </div>
           </div>
-        </div>
-      )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
