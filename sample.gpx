@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="GPX Repeat - Route Editor" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata>
+    <name>Golden Gate Park Loop</name>
+    <desc>Scenic loop through Golden Gate Park with multiple viewpoints and elevation changes</desc>
+    <author>
+      <name>Route Creator</name>
+    </author>
+    <copyright author="OpenStreetMap contributors">
+      <year>2025</year>
+      <license>https://www.openstreetmap.org/copyright</license>
+    </copyright>
+    <time>2025-05-12T10:00:00Z</time>
+  </metadata>
+  <trk>
+    <name>Golden Gate Park Loop</name>
+    <desc>Complete loop through Golden Gate Park starting at the Panhandle</desc>
+    <type>running</type>
+    <trkseg>
+      <trkpt lat="37.7714" lon="-122.4486">
+        <ele>5</ele>
+        <time>2025-05-12T10:00:00Z</time>
+        <name>Start - Panhandle Entrance</name>
+        <desc>Beginning of the route at the Panhandle</desc>
+      </trkpt>
+      <trkpt lat="37.7720" lon="-122.4475">
+        <ele>8</ele>
+        <time>2025-05-12T10:02:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7732" lon="-122.4460">
+        <ele>12</ele>
+        <time>2025-05-12T10:05:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7745" lon="-122.4445">
+        <ele>18</ele>
+        <time>2025-05-12T10:07:30Z</time>
+        <name>Music Concourse Area</name>
+      </trkpt>
+      <trkpt lat="37.7758" lon="-122.4430">
+        <ele>22</ele>
+        <time>2025-05-12T10:10:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7768" lon="-122.4415">
+        <ele>28</ele>
+        <time>2025-05-12T10:12:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7775" lon="-122.4395">
+        <ele>32</ele>
+        <time>2025-05-12T10:15:00Z</time>
+        <name>Hill Climb - Medium Grade</name>
+      </trkpt>
+      <trkpt lat="37.7782" lon="-122.4375">
+        <ele>38</ele>
+        <time>2025-05-12T10:17:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7788" lon="-122.4355">
+        <ele>42</ele>
+        <time>2025-05-12T10:20:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7792" lon="-122.4330">
+        <ele>45</ele>
+        <time>2025-05-12T10:22:30Z</time>
+        <name>Twin Peaks Junction</name>
+      </trkpt>
+      <trkpt lat="37.7795" lon="-122.4305">
+        <ele>48</ele>
+        <time>2025-05-12T10:25:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7798" lon="-122.4280">
+        <ele>50</ele>
+        <time>2025-05-12T10:27:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7802" lon="-122.4255">
+        <ele>52</ele>
+        <time>2025-05-12T10:30:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7805" lon="-122.4230">
+        <ele>54</ele>
+        <time>2025-05-12T10:32:30Z</time>
+        <name>Peak Elevation Point</name>
+        <desc>Highest point of the route with scenic views</desc>
+      </trkpt>
+      <trkpt lat="37.7808" lon="-122.4205">
+        <ele>52</ele>
+        <time>2025-05-12T10:35:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7810" lon="-122.4180">
+        <ele>50</ele>
+        <time>2025-05-12T10:37:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7812" lon="-122.4155">
+        <ele>48</ele>
+        <time>2025-05-12T10:40:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7814" lon="-122.4130">
+        <ele>45</ele>
+        <time>2025-05-12T10:42:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7815" lon="-122.4105">
+        <ele>42</ele>
+        <time>2025-05-12T10:45:00Z</time>
+        <name>Descending Grade</name>
+      </trkpt>
+      <trkpt lat="37.7816" lon="-122.4080">
+        <ele>38</ele>
+        <time>2025-05-12T10:47:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7816" lon="-122.4055">
+        <ele>32</ele>
+        <time>2025-05-12T10:50:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7815" lon="-122.4030">
+        <ele>28</ele>
+        <time>2025-05-12T10:52:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7813" lon="-122.4005">
+        <ele>22</ele>
+        <time>2025-05-12T10:55:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7810" lon="-122.3980">
+        <ele>18</ele>
+        <time>2025-05-12T10:57:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7806" lon="-122.3960">
+        <ele>15</ele>
+        <time>2025-05-12T11:00:00Z</time>
+        <name>Ocean Beach Access</name>
+      </trkpt>
+      <trkpt lat="37.7802" lon="-122.3945">
+        <ele>12</ele>
+        <time>2025-05-12T11:02:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7798" lon="-122.3930">
+        <ele>10</ele>
+        <time>2025-05-12T11:05:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7792" lon="-122.3920">
+        <ele>8</ele>
+        <time>2025-05-12T11:07:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7785" lon="-122.3915">
+        <ele>6</ele>
+        <time>2025-05-12T11:10:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7775" lon="-122.3920">
+        <ele>5</ele>
+        <time>2025-05-12T11:12:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7765" lon="-122.3930">
+        <ele>5</ele>
+        <time>2025-05-12T11:15:00Z</time>
+        <name>Beach Loop</name>
+      </trkpt>
+      <trkpt lat="37.7755" lon="-122.3940">
+        <ele>5</ele>
+        <time>2025-05-12T11:17:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7745" lon="-122.3935">
+        <ele>5</ele>
+        <time>2025-05-12T11:20:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7738" lon="-122.3920">
+        <ele>6</ele>
+        <time>2025-05-12T11:22:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7735" lon="-122.3900">
+        <ele>8</ele>
+        <time>2025-05-12T11:25:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7732" lon="-122.3875">
+        <ele>12</ele>
+        <time>2025-05-12T11:27:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7728" lon="-122.3850">
+        <ele>18</ele>
+        <time>2025-05-12T11:30:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7722" lon="-122.3830">
+        <ele>22</ele>
+        <time>2025-05-12T11:32:30Z</time>
+        <name>Botanical Gardens Approach</name>
+      </trkpt>
+      <trkpt lat="37.7715" lon="-122.3815">
+        <ele>25</ele>
+        <time>2025-05-12T11:35:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7708" lon="-122.3800">
+        <ele>28</ele>
+        <time>2025-05-12T11:37:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7700" lon="-122.3795">
+        <ele>30</ele>
+        <time>2025-05-12T11:40:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7690" lon="-122.3800">
+        <ele>28</ele>
+        <time>2025-05-12T11:42:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7680" lon="-122.3810">
+        <ele>25</ele>
+        <time>2025-05-12T11:45:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7672" lon="-122.3825">
+        <ele>20</ele>
+        <time>2025-05-12T11:47:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7665" lon="-122.3840">
+        <ele>15</ele>
+        <time>2025-05-12T11:50:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7660" lon="-122.3860">
+        <ele>12</ele>
+        <time>2025-05-12T11:52:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7655" lon="-122.3880">
+        <ele>10</ele>
+        <time>2025-05-12T11:55:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7650" lon="-122.3900">
+        <ele>8</ele>
+        <time>2025-05-12T11:57:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7648" lon="-122.3920">
+        <ele>6</ele>
+        <time>2025-05-12T12:00:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7648" lon="-122.3940">
+        <ele>5</ele>
+        <time>2025-05-12T12:02:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7650" lon="-122.3960">
+        <ele>5</ele>
+        <time>2025-05-12T12:05:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7655" lon="-122.3980">
+        <ele>6</ele>
+        <time>2025-05-12T12:07:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7662" lon="-122.3995">
+        <ele>8</ele>
+        <time>2025-05-12T12:10:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7670" lon="-122.4005">
+        <ele>10</ele>
+        <time>2025-05-12T12:12:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7680" lon="-122.4010">
+        <ele>12</ele>
+        <time>2025-05-12T12:15:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7690" lon="-122.4408">
+        <ele>15</ele>
+        <time>2025-05-12T12:17:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7700" lon="-122.4420">
+        <ele>18</ele>
+        <time>2025-05-12T12:20:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7708" lon="-122.4435">
+        <ele>22</ele>
+        <time>2025-05-12T12:22:30Z</time>
+      </trkpt>
+      <trkpt lat="37.7714" lon="-122.4450">
+        <ele>25</ele>
+        <time>2025-05-12T12:25:00Z</time>
+      </trkpt>
+      <trkpt lat="37.7714" lon="-122.4486">
+        <ele>5</ele>
+        <time>2025-05-12T12:27:30Z</time>
+        <name>Finish - Panhandle Entrance</name>
+        <desc>End of the loop route</desc>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <wpt lat="37.7714" lon="-122.4486">
+    <ele>5</ele>
+    <name>Start/Finish</name>
+    <desc>Panhandle entrance to Golden Gate Park</desc>
+    <sym>parking</sym>
+  </wpt>
+  <wpt lat="37.7805" lon="-122.4230">
+    <ele>54</ele>
+    <name>Peak View</name>
+    <desc>Highest point with scenic overlook</desc>
+    <sym>scenic</sym>
+  </wpt>
+  <wpt lat="37.7806" lon="-122.3960">
+    <ele>15</ele>
+    <name>Ocean Beach</name>
+    <desc>Access to Ocean Beach</desc>
+    <sym>picnic</sym>
+  </wpt>
+  <wpt lat="37.7700" lon="-122.3800">
+    <ele>30</ele>
+    <name>Botanical Gardens</name>
+    <desc>San Francisco Botanical Gardens</desc>
+    <sym>scenic</sym>
+  </wpt>
+</gpx>
