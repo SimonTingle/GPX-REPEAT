@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Polyline, Popup, useMap } from 'react-leaflet';
 import { LatLngBounds } from 'leaflet';
 import { useMapStyle } from '../hooks/useMapStyle';
+import { useIsMobile } from '../hooks/useMediaQuery';
 import { ElevationProfile } from './ElevationProfile';
 import { Route, MapStyle } from '../types';
 import { generateColoredSegments } from '../utils/elevationColor';
@@ -56,6 +57,7 @@ const MapUpdater = ({ route }: { route?: Route }) => {
 
 export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?: Route }) => {
   const { style, setStyle, getTileUrl, getAttribution } = useMapStyle();
+  const isMobile = useIsMobile();
 
   const route = selectedRoute || routes[0];
   const center: [number, number] = route && route.waypoints.length > 0
@@ -66,6 +68,9 @@ export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?
     : [];
 
   const styleButtons: MapStyle[] = ['osm', 'satellite', 'terrain', 'topo', 'hybrid'];
+
+  // Responsive positioning: desktop top-right, mobile bottom-left
+  const controlPosition = isMobile ? 'bottom-24 left-4' : 'top-4 right-4';
 
   return (
     <div className="relative w-full h-full flex flex-col" style={{ touchAction: 'none' }}>
@@ -110,8 +115,8 @@ export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?
         </div>
       )}
 
-      {/* Map style selector and elevation legend (bottom-left, away from zoom controls) */}
-      <div className="absolute bottom-24 left-4 flex flex-col gap-3 pointer-events-auto" style={{ zIndex: 1000 }}>
+      {/* Map style selector and elevation legend (responsive positioning) */}
+      <div className={`absolute flex flex-col gap-3 pointer-events-auto ${controlPosition}`} style={{ zIndex: 1000 }}>
         {/* Map style buttons */}
         <div className="bg-white rounded shadow-lg flex gap-2 p-2">
           {styleButtons.map(s => (
