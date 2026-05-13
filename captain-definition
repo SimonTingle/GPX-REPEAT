@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 2,
+  "dockerfilePath": "./Dockerfile",
+  "imageName": "gpx-repeat:latest",
+  "ports": ["5000"],
+  "volumes": [
+    {
+      "containerPath": "/app/data",
+      "hostPath": "/captain/data/gpx-repeat"
+    }
+  ],
+  "environment": [
+    {
+      "key": "FLASK_ENV",
+      "value": "production"
+    },
+    {
+      "key": "PYTHONUNBUFFERED",
+      "value": "1"
+    }
+  ],
+  "forceBuild": false
+}
