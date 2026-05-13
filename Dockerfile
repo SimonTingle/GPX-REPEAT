@@ -28,40 +28,14 @@ RUN apt-get update && apt-get install -y \
 COPY backend/requirements.txt ./backend/requirements.txt
 COPY backend/app.py ./backend/app.py
 
+# Copy frontend server wrapper
+COPY serve.py ./serve.py
+
 # Install Python dependencies
 RUN pip install --no-cache-dir -r backend/requirements.txt
 
 # Copy built frontend from stage 1
 COPY --from=frontend-builder /app/dist ./frontend/dist
-
-# Create a simple Flask app wrapper to serve both backend API and frontend
-RUN mkdir -p /app/app && cat > /app/app/serve.py << 'EOF'
-from flask import Flask, send_from_directory
-from flask_cors import CORS
-import sys
-import os
-
-# Add backend to path
-sys.path.insert(0, '/app/backend')
-
-# Import the original app
-from app import app as backend_app, parse_gpx, health
-
-# Configure CORS for API routes
-CORS(backend_app)
-
-# Serve static files (React frontend)
-@backend_app.route('/')
-@backend_app.route('/<path:path>')
-def serve_frontend(path=''):
-    if path and os.path.exists(os.path.join('/app/frontend/dist', path)):
-        return send_from_directory('/app/frontend/dist', path)
-    return send_from_directory('/app/frontend/dist', 'index.html')
-
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    backend_app.run(host='0.0.0.0', port=port, debug=False)
-EOF
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
@@ -75,4 +49,4 @@ ENV FLASK_ENV=production
 ENV PYTHONUNBUFFERED=1
 
 # Run the server
-CMD ["python", "/app/app/serve.py"]
+CMD ["python", "/app/serve.py"]
