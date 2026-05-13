@@ -52,16 +52,16 @@ export const Mobile = ({
         <div className="w-10"></div> {/* Spacer for centering */}
       </div>
 
-      {/* Map Area (full screen) */}
-      <div className="flex-1 relative overflow-hidden">
+      {/* Map Area (full screen with safe area padding) */}
+      <div className="flex-1 relative overflow-hidden pb-safe">
         <Map routes={routes} selectedRoute={selectedRoute} />
 
-        {/* Floating Control Buttons (bottom-right) */}
-        <div className="absolute bottom-6 right-6 z-50 flex flex-col gap-4 items-end">
+        {/* Floating Control Buttons (bottom-right, above elevation profile) */}
+        <div className="absolute bottom-44 right-4 z-50 flex flex-col gap-3 items-end">
           {/* Route List Button */}
           <button
             onClick={() => setShowRouteList(!showRouteList)}
-            className="w-16 h-16 rounded-full bg-gray-600 text-white shadow-lg flex items-center justify-center hover:bg-gray-700 active:scale-95 transition-transform text-2xl font-bold"
+            className="w-20 h-20 rounded-full bg-gray-600 text-white shadow-xl flex items-center justify-center hover:bg-gray-700 active:scale-95 transition-transform text-3xl font-bold"
             title="Routes"
             aria-label="View route list"
           >
@@ -71,17 +71,17 @@ export const Mobile = ({
           {/* Menu Button (Config) */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="w-16 h-16 rounded-full bg-blue-600 text-white shadow-lg flex flex-col items-center justify-center hover:bg-blue-700 active:scale-95 transition-transform"
+            className="w-20 h-20 rounded-full bg-blue-600 text-white shadow-xl flex flex-col items-center justify-center hover:bg-blue-700 active:scale-95 transition-transform gap-1"
             title="Menu"
             aria-label="Open menu"
           >
-            <span className="text-2xl">⚙️</span>
+            <span className="text-3xl">⚙️</span>
             <span className="text-xs font-bold">MENU</span>
           </button>
 
           {/* Dropdown Menu (appears above button) */}
           {isMenuOpen && (
-            <div className="absolute bottom-20 right-0 bg-white rounded-lg shadow-xl border border-gray-200 min-w-max z-50 overflow-hidden">
+            <div className="absolute bottom-24 right-0 bg-white rounded-lg shadow-xl border border-gray-200 min-w-max z-50 overflow-hidden">
               <button
                 onClick={() => {
                   setShowUpload(true);

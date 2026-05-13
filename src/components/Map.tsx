@@ -110,8 +110,8 @@ export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?
         </div>
       )}
 
-      {/* Map style selector and elevation legend (top-right) */}
-      <div className="absolute top-4 right-4 flex flex-col gap-3" style={{ zIndex: 9999 }}>
+      {/* Map style selector and elevation legend (bottom-left, away from zoom controls) */}
+      <div className="absolute bottom-24 left-4 flex flex-col gap-3" style={{ zIndex: 9999 }}>
         {/* Map style buttons */}
         <div className="bg-white rounded shadow-lg flex gap-2 p-2">
           {styleButtons.map(s => (
