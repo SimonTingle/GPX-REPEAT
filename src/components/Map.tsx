@@ -89,7 +89,6 @@ export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?
               color={seg.color}
               weight={3}
               opacity={0.8}
-              title={`Gradient: ${seg.gradient.toFixed(1)}%`}
             />
           ));
         })()}
