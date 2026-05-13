@@ -87,17 +87,24 @@ export function gradientToColor(gradientPct: number): string {
 }
 
 export interface ColoredSegment {
-  coordinates: [[number, number], [number, number]]; // [[lat1, lon1], [lat2, lon2]]
+  coordinates: [number, number][]; // Array of [lat, lon] pairs for this polyline
   color: string;
-  gradient: number; // For debugging/tooltip
+  gradient: number; // For debugging/tooltip (average gradient for segment)
 }
 
 /**
  * Generate colored polyline segments from waypoints.
- * Each segment gets a color based on its elevation gradient.
+ * Groups consecutive segments with the same color to minimize DOM elements.
+ * Instead of one polyline per segment, we group adjacent same-colored segments together.
+ * This dramatically improves performance for large routes (1000+ waypoints).
  */
 export function generateColoredSegments(waypoints: Waypoint[]): ColoredSegment[] {
+  if (waypoints.length < 2) return [];
+
   const segments: ColoredSegment[] = [];
+  let currentColor: string | null = null;
+  let currentCoordinates: [number, number][] = [];
+  let currentGradients: number[] = [];
 
   for (let i = 0; i < waypoints.length - 1; i++) {
     const wp1 = waypoints[i];
@@ -106,13 +113,39 @@ export function generateColoredSegments(waypoints: Waypoint[]): ColoredSegment[]
     const gradient = calculateGradient(wp1.lat, wp1.lon, wp1.ele, wp2.lat, wp2.lon, wp2.ele);
     const color = gradientToColor(gradient);
 
+    // Start new polyline if color changes
+    if (color !== currentColor && currentCoordinates.length > 0) {
+      const avgGradient = currentGradients.length > 0
+        ? currentGradients.reduce((a, b) => a + b) / currentGradients.length
+        : 0;
+      segments.push({
+        coordinates: currentCoordinates,
+        color: currentColor!,
+        gradient: avgGradient,
+      });
+      currentCoordinates = [];
+      currentGradients = [];
+    }
+
+    // Add first waypoint if starting new group
+    if (currentCoordinates.length === 0) {
+      currentCoordinates.push([wp1.lat, wp1.lon]);
+    }
+    // Add second waypoint
+    currentCoordinates.push([wp2.lat, wp2.lon]);
+    currentGradients.push(gradient);
+    currentColor = color;
+  }
+
+  // Add final group
+  if (currentCoordinates.length > 1) {
+    const avgGradient = currentGradients.length > 0
+      ? currentGradients.reduce((a, b) => a + b) / currentGradients.length
+      : 0;
     segments.push({
-      coordinates: [
-        [wp1.lat, wp1.lon],
-        [wp2.lat, wp2.lon],
-      ],
-      color,
-      gradient,
+      coordinates: currentCoordinates,
+      color: currentColor!,
+      gradient: avgGradient,
     });
   }
 
