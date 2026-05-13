@@ -1,13 +1,15 @@
 import { useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Polyline, Popup, useMap } from 'react-leaflet';
-import { LatLngBounds, Map as LeafletMap } from 'leaflet';
+import { LatLngBounds } from 'leaflet';
 import { useMapStyle } from '../hooks/useMapStyle';
 import { ElevationProfile } from './ElevationProfile';
 import { Route, MapStyle } from '../types';
 import 'leaflet/dist/leaflet.css';
 
 // Fix Leaflet marker icons
+// @ts-ignore - PNG assets don't have type declarations
 import icon from 'leaflet/dist/images/marker-icon.png';
+// @ts-ignore - PNG assets don't have type declarations
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import L from 'leaflet';
 
