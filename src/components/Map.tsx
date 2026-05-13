@@ -111,7 +111,7 @@ export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?
       )}
 
       {/* Map style selector and elevation legend (bottom-left, away from zoom controls) */}
-      <div className="absolute bottom-24 left-4 flex flex-col gap-3" style={{ zIndex: 9999 }}>
+      <div className="absolute bottom-24 left-4 flex flex-col gap-3 pointer-events-auto" style={{ zIndex: 1000 }}>
         {/* Map style buttons */}
         <div className="bg-white rounded shadow-lg flex gap-2 p-2">
           {styleButtons.map(s => (
@@ -130,8 +130,8 @@ export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?
         {/* Elevation gradient legend */}
         {route && route.waypoints.length > 0 && (
           <div
-            className="bg-white rounded shadow-lg p-3 opacity-50 hover:opacity-100 transition-opacity duration-200"
-            style={{ zIndex: 9998 }}
+            className="bg-white rounded shadow-lg p-3 opacity-50 hover:opacity-100 transition-opacity duration-200 pointer-events-auto"
+            style={{ zIndex: 1000 }}
           >
             <div className="text-xs font-bold text-gray-700 mb-2">📈 Elevation Gradient</div>
             <div className="space-y-1 text-xs">

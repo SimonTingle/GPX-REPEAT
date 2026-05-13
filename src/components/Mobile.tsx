@@ -57,7 +57,7 @@ export const Mobile = ({
         <Map routes={routes} selectedRoute={selectedRoute} />
 
         {/* Floating Control Buttons (bottom-right, above elevation profile) */}
-        <div className="absolute bottom-44 right-4 z-50 flex flex-col gap-3 items-end">
+        <div className="absolute bottom-44 right-4 flex flex-col gap-3 items-end pointer-events-auto" style={{ zIndex: 1000 }}>
           {/* Route List Button */}
           <button
             onClick={() => setShowRouteList(!showRouteList)}
@@ -81,7 +81,7 @@ export const Mobile = ({
 
           {/* Dropdown Menu (appears above button) */}
           {isMenuOpen && (
-            <div className="absolute bottom-24 right-0 bg-white rounded-lg shadow-xl border border-gray-200 min-w-max z-50 overflow-hidden">
+            <div className="absolute bottom-24 right-0 bg-white rounded-lg shadow-xl border border-gray-200 min-w-max overflow-hidden pointer-events-auto" style={{ zIndex: 1001 }}>
               <button
                 onClick={() => {
                   setShowUpload(true);
