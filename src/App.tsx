@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Map } from './components/Map';
 import { Dashboard } from './components/Dashboard';
 import { Mobile } from './components/Mobile';
-import { LanguageSwitcher } from './components/LanguageSwitcher';
 import { useGPX } from './hooks/useGPX';
 import { useIsMobile } from './hooks/useMediaQuery';
 import { TextProvider } from './contexts/TextContext';
@@ -25,35 +24,29 @@ const AppContent = () => {
   // Render mobile or desktop layout based on viewport size
   if (isMobile) {
     return (
-      <>
-        <LanguageSwitcher />
-        <Mobile
-          routes={routes}
-          selectedRoute={selectedRoute}
-          onSelectRoute={setSelectedRoute}
-          updateRoute={updateRoute}
-        />
-      </>
+      <Mobile
+        routes={routes}
+        selectedRoute={selectedRoute}
+        onSelectRoute={setSelectedRoute}
+        updateRoute={updateRoute}
+      />
     );
   }
 
   // Desktop layout
   return (
-    <>
-      <LanguageSwitcher />
-      <div className="flex w-screen h-screen bg-white">
-        <Dashboard
-          routes={routes}
-          selectedRoute={selectedRoute}
-          onSelectRoute={setSelectedRoute}
-          updateRoute={updateRoute}
-          deleteRoute={deleteRoute}
-        />
-        <div className="flex-1">
-          <Map routes={routes} selectedRoute={selectedRoute} />
-        </div>
+    <div className="flex w-screen h-screen bg-white">
+      <Dashboard
+        routes={routes}
+        selectedRoute={selectedRoute}
+        onSelectRoute={setSelectedRoute}
+        updateRoute={updateRoute}
+        deleteRoute={deleteRoute}
+      />
+      <div className="flex-1">
+        <Map routes={routes} selectedRoute={selectedRoute} />
       </div>
-    </>
+    </div>
   );
 };
 

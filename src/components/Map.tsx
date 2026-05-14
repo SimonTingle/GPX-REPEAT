@@ -1,9 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { MapContainer, TileLayer, Polyline, Popup, useMap } from 'react-leaflet';
 import { LatLngBounds } from 'leaflet';
 import { useMapStyle } from '../hooks/useMapStyle';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import { useTexts } from '../contexts/TextContext';
+import { SUPPORTED_LANGUAGES } from '../constants/languages';
+import type { LanguageCode } from '../constants/languages';
 import { ElevationProfile } from './ElevationProfile';
 import { Route, MapStyle } from '../types';
 import { generateColoredSegments } from '../utils/elevationColor';
@@ -58,8 +60,27 @@ const MapUpdater = ({ route }: { route?: Route }) => {
 
 export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?: Route }) => {
   const { style, setStyle, getTileUrl, getAttribution } = useMapStyle();
-  const { t } = useTexts();
+  const { t, currentLanguage, setLanguage, allLanguages } = useTexts();
   const isMobile = useIsMobile();
+  const [showLanguageMenu, setShowLanguageMenu] = useState(false);
+  const languageMenuRef = useRef<HTMLDivElement>(null);
+
+  // Close language menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (languageMenuRef.current && !languageMenuRef.current.contains(event.target as Node)) {
+        setShowLanguageMenu(false);
+      }
+    };
+
+    if (showLanguageMenu) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showLanguageMenu]);
 
   const route = selectedRoute || routes[0];
   const center: [number, number] = route && route.waypoints.length > 0
@@ -74,6 +95,12 @@ export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?
 
   // Responsive positioning: desktop top-right, mobile bottom-left (above elevation profile)
   const controlPosition = isMobile ? 'bottom-24 left-4' : 'top-4 right-4';
+
+  // Handle language selection
+  const handleLanguageSelect = (lang: LanguageCode) => {
+    setLanguage(lang);
+    setShowLanguageMenu(false);
+  };
 
   return (
     <div className="relative w-full h-full flex flex-col" style={{ touchAction: 'none' }}>
@@ -118,10 +145,11 @@ export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?
         </div>
       )}
 
-      {/* Map style selector and elevation legend (responsive positioning) */}
+      {/* Map style selector and language selector (responsive positioning) */}
       <div className={`absolute flex flex-col gap-3 pointer-events-auto ${controlPosition}`} style={{ zIndex: 1000 }}>
-        {/* Map style buttons */}
+        {/* Map style buttons and language selector container */}
         <div className="bg-white rounded shadow-lg flex gap-2 p-2">
+          {/* Map style buttons */}
           {styleButtons.map(s => (
             <button
               key={s}
@@ -133,6 +161,41 @@ export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?
               {s}
             </button>
           ))}
+
+          {/* Language selector - divider */}
+          <div className="w-px bg-gray-300 mx-1"></div>
+
+          {/* Language selector trigger button */}
+          <div className="relative" ref={languageMenuRef}>
+            <button
+              onClick={() => setShowLanguageMenu(!showLanguageMenu)}
+              className="w-10 h-10 rounded-full bg-white hover:bg-gray-50 active:scale-95 flex items-center justify-center text-sm font-bold text-gray-700 transition-all"
+              title={`Current language: ${SUPPORTED_LANGUAGES[currentLanguage as LanguageCode].nativeName}`}
+              aria-label="Change language"
+            >
+              {currentLanguage.toUpperCase()}
+            </button>
+
+            {/* Language dropdown menu */}
+            {showLanguageMenu && (
+              <div className="absolute top-full mt-1 left-0 bg-white/90 backdrop-blur-sm rounded shadow-lg p-2 flex flex-wrap gap-1 w-40 z-50">
+                {allLanguages.map((lang) => {
+                  const langInfo = SUPPORTED_LANGUAGES[lang as LanguageCode];
+                  return (
+                    <button
+                      key={lang}
+                      onClick={() => handleLanguageSelect(lang as LanguageCode)}
+                      className="w-8 h-8 rounded-full bg-transparent hover:bg-gray-100 active:scale-90 flex items-center justify-center text-base transition-all"
+                      title={langInfo.nativeName}
+                      aria-label={`Switch to ${langInfo.name}`}
+                    >
+                      {langInfo.flag}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Elevation gradient legend */}
