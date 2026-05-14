@@ -158,7 +158,7 @@ export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?
                 style === s ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'
               }`}
             >
-              {s}
+              {t(`map_styles.${s}`)}
             </button>
           ))}
 

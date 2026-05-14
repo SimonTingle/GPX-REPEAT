@@ -69,7 +69,13 @@
       "steep_down": "Steep downhill (7-10%)",
       "very_steep_down": "Very steep downhill (11%+)"
     },
-    "map_styles": ["osm", "satellite", "terrain", "topo", "hybrid"],
+    "map_styles": {
+      "osm": "OpenStreetMap",
+      "satellite": "Satellite",
+      "terrain": "Terrain",
+      "topo": "Topographic",
+      "hybrid": "Hybrid"
+    },
     "menu": {
       "load_gpx": "📥 Load GPX",
       "info_stats": "ℹ️ Info & Stats",
@@ -173,7 +179,20 @@
       "steep_down": "Bajada pronunciada (7-10%)",
       "very_steep_down": "Bajada muy pronunciada (11%+)"
     },
-    "map_styles": ["osm", "satellite", "terrain", "topo", "hybrid"],
+    "map_styles": {
+      "osm": "OpenStreetMap",
+      "satellite": "Satellite",
+      "terrain": "Terrain",
+      "topo": "Topographic",
+      "hybrid": "Hybrid"
+    },
+    "map_styles": {
+      "osm": "OpenStreetMap",
+      "satellite": "Satélite",
+      "terrain": "Terreno",
+      "topo": "Topográfico",
+      "hybrid": "Híbrido"
+    },
     "menu": {
       "load_gpx": "📥 Cargar GPX",
       "info_stats": "ℹ️ Info y estadísticas",
@@ -277,7 +296,20 @@
       "steep_down": "Descente raide (7-10%)",
       "very_steep_down": "Descente très raide (11%+)"
     },
-    "map_styles": ["osm", "satellite", "terrain", "topo", "hybrid"],
+    "map_styles": {
+      "osm": "OpenStreetMap",
+      "satellite": "Satellite",
+      "terrain": "Terrain",
+      "topo": "Topographic",
+      "hybrid": "Hybrid"
+    },
+    "map_styles": {
+      "osm": "OpenStreetMap",
+      "satellite": "Satellite",
+      "terrain": "Terrain",
+      "topo": "Topographique",
+      "hybrid": "Hybride"
+    },
     "menu": {
       "load_gpx": "📥 Charger GPX",
       "info_stats": "ℹ️ Info et statistiques",
@@ -381,7 +413,20 @@
       "steep_down": "Steiles Gefälle (7-10%)",
       "very_steep_down": "Sehr steiles Gefälle (11%+)"
     },
-    "map_styles": ["osm", "satellite", "terrain", "topo", "hybrid"],
+    "map_styles": {
+      "osm": "OpenStreetMap",
+      "satellite": "Satellite",
+      "terrain": "Terrain",
+      "topo": "Topographic",
+      "hybrid": "Hybrid"
+    },
+    "map_styles": {
+      "osm": "OpenStreetMap",
+      "satellite": "Satellit",
+      "terrain": "Gelände",
+      "topo": "Topographisch",
+      "hybrid": "Hybrid"
+    },
     "menu": {
       "load_gpx": "📥 GPX laden",
       "info_stats": "ℹ️ Info & Statistiken",
@@ -485,7 +530,20 @@
       "steep_down": "Discesa ripida (7-10%)",
       "very_steep_down": "Discesa molto ripida (11%+)"
     },
-    "map_styles": ["osm", "satellite", "terrain", "topo", "hybrid"],
+    "map_styles": {
+      "osm": "OpenStreetMap",
+      "satellite": "Satellite",
+      "terrain": "Terrain",
+      "topo": "Topographic",
+      "hybrid": "Hybrid"
+    },
+    "map_styles": {
+      "osm": "OpenStreetMap",
+      "satellite": "Satellite",
+      "terrain": "Terreno",
+      "topo": "Topografico",
+      "hybrid": "Ibrido"
+    },
     "menu": {
       "load_gpx": "📥 Carica GPX",
       "info_stats": "ℹ️ Info e statistiche",
@@ -589,7 +647,20 @@
       "steep_down": "Descida íngreme (7-10%)",
       "very_steep_down": "Descida muito íngreme (11%+)"
     },
-    "map_styles": ["osm", "satellite", "terrain", "topo", "hybrid"],
+    "map_styles": {
+      "osm": "OpenStreetMap",
+      "satellite": "Satellite",
+      "terrain": "Terrain",
+      "topo": "Topographic",
+      "hybrid": "Hybrid"
+    },
+    "map_styles": {
+      "osm": "OpenStreetMap",
+      "satellite": "Satélite",
+      "terrain": "Terreno",
+      "topo": "Topográfico",
+      "hybrid": "Híbrido"
+    },
     "menu": {
       "load_gpx": "📥 Carregar GPX",
       "info_stats": "ℹ️ Info e estatísticas",
@@ -693,7 +764,20 @@
       "steep_down": "急な下り坂（7-10%）",
       "very_steep_down": "非常に急な下り坂（11%以上）"
     },
-    "map_styles": ["osm", "satellite", "terrain", "topo", "hybrid"],
+    "map_styles": {
+      "osm": "OpenStreetMap",
+      "satellite": "Satellite",
+      "terrain": "Terrain",
+      "topo": "Topographic",
+      "hybrid": "Hybrid"
+    },
+    "map_styles": {
+      "osm": "OpenStreetMap",
+      "satellite": "衛星画像",
+      "terrain": "地形",
+      "topo": "地形図",
+      "hybrid": "ハイブリッド"
+    },
     "menu": {
       "load_gpx": "📥 GPXを読み込む",
       "info_stats": "ℹ️ 情報と統計",
@@ -797,7 +881,20 @@
       "steep_down": "陡峭下降（7-10%）",
       "very_steep_down": "非常陡峭下降（11%以上）"
     },
-    "map_styles": ["osm", "satellite", "terrain", "topo", "hybrid"],
+    "map_styles": {
+      "osm": "OpenStreetMap",
+      "satellite": "Satellite",
+      "terrain": "Terrain",
+      "topo": "Topographic",
+      "hybrid": "Hybrid"
+    },
+    "map_styles": {
+      "osm": "OpenStreetMap",
+      "satellite": "卫星",
+      "terrain": "地形",
+      "topo": "地形图",
+      "hybrid": "混合"
+    },
     "menu": {
       "load_gpx": "📥 加载GPX",
       "info_stats": "ℹ️ 信息和统计",
