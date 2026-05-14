@@ -12,6 +12,11 @@ export const LanguageSwitcher: React.FC = () => {
   const { currentLanguage, setLanguage, allLanguages } = useTexts();
   const [isHovering, setIsHovering] = useState(false);
 
+  // Defensive check: ensure allLanguages is an array
+  if (!Array.isArray(allLanguages) || allLanguages.length === 0) {
+    return null;
+  }
+
   return (
     <div
       className={`fixed bottom-4 left-4 transition-all duration-300 ease-in-out ${

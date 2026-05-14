@@ -57,24 +57,23 @@ export const TextProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setCurrentLanguage(lang);
   };
 
-  const allLanguages = (Object.keys(texts) as LanguageCode[]).sort((a, b) => {
-    // Keep English first
-    if (a === 'en') return -1;
-    if (b === 'en') return 1;
-    return a.localeCompare(b);
-  });
-
   // Use useMemo to prevent unnecessary re-renders
-  const value = useMemo(
-    () => ({
+  const value = useMemo(() => {
+    const allLanguages = (Object.keys(texts) as LanguageCode[]).sort((a, b) => {
+      // Keep English first
+      if (a === 'en') return -1;
+      if (b === 'en') return 1;
+      return a.localeCompare(b);
+    });
+
+    return {
       t,
       currentLanguage,
       setLanguage,
       texts,
       allLanguages,
-    }),
-    [currentLanguage]
-  );
+    };
+  }, [currentLanguage]);
 
   return <TextContext.Provider value={value}>{children}</TextContext.Provider>;
 };
