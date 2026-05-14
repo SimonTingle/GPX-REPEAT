@@ -13,11 +13,40 @@ const haversine = (lat1: number, lon1: number, lat2: number, lon2: number): numb
   return 2 * R * Math.asin(Math.sqrt(a));
 };
 
-interface ColoredSegment {
+interface DataPoint {
+  distance: number;
+  elevation: number;
   color: string;
-  gradient: number;
-  data: { distance: number; elevation: number }[];
 }
+
+// Custom shape component that renders colored line segments
+const ColoredLineShape = (props: any) => {
+  const { points } = props;
+  if (!points || points.length < 2) return null;
+
+  // Draw line segments with colors from the data
+  return (
+    <g>
+      {points.map((point: any, idx: number) => {
+        if (idx === 0) return null;
+        const prevPoint = points[idx - 1];
+        const currentColor = point.payload?.color || '#16a34a';
+
+        return (
+          <line
+            key={idx}
+            x1={prevPoint.x}
+            y1={prevPoint.y}
+            x2={point.x}
+            y2={point.y}
+            stroke={currentColor}
+            strokeWidth={2.5}
+          />
+        );
+      })}
+    </g>
+  );
+};
 
 export const ElevationProfile = ({ waypoints }: { waypoints: Waypoint[] }) => {
   const { t } = useTexts();
@@ -37,15 +66,28 @@ export const ElevationProfile = ({ waypoints }: { waypoints: Waypoint[] }) => {
     distances.push(distances[i - 1] + dist);
   }
 
-  // Build elevation profile data
-  const data = waypoints.map((wp, i) => {
+  // Build elevation profile data with color for each point based on gradient to next point
+  const data: DataPoint[] = waypoints.map((wp, i) => {
     const wpAny = wp as any;
     const elev = wpAny.ele !== undefined ?
       (typeof wpAny.ele === 'number' ? wpAny.ele : parseFloat(wpAny.ele)) : 0;
 
+    // Calculate gradient from this point to the next point (if not last point)
+    let color = '#CCCCCC'; // default gray
+    if (i < waypoints.length - 1) {
+      const wp1Any = wp as any;
+      const wp2Any = waypoints[i + 1] as any;
+      const ele1 = wp1Any.ele !== undefined ? (typeof wp1Any.ele === 'number' ? wp1Any.ele : parseFloat(wp1Any.ele)) : undefined;
+      const ele2 = wp2Any.ele !== undefined ? (typeof wp2Any.ele === 'number' ? wp2Any.ele : parseFloat(wp2Any.ele)) : undefined;
+
+      const gradient = calculateGradient(wp.lat, wp.lon, ele1, waypoints[i + 1].lat, waypoints[i + 1].lon, ele2);
+      color = gradientToColor(gradient);
+    }
+
     return {
       distance: parseFloat(distances[i].toFixed(2)),
       elevation: Math.round(elev),
+      color,
     };
   });
 
@@ -60,28 +102,6 @@ export const ElevationProfile = ({ waypoints }: { waypoints: Waypoint[] }) => {
   const yDomain = hasData
     ? [minElev - 20, maxElev + 20]
     : [0, 100];
-
-  // Build colored segments: each segment is 2 consecutive waypoints
-  const coloredSegments: ColoredSegment[] = [];
-  for (let i = 0; i < waypoints.length - 1; i++) {
-    const wp1 = waypoints[i];
-    const wp2 = waypoints[i + 1];
-    const wp1Any = wp1 as any;
-    const wp2Any = wp2 as any;
-
-    const ele1 = wp1Any.ele !== undefined ? (typeof wp1Any.ele === 'number' ? wp1Any.ele : parseFloat(wp1Any.ele)) : undefined;
-    const ele2 = wp2Any.ele !== undefined ? (typeof wp2Any.ele === 'number' ? wp2Any.ele : parseFloat(wp2Any.ele)) : undefined;
-
-    const gradient = calculateGradient(wp1.lat, wp1.lon, ele1, wp2.lat, wp2.lon, ele2);
-    const color = gradientToColor(gradient);
-
-    // Each segment contains 2 data points (from point i to point i+1)
-    coloredSegments.push({
-      color,
-      gradient,
-      data: [data[i], data[i + 1]],
-    });
-  }
 
   return (
     <div className="w-full bg-gradient-to-b from-amber-50 to-amber-100 p-4 border-t border-gray-300">
@@ -110,20 +130,16 @@ export const ElevationProfile = ({ waypoints }: { waypoints: Waypoint[] }) => {
             labelFormatter={(label) => `${parseFloat(label).toFixed(2)} km`}
           />
 
-          {/* Render colored segments as connected line segments */}
-          {coloredSegments.map((segment, idx) => (
-            <Line
-              key={idx}
-              data={segment.data}
-              type="natural"
-              dataKey="elevation"
-              stroke={segment.color}
-              dot={false}
-              strokeWidth={2.5}
-              isAnimationActive={false}
-              connectNulls={true}
-            />
-          ))}
+          {/* Use custom shape to render colored line segments */}
+          <Line
+            type="natural"
+            dataKey="elevation"
+            stroke="#16a34a"
+            dot={false}
+            strokeWidth={2.5}
+            isAnimationActive={false}
+            shape={<ColoredLineShape />}
+          />
         </LineChart>
       </ResponsiveContainer>
     </div>
