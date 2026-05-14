@@ -178,7 +178,7 @@ export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?
 
             {/* Language dropdown menu */}
             {showLanguageMenu && (
-              <div className="absolute top-full mt-1 left-0 bg-white/90 backdrop-blur-sm rounded shadow-lg p-2 flex flex-col gap-1 z-50">
+              <div className="absolute top-full mt-1 left-0 bg-white/90 backdrop-blur-sm rounded shadow-lg p-2 flex flex-col gap-1 z-[9999]">
                 {allLanguages.map((lang) => {
                   const langInfo = SUPPORTED_LANGUAGES[lang as LanguageCode];
                   return (
