@@ -1,6 +1,7 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Waypoint } from '../types';
 import { useTexts } from '../contexts/TextContext';
+import { calculateGradient, gradientToColor } from '../utils/elevationColor';
 
 const haversine = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
   const R = 6371;
@@ -11,6 +12,12 @@ const haversine = (lat1: number, lon1: number, lat2: number, lon2: number): numb
     Math.sin(dLon / 2) * Math.sin(dLon / 2);
   return 2 * R * Math.asin(Math.sqrt(a));
 };
+
+interface ColoredSegment {
+  color: string;
+  gradient: number;
+  data: { distance: number; elevation: number }[];
+}
 
 export const ElevationProfile = ({ waypoints }: { waypoints: Waypoint[] }) => {
   const { t } = useTexts();
@@ -30,7 +37,7 @@ export const ElevationProfile = ({ waypoints }: { waypoints: Waypoint[] }) => {
     distances.push(distances[i - 1] + dist);
   }
 
-  // Build elevation profile data - be more aggressive in extracting ele
+  // Build elevation profile data
   const data = waypoints.map((wp, i) => {
     const wpAny = wp as any;
     const elev = wpAny.ele !== undefined ?
@@ -53,6 +60,28 @@ export const ElevationProfile = ({ waypoints }: { waypoints: Waypoint[] }) => {
   const yDomain = hasData
     ? [minElev - 20, maxElev + 20]
     : [0, 100];
+
+  // Build colored segments: each segment is 2 consecutive waypoints
+  const coloredSegments: ColoredSegment[] = [];
+  for (let i = 0; i < waypoints.length - 1; i++) {
+    const wp1 = waypoints[i];
+    const wp2 = waypoints[i + 1];
+    const wp1Any = wp1 as any;
+    const wp2Any = wp2 as any;
+
+    const ele1 = wp1Any.ele !== undefined ? (typeof wp1Any.ele === 'number' ? wp1Any.ele : parseFloat(wp1Any.ele)) : undefined;
+    const ele2 = wp2Any.ele !== undefined ? (typeof wp2Any.ele === 'number' ? wp2Any.ele : parseFloat(wp2Any.ele)) : undefined;
+
+    const gradient = calculateGradient(wp1.lat, wp1.lon, ele1, wp2.lat, wp2.lon, ele2);
+    const color = gradientToColor(gradient);
+
+    // Each segment contains 2 data points (from point i to point i+1)
+    coloredSegments.push({
+      color,
+      gradient,
+      data: [data[i], data[i + 1]],
+    });
+  }
 
   return (
     <div className="w-full bg-gradient-to-b from-amber-50 to-amber-100 p-4 border-t border-gray-300">
@@ -80,16 +109,21 @@ export const ElevationProfile = ({ waypoints }: { waypoints: Waypoint[] }) => {
             }}
             labelFormatter={(label) => `${parseFloat(label).toFixed(2)} km`}
           />
-          <Line
-            type="natural"
-            dataKey="elevation"
-            stroke="#16a34a"
-            dot={false}
-            strokeWidth={2.5}
-            isAnimationActive={false}
-            fill="#86efac"
-            fillOpacity={0.1}
-          />
+
+          {/* Render colored segments as connected line segments */}
+          {coloredSegments.map((segment, idx) => (
+            <Line
+              key={idx}
+              data={segment.data}
+              type="natural"
+              dataKey="elevation"
+              stroke={segment.color}
+              dot={false}
+              strokeWidth={2.5}
+              isAnimationActive={false}
+              connectNulls={true}
+            />
+          ))}
         </LineChart>
       </ResponsiveContainer>
     </div>
