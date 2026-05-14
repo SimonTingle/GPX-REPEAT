@@ -3,6 +3,7 @@ import { Route, Option } from '../types';
 import { downloadGPX } from '../utils/gpxExport';
 import { calculateStats } from '../utils/stats';
 import { calcTiming, formatDuration, formatMmSs, parseMmSs } from '../utils/timeCalc';
+import { useTexts } from '../contexts/TextContext';
 
 export const Dashboard = ({
   routes,
@@ -17,6 +18,7 @@ export const Dashboard = ({
   updateRoute: (id: string, updates: Partial<Route>) => void;
   deleteRoute: (id: string) => void;
 }) => {
+  const { t } = useTexts();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [editRoute, setEditRoute] = useState<Route | null>(null);
   const [newOptions, setNewOptions] = useState<Option[]>([]);
@@ -38,10 +40,10 @@ export const Dashboard = ({
     try {
       // Pre-check: validate file
       if (!file.name.endsWith('.gpx')) {
-        throw new Error('File must be a .gpx file');
+        throw new Error(t('errors.invalid_gpx'));
       }
       if (file.size > 50 * 1024 * 1024) {
-        throw new Error('File size exceeds 50MB limit');
+        throw new Error(t('errors.file_too_large'));
       }
 
       setProgress(10); // File validated
@@ -61,7 +63,7 @@ export const Dashboard = ({
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.error || 'Backend parsing failed');
+        throw new Error(error.error || t('errors.parse_failed'));
       }
 
       const rawText = await response.text();
@@ -98,7 +100,7 @@ export const Dashboard = ({
 
       // Post-check: validate result
       if (!waypoints || waypoints.length === 0) {
-        throw new Error('GPX file contains no valid waypoints');
+        throw new Error(t('errors.no_waypoints'));
       }
 
       // Save route
@@ -117,7 +119,7 @@ export const Dashboard = ({
         setProgress(0);
       }, 4000);
     } catch (error) {
-      const errorText = error instanceof Error ? error.message : 'Unknown error occurred';
+      const errorText = error instanceof Error ? error.message : t('errors.unknown_error');
       setMessage({
         type: 'error',
         text: `✗ ${errorText}`,
@@ -179,7 +181,7 @@ export const Dashboard = ({
           className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
           {loading && <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />}
-          {loading ? 'Loading...' : 'Upload GPX'}
+          {loading ? t('messages.loading') : t('buttons.upload')}
         </button>
 
         {/* Progress Bar */}
@@ -333,11 +335,11 @@ export const Dashboard = ({
             value={editRoute.name}
             onChange={e => setEditRoute({ ...editRoute, name: e.target.value })}
             className="w-full px-2 py-1 border rounded text-sm"
-            placeholder="Route name"
+            placeholder={t('labels.route_name')}
           />
 
           <div>
-            <label className="block text-xs font-semibold mb-1">Repetitions</label>
+            <label className="block text-xs font-semibold mb-1">{t('labels.repetitions')}</label>
             <input
               type="number"
               value={editRoute.repetitions}
@@ -351,33 +353,33 @@ export const Dashboard = ({
           <div className="border-t pt-2 space-y-2">
             <div className="text-xs font-semibold text-green-700">⏱ Timing</div>
             <div className="flex items-center gap-2">
-              <label className="text-xs w-24 shrink-0">Target Pace</label>
+              <label className="text-xs w-24 shrink-0">{t('labels.target_pace')}</label>
               <input
                 type="text"
                 value={editRoute.targetPace ?? ''}
                 onChange={e => setEditRoute({ ...editRoute, targetPace: e.target.value })}
-                placeholder="MM:SS"
+                placeholder={t('placeholders.pace_format')}
                 className="flex-1 px-2 py-1 border rounded text-sm font-mono"
               />
               <span className="text-xs text-gray-500">/km</span>
             </div>
             <div className="flex items-center gap-2">
-              <label className="text-xs w-24 shrink-0">Start Time</label>
+              <label className="text-xs w-24 shrink-0">{t('labels.start_time')}</label>
               <input
                 type="text"
                 value={editRoute.startTime ?? ''}
                 onChange={e => setEditRoute({ ...editRoute, startTime: e.target.value })}
-                placeholder="HH:MM"
+                placeholder={t('placeholders.time_format')}
                 className="flex-1 px-2 py-1 border rounded text-sm font-mono"
               />
             </div>
             <div className="flex items-center gap-2">
-              <label className="text-xs w-24 shrink-0">Rest / Lap</label>
+              <label className="text-xs w-24 shrink-0">{t('labels.rest_per_lap')}</label>
               <input
                 type="text"
                 value={editRoute.restTime ?? ''}
                 onChange={e => setEditRoute({ ...editRoute, restTime: e.target.value })}
-                placeholder="MM:SS"
+                placeholder={t('placeholders.pace_format')}
                 className="flex-1 px-2 py-1 border rounded text-sm font-mono"
               />
             </div>
@@ -420,14 +422,14 @@ export const Dashboard = ({
               type="text"
               value={newOptionId}
               onChange={e => setNewOptionId(e.target.value)}
-              placeholder="Custom option name"
+              placeholder={t('placeholders.custom_option')}
               className="flex-1 px-2 py-1 border rounded text-xs"
             />
             <button
               onClick={handleAddOption}
               className="px-2 py-1 bg-green-500 text-white rounded text-xs hover:bg-green-600"
             >
-              Add
+              {t('buttons.add')}
             </button>
           </div>
 
@@ -436,7 +438,7 @@ export const Dashboard = ({
               onClick={handleSaveRoute}
               className="flex-1 px-2 py-1 bg-blue-500 text-white rounded text-sm hover:bg-blue-600"
             >
-              Save
+              {t('buttons.save')}
             </button>
             <button
               onClick={() => {
@@ -445,7 +447,7 @@ export const Dashboard = ({
               }}
               className="flex-1 px-2 py-1 bg-gray-400 text-white rounded text-sm hover:bg-gray-500"
             >
-              Cancel
+              {t('buttons.cancel')}
             </button>
           </div>
         </div>
@@ -478,7 +480,7 @@ export const Dashboard = ({
             disabled={!selectedRoute}
             className="w-full px-3 py-2 bg-yellow-500 text-white rounded text-sm hover:bg-yellow-600 disabled:opacity-50"
           >
-            Edit
+            {t('buttons.edit')}
           </button>
           <button
             onClick={() => {
@@ -487,7 +489,7 @@ export const Dashboard = ({
             disabled={!selectedRoute}
             className="w-full px-3 py-2 bg-green-500 text-white rounded text-sm hover:bg-green-600 disabled:opacity-50"
           >
-            Export GPX
+            {t('buttons.export')}
           </button>
           <button
             onClick={() => {
@@ -496,7 +498,7 @@ export const Dashboard = ({
             disabled={!selectedRoute}
             className="w-full px-3 py-2 bg-red-500 text-white rounded text-sm hover:bg-red-600 disabled:opacity-50"
           >
-            Delete
+            {t('buttons.delete')}
           </button>
         </div>
       )}

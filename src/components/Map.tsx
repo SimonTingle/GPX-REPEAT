@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Polyline, Popup, useMap } from 'react-leaflet'
 import { LatLngBounds } from 'leaflet';
 import { useMapStyle } from '../hooks/useMapStyle';
 import { useIsMobile } from '../hooks/useMediaQuery';
+import { useTexts } from '../contexts/TextContext';
 import { ElevationProfile } from './ElevationProfile';
 import { Route, MapStyle } from '../types';
 import { generateColoredSegments } from '../utils/elevationColor';
@@ -57,6 +58,7 @@ const MapUpdater = ({ route }: { route?: Route }) => {
 
 export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?: Route }) => {
   const { style, setStyle, getTileUrl, getAttribution } = useMapStyle();
+  const { t } = useTexts();
   const isMobile = useIsMobile();
 
   const route = selectedRoute || routes[0];
@@ -67,9 +69,9 @@ export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?
     ? route.waypoints.map(w => [w.lat, w.lon] as [number, number])
     : [];
 
-  const styleButtons: MapStyle[] = ['osm', 'satellite', 'terrain', 'topo', 'hybrid'];
+  const styleButtons: MapStyle[] = (t('map_styles') as unknown as MapStyle[]) || ['osm', 'satellite', 'terrain', 'topo', 'hybrid'];
 
-  // Responsive positioning: desktop top-right, mobile bottom-left
+  // Responsive positioning: desktop top-right, mobile bottom-left (above elevation profile)
   const controlPosition = isMobile ? 'bottom-24 left-4' : 'top-4 right-4';
 
   return (
@@ -138,35 +140,35 @@ export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?
             className="bg-white rounded shadow-lg p-3 opacity-50 hover:opacity-100 transition-opacity duration-200 pointer-events-auto"
             style={{ zIndex: 1000 }}
           >
-            <div className="text-xs font-bold text-gray-700 mb-2">📈 Elevation Gradient</div>
+            <div className="text-xs font-bold text-gray-700 mb-2">{t('elevation.title')}</div>
             <div className="space-y-1 text-xs">
             <div className="flex items-center gap-2">
               <div className="w-6 h-2 rounded" style={{ backgroundColor: '#8B0000' }}></div>
-              <span>Very steep uphill (11%+)</span>
+              <span>{t('elevation.very_steep_up')}</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-6 h-2 rounded" style={{ backgroundColor: '#FF4444' }}></div>
-              <span>Steep uphill (7-10%)</span>
+              <span>{t('elevation.steep_up')}</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-6 h-2 rounded" style={{ backgroundColor: '#FFB3BA' }}></div>
-              <span>Gentle uphill (1-3%)</span>
+              <span>{t('elevation.gentle_up')}</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-6 h-2 rounded" style={{ backgroundColor: '#CCCCCC' }}></div>
-              <span>Flat (±1%)</span>
+              <span>{t('elevation.flat')}</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-6 h-2 rounded" style={{ backgroundColor: '#87CEEB' }}></div>
-              <span>Gentle downhill (1-3%)</span>
+              <span>{t('elevation.gentle_down')}</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-6 h-2 rounded" style={{ backgroundColor: '#0047AB' }}></div>
-              <span>Steep downhill (7-10%)</span>
+              <span>{t('elevation.steep_down')}</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-6 h-2 rounded" style={{ backgroundColor: '#00008B' }}></div>
-              <span>Very steep downhill (11%+)</span>
+              <span>{t('elevation.very_steep_down')}</span>
             </div>
           </div>
           </div>

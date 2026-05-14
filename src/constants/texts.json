@@ -1,0 +1,77 @@
+{
+  "buttons": {
+    "upload": "Upload GPX",
+    "edit": "Edit",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "done": "Done",
+    "export": "Export GPX",
+    "delete": "Delete",
+    "add": "Add",
+    "back": "← Back",
+    "choose_file": "Choose File"
+  },
+  "modals": {
+    "load_gpx_title": "Load GPX File",
+    "route_info_title": "Route Info",
+    "edit_route_title": "Edit Route",
+    "routes_title": "Routes",
+    "select_route": "Select Route"
+  },
+  "labels": {
+    "route_name": "Route name",
+    "distance": "Distance",
+    "waypoints": "Waypoints",
+    "repetitions": "Repetitions",
+    "target_pace": "Target Pace",
+    "start_time": "Start Time",
+    "rest_per_lap": "Rest per Lap",
+    "elevation_gain": "Gain",
+    "elevation_loss": "Loss",
+    "elevation_max": "Max",
+    "elevation_min": "Min",
+    "density": "Density",
+    "complexity": "Complexity",
+    "efficiency": "Efficiency",
+    "est_speed": "Est. Speed"
+  },
+  "placeholders": {
+    "pace_format": "MM:SS",
+    "time_format": "HH:MM",
+    "custom_option": "Custom option name"
+  },
+  "messages": {
+    "loading": "Loading...",
+    "uploading": "Uploading...",
+    "no_routes": "No routes loaded yet",
+    "select_to_view": "Select or upload a route to view",
+    "no_elevation": "(No elevation data)"
+  },
+  "errors": {
+    "invalid_gpx": "File must be a .gpx file",
+    "file_too_large": "File size exceeds 50MB limit",
+    "parse_failed": "Backend parsing failed",
+    "no_waypoints": "GPX file contains no valid waypoints",
+    "unknown_error": "Unknown error occurred"
+  },
+  "elevation": {
+    "title": "📈 Elevation Gradient",
+    "very_steep_up": "Very steep uphill (11%+)",
+    "steep_up": "Steep uphill (7-10%)",
+    "gentle_up": "Gentle uphill (1-3%)",
+    "flat": "Flat (±1%)",
+    "gentle_down": "Gentle downhill (1-3%)",
+    "steep_down": "Steep downhill (7-10%)",
+    "very_steep_down": "Very steep downhill (11%+)"
+  },
+  "map_styles": ["osm", "satellite", "terrain", "topo", "hybrid"],
+  "menu": {
+    "load_gpx": "📥 Load GPX",
+    "info_stats": "ℹ️ Info & Stats",
+    "edit": "✏️ Edit Route",
+    "export": "📤 Export GPX",
+    "routes": "📋",
+    "menu": "⚙️ MENU"
+  }
+}

@@ -4,8 +4,9 @@ import { Dashboard } from './components/Dashboard';
 import { Mobile } from './components/Mobile';
 import { useGPX } from './hooks/useGPX';
 import { useIsMobile } from './hooks/useMediaQuery';
+import { TextProvider } from './contexts/TextContext';
 
-export const App = () => {
+const AppContent = () => {
   const { routes, updateRoute, deleteRoute } = useGPX();
   const [selectedRoute, setSelectedRoute] = useState(routes[0]);
   const isMobile = useIsMobile();
@@ -46,5 +47,13 @@ export const App = () => {
         <Map routes={routes} selectedRoute={selectedRoute} />
       </div>
     </div>
+  );
+};
+
+export const App = () => {
+  return (
+    <TextProvider>
+      <AppContent />
+    </TextProvider>
   );
 };

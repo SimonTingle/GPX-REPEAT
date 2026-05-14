@@ -1,5 +1,6 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Waypoint } from '../types';
+import { useTexts } from '../contexts/TextContext';
 
 const haversine = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
   const R = 6371;
@@ -12,6 +13,7 @@ const haversine = (lat1: number, lon1: number, lat2: number, lon2: number): numb
 };
 
 export const ElevationProfile = ({ waypoints }: { waypoints: Waypoint[] }) => {
+  const { t } = useTexts();
   if (!waypoints || waypoints.length < 2) {
     return null;
   }
@@ -55,7 +57,7 @@ export const ElevationProfile = ({ waypoints }: { waypoints: Waypoint[] }) => {
   return (
     <div className="w-full bg-gradient-to-b from-amber-50 to-amber-100 p-4 border-t border-gray-300">
       <div className="text-xs font-semibold text-gray-700 mb-2">
-        Elevation Profile {hasData ? `(${minElev.toFixed(0)}m - ${maxElev.toFixed(0)}m)` : '(No elevation data)'}
+        Elevation Profile {hasData ? `(${minElev.toFixed(0)}m - ${maxElev.toFixed(0)}m)` : t('messages.no_elevation')}
       </div>
       <ResponsiveContainer width="100%" height={160}>
         <LineChart data={data} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>

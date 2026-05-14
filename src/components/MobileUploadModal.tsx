@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { Route } from '../types';
+import { useTexts } from '../contexts/TextContext';
 
 export const MobileUploadModal = ({
   onClose,
@@ -8,6 +9,7 @@ export const MobileUploadModal = ({
   onClose: () => void;
   onUpload: (route: Route) => void;
 }) => {
+  const { t } = useTexts();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -24,10 +26,10 @@ export const MobileUploadModal = ({
     try {
       // Pre-check: validate file
       if (!file.name.endsWith('.gpx')) {
-        throw new Error('File must be a .gpx file');
+        throw new Error(t('errors.invalid_gpx'));
       }
       if (file.size > 50 * 1024 * 1024) {
-        throw new Error('File size exceeds 50MB limit');
+        throw new Error(t('errors.file_too_large'));
       }
 
       setProgress(10); // File validated
@@ -47,7 +49,7 @@ export const MobileUploadModal = ({
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.error || 'Backend parsing failed');
+        throw new Error(error.error || t('errors.parse_failed'));
       }
 
       const rawText = await response.text();
@@ -84,7 +86,7 @@ export const MobileUploadModal = ({
 
       // Post-check: validate result
       if (!waypoints || waypoints.length === 0) {
-        throw new Error('GPX file contains no valid waypoints');
+        throw new Error(t('errors.no_waypoints'));
       }
 
       // Save route to localStorage
@@ -109,7 +111,7 @@ export const MobileUploadModal = ({
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg max-w-md w-full p-6 space-y-4">
-        <h2 className="text-xl font-bold">Load GPX File</h2>
+        <h2 className="text-xl font-bold">{t('modals.load_gpx_title')}</h2>
 
         {!loading && (
           <>
@@ -125,7 +127,7 @@ export const MobileUploadModal = ({
               onClick={() => fileInputRef.current?.click()}
               className="w-full px-4 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
             >
-              Choose File
+              {t('buttons.choose_file')}
             </button>
           </>
         )}
@@ -134,7 +136,7 @@ export const MobileUploadModal = ({
           <>
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span>Uploading...</span>
+                <span>{t('messages.uploading')}</span>
                 <span>{progress}%</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2">
@@ -165,14 +167,14 @@ export const MobileUploadModal = ({
               onClick={onClose}
               className="flex-1 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
             >
-              Done
+              {t('buttons.done')}
             </button>
           ) : (
             <button
               onClick={onClose}
               className="flex-1 px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition-colors"
             >
-              Close
+              {t('buttons.close')}
             </button>
           )}
         </div>

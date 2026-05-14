@@ -6,6 +6,7 @@ import { MobileInfoModal } from './MobileInfoModal';
 import { MobileEditModal } from './MobileEditModal';
 import { MobileRouteListModal } from './MobileRouteListModal';
 import { downloadGPX } from '../utils/gpxExport';
+import { useTexts } from '../contexts/TextContext';
 
 export const Mobile = ({
   routes,
@@ -18,6 +19,7 @@ export const Mobile = ({
   onSelectRoute: (route: Route) => void;
   updateRoute: (id: string, updates: Partial<Route>) => void;
 }) => {
+  const { t } = useTexts();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showRouteList, setShowRouteList] = useState(false);
   const [showUpload, setShowUpload] = useState(false);
@@ -40,14 +42,14 @@ export const Mobile = ({
             onClick={handleCloseAllModals}
             className="p-2 hover:bg-blue-700 rounded transition-colors"
           >
-            ← Back
+            {t('buttons.back')}
           </button>
         )}
         {!(showInfo || showEdit || showUpload || showRouteList) && (
           <div className="w-10"></div>
         )}
         <h1 className="text-lg font-bold truncate flex-1 text-center px-2">
-          {selectedRoute?.name || 'Select Route'}
+          {selectedRoute?.name || t('modals.select_route')}
         </h1>
         <div className="w-10"></div> {/* Spacer for centering */}
       </div>
@@ -65,7 +67,7 @@ export const Mobile = ({
             title="Routes"
             aria-label="View route list"
           >
-            📋
+            {t('menu.routes')}
           </button>
 
           {/* Menu Button (Config) */}
@@ -90,7 +92,7 @@ export const Mobile = ({
               }}
               className="w-full px-4 py-3 text-left hover:bg-gray-50 border-b border-gray-200 text-sm transition-colors"
             >
-              📥 Load GPX
+              {t('menu.load_gpx')}
             </button>
             <button
               onClick={() => {
@@ -99,7 +101,7 @@ export const Mobile = ({
               }}
               className="w-full px-4 py-3 text-left hover:bg-gray-50 border-b border-gray-200 text-sm transition-colors"
             >
-              ℹ️ Info & Stats
+              {t('menu.info_stats')}
             </button>
             <button
               onClick={() => {
@@ -109,7 +111,7 @@ export const Mobile = ({
               disabled={!selectedRoute}
               className="w-full px-4 py-3 text-left hover:bg-gray-50 border-b border-gray-200 text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              ✏️ Edit Route
+              {t('menu.edit')}
             </button>
             <button
               onClick={() => {
@@ -119,7 +121,7 @@ export const Mobile = ({
               disabled={!selectedRoute}
               className="w-full px-4 py-3 text-left hover:bg-gray-50 text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              📤 Export GPX
+              {t('menu.export')}
             </button>
           </div>
         )}

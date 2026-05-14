@@ -1,4 +1,5 @@
 import { Route } from '../types';
+import { useTexts } from '../contexts/TextContext';
 
 export const MobileRouteListModal = ({
   routes,
@@ -11,18 +12,20 @@ export const MobileRouteListModal = ({
   onSelectRoute: (route: Route) => void;
   onClose: () => void;
 }) => {
+  const { t } = useTexts();
+
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg max-w-md w-full max-h-[80vh] overflow-y-auto flex flex-col">
         <div className="sticky top-0 bg-white border-b p-4">
           <h2 className="text-xl font-bold">
-            Routes ({routes.length})
+            {t('modals.routes_title')} ({routes.length})
           </h2>
         </div>
 
         {routes.length === 0 ? (
           <div className="flex-1 flex items-center justify-center p-4">
-            <p className="text-gray-600 text-center">No routes loaded yet</p>
+            <p className="text-gray-600 text-center">{t('messages.no_routes')}</p>
           </div>
         ) : (
           <div className="flex-1 overflow-y-auto divide-y">
@@ -39,15 +42,15 @@ export const MobileRouteListModal = ({
                 <div className="font-semibold text-gray-900 truncate">{route.name}</div>
                 <div className="text-sm text-gray-600 space-y-1 mt-1">
                   <div>
-                    <span className="text-gray-500">Distance: </span>
+                    <span className="text-gray-500">{t('labels.distance')}: </span>
                     <span className="font-mono">{route.distance.toFixed(2)} km</span>
                   </div>
                   <div>
-                    <span className="text-gray-500">Waypoints: </span>
+                    <span className="text-gray-500">{t('labels.waypoints')}: </span>
                     <span className="font-mono">{route.waypoints.length}</span>
                   </div>
                   <div>
-                    <span className="text-gray-500">Reps: </span>
+                    <span className="text-gray-500">{t('labels.repetitions')}: </span>
                     <span className="font-mono">{route.repetitions || 1}</span>
                   </div>
                   {route.elevationStats && (
@@ -70,7 +73,7 @@ export const MobileRouteListModal = ({
             onClick={onClose}
             className="w-full px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition-colors"
           >
-            Close
+            {t('buttons.close')}
           </button>
         </div>
       </div>

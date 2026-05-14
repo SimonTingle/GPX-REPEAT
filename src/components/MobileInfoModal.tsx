@@ -1,5 +1,6 @@
 import { Route } from '../types';
 import { calculateStats } from '../utils/stats';
+import { useTexts } from '../contexts/TextContext';
 
 export const MobileInfoModal = ({
   route,
@@ -8,17 +9,19 @@ export const MobileInfoModal = ({
   route?: Route;
   onClose: () => void;
 }) => {
+  const { t } = useTexts();
+
   if (!route) {
     return (
       <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
         <div className="bg-white rounded-lg max-w-md w-full p-6">
-          <h2 className="text-xl font-bold mb-4">Route Info</h2>
+          <h2 className="text-xl font-bold mb-4">{t('modals.route_info_title')}</h2>
           <p className="text-gray-600 mb-4">No route selected</p>
           <button
             onClick={onClose}
             className="w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
           >
-            Close
+            {t('buttons.close')}
           </button>
         </div>
       </div>
@@ -40,15 +43,15 @@ export const MobileInfoModal = ({
             <h3 className="font-semibold text-gray-700">Route Details</h3>
             <div className="grid grid-cols-2 gap-2 text-sm bg-gray-50 p-3 rounded">
               <div>
-                <div className="text-gray-600 text-xs">Distance</div>
+                <div className="text-gray-600 text-xs">{t('labels.distance')}</div>
                 <div className="font-mono font-semibold">{route.distance.toFixed(2)} km</div>
               </div>
               <div>
-                <div className="text-gray-600 text-xs">Waypoints</div>
+                <div className="text-gray-600 text-xs">{t('labels.waypoints')}</div>
                 <div className="font-mono font-semibold">{route.waypoints.length}</div>
               </div>
               <div>
-                <div className="text-gray-600 text-xs">Repetitions</div>
+                <div className="text-gray-600 text-xs">{t('labels.repetitions')}</div>
                 <div className="font-mono font-semibold">{route.repetitions || 1}</div>
               </div>
               <div>
@@ -66,25 +69,25 @@ export const MobileInfoModal = ({
               <h3 className="font-semibold text-gray-700">Elevation</h3>
               <div className="grid grid-cols-2 gap-2 text-sm bg-orange-50 p-3 rounded">
                 <div>
-                  <div className="text-gray-600 text-xs">Gain</div>
+                  <div className="text-gray-600 text-xs">{t('labels.elevation_gain')}</div>
                   <div className="font-mono font-semibold">
                     {route.elevationStats.elevationGain.toFixed(0)} m
                   </div>
                 </div>
                 <div>
-                  <div className="text-gray-600 text-xs">Loss</div>
+                  <div className="text-gray-600 text-xs">{t('labels.elevation_loss')}</div>
                   <div className="font-mono font-semibold">
                     {route.elevationStats.elevationLoss.toFixed(0)} m
                   </div>
                 </div>
                 <div>
-                  <div className="text-gray-600 text-xs">Max</div>
+                  <div className="text-gray-600 text-xs">{t('labels.elevation_max')}</div>
                   <div className="font-mono font-semibold">
                     {route.elevationStats.maxElevation.toFixed(0)} m
                   </div>
                 </div>
                 <div>
-                  <div className="text-gray-600 text-xs">Min</div>
+                  <div className="text-gray-600 text-xs">{t('labels.elevation_min')}</div>
                   <div className="font-mono font-semibold">
                     {route.elevationStats.minElevation.toFixed(0)} m
                   </div>
@@ -98,19 +101,19 @@ export const MobileInfoModal = ({
             <h3 className="font-semibold text-gray-700">Statistics</h3>
             <div className="grid grid-cols-2 gap-2 text-sm bg-blue-50 p-3 rounded">
               <div>
-                <div className="text-gray-600 text-xs">Density</div>
+                <div className="text-gray-600 text-xs">{t('labels.density')}</div>
                 <div className="font-mono font-semibold">{stats.avgWaypointDensity} /km</div>
               </div>
               <div>
-                <div className="text-gray-600 text-xs">Complexity</div>
+                <div className="text-gray-600 text-xs">{t('labels.complexity')}</div>
                 <div className="font-mono font-semibold">{stats.complexity}</div>
               </div>
               <div>
-                <div className="text-gray-600 text-xs">Efficiency</div>
+                <div className="text-gray-600 text-xs">{t('labels.efficiency')}</div>
                 <div className="font-mono font-semibold">{stats.efficiency}%</div>
               </div>
               <div>
-                <div className="text-gray-600 text-xs">Est. Speed</div>
+                <div className="text-gray-600 text-xs">{t('labels.est_speed')}</div>
                 <div className="font-mono font-semibold text-xs">{stats.speedIfKnown}</div>
               </div>
             </div>
@@ -166,7 +169,7 @@ export const MobileInfoModal = ({
             onClick={onClose}
             className="w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
           >
-            Close
+            {t('buttons.close')}
           </button>
         </div>
       </div>
