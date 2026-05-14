@@ -1,77 +1,618 @@
 {
-  "buttons": {
-    "upload": "Upload GPX",
-    "edit": "Edit",
-    "save": "Save",
-    "cancel": "Cancel",
-    "close": "Close",
-    "done": "Done",
-    "export": "Export GPX",
-    "delete": "Delete",
-    "add": "Add",
-    "back": "← Back",
-    "choose_file": "Choose File"
+  "en": {
+    "buttons": {
+      "upload": "Upload GPX",
+      "edit": "Edit",
+      "save": "Save",
+      "cancel": "Cancel",
+      "close": "Close",
+      "done": "Done",
+      "export": "Export GPX",
+      "delete": "Delete",
+      "add": "Add",
+      "back": "← Back",
+      "choose_file": "Choose File"
+    },
+    "modals": {
+      "load_gpx_title": "Load GPX File",
+      "route_info_title": "Route Info",
+      "edit_route_title": "Edit Route",
+      "routes_title": "Routes",
+      "select_route": "Select Route"
+    },
+    "labels": {
+      "route_name": "Route name",
+      "distance": "Distance",
+      "waypoints": "Waypoints",
+      "repetitions": "Repetitions",
+      "target_pace": "Target Pace",
+      "start_time": "Start Time",
+      "rest_per_lap": "Rest per Lap",
+      "elevation_gain": "Gain",
+      "elevation_loss": "Loss",
+      "elevation_max": "Max",
+      "elevation_min": "Min",
+      "density": "Density",
+      "complexity": "Complexity",
+      "efficiency": "Efficiency",
+      "est_speed": "Est. Speed"
+    },
+    "placeholders": {
+      "pace_format": "MM:SS",
+      "time_format": "HH:MM",
+      "custom_option": "Custom option name"
+    },
+    "messages": {
+      "loading": "Loading...",
+      "uploading": "Uploading...",
+      "no_routes": "No routes loaded yet",
+      "select_to_view": "Select or upload a route to view",
+      "no_elevation": "(No elevation data)"
+    },
+    "errors": {
+      "invalid_gpx": "File must be a .gpx file",
+      "file_too_large": "File size exceeds 50MB limit",
+      "parse_failed": "Backend parsing failed",
+      "no_waypoints": "GPX file contains no valid waypoints",
+      "unknown_error": "Unknown error occurred"
+    },
+    "elevation": {
+      "title": "📈 Elevation Gradient",
+      "very_steep_up": "Very steep uphill (11%+)",
+      "steep_up": "Steep uphill (7-10%)",
+      "gentle_up": "Gentle uphill (1-3%)",
+      "flat": "Flat (±1%)",
+      "gentle_down": "Gentle downhill (1-3%)",
+      "steep_down": "Steep downhill (7-10%)",
+      "very_steep_down": "Very steep downhill (11%+)"
+    },
+    "map_styles": ["osm", "satellite", "terrain", "topo", "hybrid"],
+    "menu": {
+      "load_gpx": "📥 Load GPX",
+      "info_stats": "ℹ️ Info & Stats",
+      "edit": "✏️ Edit Route",
+      "export": "📤 Export GPX",
+      "routes": "📋",
+      "menu": "⚙️ MENU"
+    }
   },
-  "modals": {
-    "load_gpx_title": "Load GPX File",
-    "route_info_title": "Route Info",
-    "edit_route_title": "Edit Route",
-    "routes_title": "Routes",
-    "select_route": "Select Route"
+  "es": {
+    "buttons": {
+      "upload": "Subir GPX",
+      "edit": "Editar",
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "close": "Cerrar",
+      "done": "Hecho",
+      "export": "Exportar GPX",
+      "delete": "Eliminar",
+      "add": "Añadir",
+      "back": "← Atrás",
+      "choose_file": "Elegir archivo"
+    },
+    "modals": {
+      "load_gpx_title": "Cargar archivo GPX",
+      "route_info_title": "Información de ruta",
+      "edit_route_title": "Editar ruta",
+      "routes_title": "Rutas",
+      "select_route": "Seleccionar ruta"
+    },
+    "labels": {
+      "route_name": "Nombre de ruta",
+      "distance": "Distancia",
+      "waypoints": "Puntos de referencia",
+      "repetitions": "Repeticiones",
+      "target_pace": "Ritmo objetivo",
+      "start_time": "Hora de inicio",
+      "rest_per_lap": "Descanso por vuelta",
+      "elevation_gain": "Ganancia",
+      "elevation_loss": "Pérdida",
+      "elevation_max": "Máximo",
+      "elevation_min": "Mínimo",
+      "density": "Densidad",
+      "complexity": "Complejidad",
+      "efficiency": "Eficiencia",
+      "est_speed": "Vel. est."
+    },
+    "placeholders": {
+      "pace_format": "MM:SS",
+      "time_format": "HH:MM",
+      "custom_option": "Nombre de opción personalizada"
+    },
+    "messages": {
+      "loading": "Cargando...",
+      "uploading": "Subiendo...",
+      "no_routes": "Aún no hay rutas cargadas",
+      "select_to_view": "Selecciona o sube una ruta para verla",
+      "no_elevation": "(Sin datos de elevación)"
+    },
+    "errors": {
+      "invalid_gpx": "El archivo debe ser un archivo .gpx",
+      "file_too_large": "El tamaño del archivo excede el límite de 50 MB",
+      "parse_failed": "Falló el análisis del backend",
+      "no_waypoints": "El archivo GPX no contiene puntos de referencia válidos",
+      "unknown_error": "Error desconocido"
+    },
+    "elevation": {
+      "title": "📈 Gradiente de elevación",
+      "very_steep_up": "Subida muy pronunciada (11%+)",
+      "steep_up": "Subida pronunciada (7-10%)",
+      "gentle_up": "Subida suave (1-3%)",
+      "flat": "Plano (±1%)",
+      "gentle_down": "Bajada suave (1-3%)",
+      "steep_down": "Bajada pronunciada (7-10%)",
+      "very_steep_down": "Bajada muy pronunciada (11%+)"
+    },
+    "map_styles": ["osm", "satellite", "terrain", "topo", "hybrid"],
+    "menu": {
+      "load_gpx": "📥 Cargar GPX",
+      "info_stats": "ℹ️ Info y estadísticas",
+      "edit": "✏️ Editar ruta",
+      "export": "📤 Exportar GPX",
+      "routes": "📋",
+      "menu": "⚙️ MENÚ"
+    }
   },
-  "labels": {
-    "route_name": "Route name",
-    "distance": "Distance",
-    "waypoints": "Waypoints",
-    "repetitions": "Repetitions",
-    "target_pace": "Target Pace",
-    "start_time": "Start Time",
-    "rest_per_lap": "Rest per Lap",
-    "elevation_gain": "Gain",
-    "elevation_loss": "Loss",
-    "elevation_max": "Max",
-    "elevation_min": "Min",
-    "density": "Density",
-    "complexity": "Complexity",
-    "efficiency": "Efficiency",
-    "est_speed": "Est. Speed"
+  "fr": {
+    "buttons": {
+      "upload": "Télécharger GPX",
+      "edit": "Modifier",
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "close": "Fermer",
+      "done": "Terminé",
+      "export": "Exporter GPX",
+      "delete": "Supprimer",
+      "add": "Ajouter",
+      "back": "← Retour",
+      "choose_file": "Choisir un fichier"
+    },
+    "modals": {
+      "load_gpx_title": "Charger un fichier GPX",
+      "route_info_title": "Informations sur l'itinéraire",
+      "edit_route_title": "Modifier l'itinéraire",
+      "routes_title": "Itinéraires",
+      "select_route": "Sélectionner un itinéraire"
+    },
+    "labels": {
+      "route_name": "Nom de l'itinéraire",
+      "distance": "Distance",
+      "waypoints": "Points de repère",
+      "repetitions": "Répétitions",
+      "target_pace": "Allure cible",
+      "start_time": "Heure de début",
+      "rest_per_lap": "Repos par tour",
+      "elevation_gain": "Gain",
+      "elevation_loss": "Perte",
+      "elevation_max": "Maximum",
+      "elevation_min": "Minimum",
+      "density": "Densité",
+      "complexity": "Complexité",
+      "efficiency": "Efficacité",
+      "est_speed": "Vit. est."
+    },
+    "placeholders": {
+      "pace_format": "MM:SS",
+      "time_format": "HH:MM",
+      "custom_option": "Nom de l'option personnalisée"
+    },
+    "messages": {
+      "loading": "Chargement...",
+      "uploading": "Téléchargement...",
+      "no_routes": "Aucun itinéraire chargé pour l'instant",
+      "select_to_view": "Sélectionnez ou téléchargez un itinéraire pour l'afficher",
+      "no_elevation": "(Pas de données d'altitude)"
+    },
+    "errors": {
+      "invalid_gpx": "Le fichier doit être un fichier .gpx",
+      "file_too_large": "La taille du fichier dépasse la limite de 50 Mo",
+      "parse_failed": "L'analyse du backend a échoué",
+      "no_waypoints": "Le fichier GPX ne contient aucun point de repère valide",
+      "unknown_error": "Erreur inconnue"
+    },
+    "elevation": {
+      "title": "📈 Gradient d'altitude",
+      "very_steep_up": "Montée très raide (11%+)",
+      "steep_up": "Montée raide (7-10%)",
+      "gentle_up": "Montée douce (1-3%)",
+      "flat": "Plat (±1%)",
+      "gentle_down": "Descente douce (1-3%)",
+      "steep_down": "Descente raide (7-10%)",
+      "very_steep_down": "Descente très raide (11%+)"
+    },
+    "map_styles": ["osm", "satellite", "terrain", "topo", "hybrid"],
+    "menu": {
+      "load_gpx": "📥 Charger GPX",
+      "info_stats": "ℹ️ Info et statistiques",
+      "edit": "✏️ Modifier l'itinéraire",
+      "export": "📤 Exporter GPX",
+      "routes": "📋",
+      "menu": "⚙️ MENU"
+    }
   },
-  "placeholders": {
-    "pace_format": "MM:SS",
-    "time_format": "HH:MM",
-    "custom_option": "Custom option name"
+  "de": {
+    "buttons": {
+      "upload": "GPX hochladen",
+      "edit": "Bearbeiten",
+      "save": "Speichern",
+      "cancel": "Abbrechen",
+      "close": "Schließen",
+      "done": "Fertig",
+      "export": "GPX exportieren",
+      "delete": "Löschen",
+      "add": "Hinzufügen",
+      "back": "← Zurück",
+      "choose_file": "Datei wählen"
+    },
+    "modals": {
+      "load_gpx_title": "GPX-Datei laden",
+      "route_info_title": "Routeninformationen",
+      "edit_route_title": "Route bearbeiten",
+      "routes_title": "Routen",
+      "select_route": "Route auswählen"
+    },
+    "labels": {
+      "route_name": "Routenname",
+      "distance": "Entfernung",
+      "waypoints": "Wegpunkte",
+      "repetitions": "Wiederholungen",
+      "target_pace": "Zielgeschwindigkeit",
+      "start_time": "Startzeit",
+      "rest_per_lap": "Ruhe pro Runde",
+      "elevation_gain": "Höhengewinn",
+      "elevation_loss": "Höhenverlust",
+      "elevation_max": "Maximum",
+      "elevation_min": "Minimum",
+      "density": "Dichte",
+      "complexity": "Komplexität",
+      "efficiency": "Effizienz",
+      "est_speed": "Geschätzte Geschwindigkeit"
+    },
+    "placeholders": {
+      "pace_format": "MM:SS",
+      "time_format": "HH:MM",
+      "custom_option": "Name der benutzerdefinierten Option"
+    },
+    "messages": {
+      "loading": "Wird geladen...",
+      "uploading": "Wird hochgeladen...",
+      "no_routes": "Noch keine Routen geladen",
+      "select_to_view": "Wählen oder laden Sie eine Route zum Anzeigen",
+      "no_elevation": "(Keine Höhendaten)"
+    },
+    "errors": {
+      "invalid_gpx": "Die Datei muss eine .gpx-Datei sein",
+      "file_too_large": "Die Dateigröße überschreitet das Limit von 50 MB",
+      "parse_failed": "Backend-Analyse fehlgeschlagen",
+      "no_waypoints": "Die GPX-Datei enthält keine gültigen Wegpunkte",
+      "unknown_error": "Unbekannter Fehler"
+    },
+    "elevation": {
+      "title": "📈 Höhenprofil",
+      "very_steep_up": "Sehr steile Steigung (11%+)",
+      "steep_up": "Steile Steigung (7-10%)",
+      "gentle_up": "Sanfte Steigung (1-3%)",
+      "flat": "Flach (±1%)",
+      "gentle_down": "Sanftes Gefälle (1-3%)",
+      "steep_down": "Steiles Gefälle (7-10%)",
+      "very_steep_down": "Sehr steiles Gefälle (11%+)"
+    },
+    "map_styles": ["osm", "satellite", "terrain", "topo", "hybrid"],
+    "menu": {
+      "load_gpx": "📥 GPX laden",
+      "info_stats": "ℹ️ Info & Statistiken",
+      "edit": "✏️ Route bearbeiten",
+      "export": "📤 GPX exportieren",
+      "routes": "📋",
+      "menu": "⚙️ MENÜ"
+    }
   },
-  "messages": {
-    "loading": "Loading...",
-    "uploading": "Uploading...",
-    "no_routes": "No routes loaded yet",
-    "select_to_view": "Select or upload a route to view",
-    "no_elevation": "(No elevation data)"
+  "it": {
+    "buttons": {
+      "upload": "Carica GPX",
+      "edit": "Modifica",
+      "save": "Salva",
+      "cancel": "Annulla",
+      "close": "Chiudi",
+      "done": "Fatto",
+      "export": "Esporta GPX",
+      "delete": "Elimina",
+      "add": "Aggiungi",
+      "back": "← Indietro",
+      "choose_file": "Scegli file"
+    },
+    "modals": {
+      "load_gpx_title": "Carica file GPX",
+      "route_info_title": "Info percorso",
+      "edit_route_title": "Modifica percorso",
+      "routes_title": "Percorsi",
+      "select_route": "Seleziona percorso"
+    },
+    "labels": {
+      "route_name": "Nome percorso",
+      "distance": "Distanza",
+      "waypoints": "Waypoint",
+      "repetitions": "Ripetizioni",
+      "target_pace": "Ritmo target",
+      "start_time": "Ora di inizio",
+      "rest_per_lap": "Riposo per giro",
+      "elevation_gain": "Dislivello positivo",
+      "elevation_loss": "Dislivello negativo",
+      "elevation_max": "Massimo",
+      "elevation_min": "Minimo",
+      "density": "Densità",
+      "complexity": "Complessità",
+      "efficiency": "Efficienza",
+      "est_speed": "Vel. stimata"
+    },
+    "placeholders": {
+      "pace_format": "MM:SS",
+      "time_format": "HH:MM",
+      "custom_option": "Nome opzione personalizzata"
+    },
+    "messages": {
+      "loading": "Caricamento...",
+      "uploading": "Caricamento in corso...",
+      "no_routes": "Nessun percorso caricato",
+      "select_to_view": "Seleziona o carica un percorso da visualizzare",
+      "no_elevation": "(Nessun dato di elevazione)"
+    },
+    "errors": {
+      "invalid_gpx": "Il file deve essere un file .gpx",
+      "file_too_large": "La dimensione del file supera il limite di 50 MB",
+      "parse_failed": "Analisi backend non riuscita",
+      "no_waypoints": "Il file GPX non contiene waypoint validi",
+      "unknown_error": "Errore sconosciuto"
+    },
+    "elevation": {
+      "title": "📈 Profilo altimetrico",
+      "very_steep_up": "Salita molto ripida (11%+)",
+      "steep_up": "Salita ripida (7-10%)",
+      "gentle_up": "Salita dolce (1-3%)",
+      "flat": "Pianeggiante (±1%)",
+      "gentle_down": "Discesa dolce (1-3%)",
+      "steep_down": "Discesa ripida (7-10%)",
+      "very_steep_down": "Discesa molto ripida (11%+)"
+    },
+    "map_styles": ["osm", "satellite", "terrain", "topo", "hybrid"],
+    "menu": {
+      "load_gpx": "📥 Carica GPX",
+      "info_stats": "ℹ️ Info e statistiche",
+      "edit": "✏️ Modifica percorso",
+      "export": "📤 Esporta GPX",
+      "routes": "📋",
+      "menu": "⚙️ MENU"
+    }
   },
-  "errors": {
-    "invalid_gpx": "File must be a .gpx file",
-    "file_too_large": "File size exceeds 50MB limit",
-    "parse_failed": "Backend parsing failed",
-    "no_waypoints": "GPX file contains no valid waypoints",
-    "unknown_error": "Unknown error occurred"
+  "pt": {
+    "buttons": {
+      "upload": "Carregar GPX",
+      "edit": "Editar",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "close": "Fechar",
+      "done": "Concluído",
+      "export": "Exportar GPX",
+      "delete": "Excluir",
+      "add": "Adicionar",
+      "back": "← Voltar",
+      "choose_file": "Escolher arquivo"
+    },
+    "modals": {
+      "load_gpx_title": "Carregar arquivo GPX",
+      "route_info_title": "Informações da rota",
+      "edit_route_title": "Editar rota",
+      "routes_title": "Rotas",
+      "select_route": "Selecionar rota"
+    },
+    "labels": {
+      "route_name": "Nome da rota",
+      "distance": "Distância",
+      "waypoints": "Pontos de passagem",
+      "repetitions": "Repetições",
+      "target_pace": "Ritmo alvo",
+      "start_time": "Hora de início",
+      "rest_per_lap": "Descanso por volta",
+      "elevation_gain": "Ganho de elevação",
+      "elevation_loss": "Perda de elevação",
+      "elevation_max": "Máximo",
+      "elevation_min": "Mínimo",
+      "density": "Densidade",
+      "complexity": "Complexidade",
+      "efficiency": "Eficiência",
+      "est_speed": "Vel. estimada"
+    },
+    "placeholders": {
+      "pace_format": "MM:SS",
+      "time_format": "HH:MM",
+      "custom_option": "Nome da opção personalizada"
+    },
+    "messages": {
+      "loading": "Carregando...",
+      "uploading": "Enviando...",
+      "no_routes": "Nenhuma rota carregada ainda",
+      "select_to_view": "Selecione ou carregue uma rota para visualizar",
+      "no_elevation": "(Sem dados de elevação)"
+    },
+    "errors": {
+      "invalid_gpx": "O arquivo deve ser um arquivo .gpx",
+      "file_too_large": "O tamanho do arquivo excede o limite de 50 MB",
+      "parse_failed": "Falha na análise do backend",
+      "no_waypoints": "O arquivo GPX não contém pontos de passagem válidos",
+      "unknown_error": "Erro desconhecido"
+    },
+    "elevation": {
+      "title": "📈 Perfil de elevação",
+      "very_steep_up": "Subida muito íngreme (11%+)",
+      "steep_up": "Subida íngreme (7-10%)",
+      "gentle_up": "Subida suave (1-3%)",
+      "flat": "Plano (±1%)",
+      "gentle_down": "Descida suave (1-3%)",
+      "steep_down": "Descida íngreme (7-10%)",
+      "very_steep_down": "Descida muito íngreme (11%+)"
+    },
+    "map_styles": ["osm", "satellite", "terrain", "topo", "hybrid"],
+    "menu": {
+      "load_gpx": "📥 Carregar GPX",
+      "info_stats": "ℹ️ Info e estatísticas",
+      "edit": "✏️ Editar rota",
+      "export": "📤 Exportar GPX",
+      "routes": "📋",
+      "menu": "⚙️ MENU"
+    }
   },
-  "elevation": {
-    "title": "📈 Elevation Gradient",
-    "very_steep_up": "Very steep uphill (11%+)",
-    "steep_up": "Steep uphill (7-10%)",
-    "gentle_up": "Gentle uphill (1-3%)",
-    "flat": "Flat (±1%)",
-    "gentle_down": "Gentle downhill (1-3%)",
-    "steep_down": "Steep downhill (7-10%)",
-    "very_steep_down": "Very steep downhill (11%+)"
+  "ja": {
+    "buttons": {
+      "upload": "GPXをアップロード",
+      "edit": "編集",
+      "save": "保存",
+      "cancel": "キャンセル",
+      "close": "閉じる",
+      "done": "完了",
+      "export": "GPXをエクスポート",
+      "delete": "削除",
+      "add": "追加",
+      "back": "← 戻る",
+      "choose_file": "ファイルを選択"
+    },
+    "modals": {
+      "load_gpx_title": "GPXファイルを読み込む",
+      "route_info_title": "ルート情報",
+      "edit_route_title": "ルートを編集",
+      "routes_title": "ルート",
+      "select_route": "ルートを選択"
+    },
+    "labels": {
+      "route_name": "ルート名",
+      "distance": "距離",
+      "waypoints": "ウェイポイント",
+      "repetitions": "繰り返し",
+      "target_pace": "目標ペース",
+      "start_time": "開始時間",
+      "rest_per_lap": "ラップごとの休憩",
+      "elevation_gain": "上昇",
+      "elevation_loss": "下降",
+      "elevation_max": "最大",
+      "elevation_min": "最小",
+      "density": "密度",
+      "complexity": "複雑さ",
+      "efficiency": "効率",
+      "est_speed": "推定速度"
+    },
+    "placeholders": {
+      "pace_format": "MM:SS",
+      "time_format": "HH:MM",
+      "custom_option": "カスタムオプション名"
+    },
+    "messages": {
+      "loading": "読み込み中...",
+      "uploading": "アップロード中...",
+      "no_routes": "ルートがまだ読み込まれていません",
+      "select_to_view": "ルートを選択またはアップロードして表示",
+      "no_elevation": "(標高データなし)"
+    },
+    "errors": {
+      "invalid_gpx": "ファイルは.gpxファイルである必要があります",
+      "file_too_large": "ファイルサイズが50MBの制限を超えています",
+      "parse_failed": "バックエンド解析が失敗しました",
+      "no_waypoints": "GPXファイルに有効なウェイポイントが含まれていません",
+      "unknown_error": "不明なエラーが発生しました"
+    },
+    "elevation": {
+      "title": "📈 標高勾配",
+      "very_steep_up": "非常に急な上り坂（11%以上）",
+      "steep_up": "急な上り坂（7-10%）",
+      "gentle_up": "緩い上り坂（1-3%）",
+      "flat": "平坦（±1%）",
+      "gentle_down": "緩い下り坂（1-3%）",
+      "steep_down": "急な下り坂（7-10%）",
+      "very_steep_down": "非常に急な下り坂（11%以上）"
+    },
+    "map_styles": ["osm", "satellite", "terrain", "topo", "hybrid"],
+    "menu": {
+      "load_gpx": "📥 GPXを読み込む",
+      "info_stats": "ℹ️ 情報と統計",
+      "edit": "✏️ ルートを編集",
+      "export": "📤 GPXをエクスポート",
+      "routes": "📋",
+      "menu": "⚙️ メニュー"
+    }
   },
-  "map_styles": ["osm", "satellite", "terrain", "topo", "hybrid"],
-  "menu": {
-    "load_gpx": "📥 Load GPX",
-    "info_stats": "ℹ️ Info & Stats",
-    "edit": "✏️ Edit Route",
-    "export": "📤 Export GPX",
-    "routes": "📋",
-    "menu": "⚙️ MENU"
+  "zh": {
+    "buttons": {
+      "upload": "上传GPX",
+      "edit": "编辑",
+      "save": "保存",
+      "cancel": "取消",
+      "close": "关闭",
+      "done": "完成",
+      "export": "导出GPX",
+      "delete": "删除",
+      "add": "添加",
+      "back": "← 返回",
+      "choose_file": "选择文件"
+    },
+    "modals": {
+      "load_gpx_title": "加载GPX文件",
+      "route_info_title": "路线信息",
+      "edit_route_title": "编辑路线",
+      "routes_title": "路线",
+      "select_route": "选择路线"
+    },
+    "labels": {
+      "route_name": "路线名称",
+      "distance": "距离",
+      "waypoints": "路点",
+      "repetitions": "重复次数",
+      "target_pace": "目标配速",
+      "start_time": "开始时间",
+      "rest_per_lap": "每圈休息时间",
+      "elevation_gain": "爬升",
+      "elevation_loss": "下降",
+      "elevation_max": "最大值",
+      "elevation_min": "最小值",
+      "density": "密度",
+      "complexity": "复杂度",
+      "efficiency": "效率",
+      "est_speed": "估计速度"
+    },
+    "placeholders": {
+      "pace_format": "MM:SS",
+      "time_format": "HH:MM",
+      "custom_option": "自定义选项名称"
+    },
+    "messages": {
+      "loading": "加载中...",
+      "uploading": "上传中...",
+      "no_routes": "还未加载任何路线",
+      "select_to_view": "选择或上传路线以查看",
+      "no_elevation": "（无海拔数据）"
+    },
+    "errors": {
+      "invalid_gpx": "文件必须是.gpx文件",
+      "file_too_large": "文件大小超过50MB限制",
+      "parse_failed": "后端解析失败",
+      "no_waypoints": "GPX文件不包含有效的路点",
+      "unknown_error": "发生未知错误"
+    },
+    "elevation": {
+      "title": "📈 海拔梯度",
+      "very_steep_up": "非常陡峭上升（11%以上）",
+      "steep_up": "陡峭上升（7-10%）",
+      "gentle_up": "缓和上升（1-3%）",
+      "flat": "平坦（±1%）",
+      "gentle_down": "缓和下降（1-3%）",
+      "steep_down": "陡峭下降（7-10%）",
+      "very_steep_down": "非常陡峭下降（11%以上）"
+    },
+    "map_styles": ["osm", "satellite", "terrain", "topo", "hybrid"],
+    "menu": {
+      "load_gpx": "📥 加载GPX",
+      "info_stats": "ℹ️ 信息和统计",
+      "edit": "✏️ 编辑路线",
+      "export": "📤 导出GPX",
+      "routes": "📋",
+      "menu": "⚙️ 菜单"
+    }
   }
 }
