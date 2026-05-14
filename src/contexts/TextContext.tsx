@@ -26,31 +26,39 @@ export const TextProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setLanguagePreference(currentLanguage);
   }, [currentLanguage]);
 
+  // Resolve a dot-path within a language object; returns undefined if not found
+  const resolvePath = (langObj: any, keys: string[]): any => {
+    let value: any = langObj;
+    for (const key of keys) {
+      value = value?.[key];
+      if (value === undefined) return undefined;
+    }
+    return value;
+  };
+
   // Get text function with language fallback
   const t = (path: string, language?: LanguageCode): string => {
     const lang = language || currentLanguage;
     const keys = path.split('.');
 
-    // Try the requested language first
-    let value: any = texts[lang];
-
-    for (const key of keys) {
-      value = value?.[key];
-      if (value === undefined) {
-        // Fallback to English if key missing in selected language
-        value = texts['en'];
-        for (const k of keys) {
-          value = value?.[k];
-          if (value === undefined) {
-            console.warn(`Missing text key: ${path} in language ${lang}`);
-            return path;
-          }
-        }
-        break;
-      }
+    // Try the requested language, then fall back to English
+    let value = resolvePath(texts[lang], keys);
+    if (value === undefined) {
+      value = resolvePath(texts['en'], keys);
     }
 
-    return String(value);
+    if (value === undefined) {
+      console.warn(`Missing text key: ${path} in language ${lang}`);
+      return path;
+    }
+
+    // Guard against non-string leaf values (arrays/objects) — t() is for text only
+    if (typeof value !== 'string') {
+      console.warn(`Text key "${path}" is not a string (got ${Array.isArray(value) ? 'array' : typeof value}). Use the raw texts object for non-string values.`);
+      return path;
+    }
+
+    return value;
   };
 
   const setLanguage = (lang: LanguageCode) => {

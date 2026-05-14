@@ -69,7 +69,8 @@ export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?
     ? route.waypoints.map(w => [w.lat, w.lon] as [number, number])
     : [];
 
-  const styleButtons: MapStyle[] = (t('map_styles') as unknown as MapStyle[]) || ['osm', 'satellite', 'terrain', 'topo', 'hybrid'];
+  // Map style identifiers are not translatable text — they are fixed across all languages
+  const styleButtons: MapStyle[] = ['osm', 'satellite', 'terrain', 'topo', 'hybrid'];
 
   // Responsive positioning: desktop top-right, mobile bottom-left (above elevation profile)
   const controlPosition = isMobile ? 'bottom-24 left-4' : 'top-4 right-4';
