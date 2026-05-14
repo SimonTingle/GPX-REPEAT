@@ -227,56 +227,56 @@ export const Dashboard = ({
 
         return (
           <div className="p-2 bg-blue-50 border-b max-h-48 overflow-y-auto text-xs space-y-1">
-            <div className="font-bold text-blue-900">Route Analytics</div>
+            <div className="font-bold text-blue-900">{t('analytics.title')}</div>
             <div className="grid grid-cols-3 gap-1 text-xs">
-              <div>Lap dist: <span className="font-semibold">{stats.distance.toFixed(2)}km</span></div>
-              <div>Points: <span className="font-semibold">{stats.waypoints}</span></div>
-              <div>Reps: <span className="font-semibold">{reps}x</span></div>
+              <div>{t('analytics.lap_dist')} <span className="font-semibold">{stats.distance.toFixed(2)}km</span></div>
+              <div>{t('analytics.points')} <span className="font-semibold">{stats.waypoints}</span></div>
+              <div>{t('analytics.reps')} <span className="font-semibold">{reps}x</span></div>
               <div className="col-span-3 bg-blue-100 rounded px-1 py-0.5">
-                Total: <span className="font-bold text-blue-800">{totalDistance.toFixed(2)}km</span>
+                {t('analytics.total')} <span className="font-bold text-blue-800">{totalDistance.toFixed(2)}km</span>
                 {reps > 0 && <span className="text-blue-600 ml-1">({stats.distance.toFixed(2)} × {reps})</span>}
               </div>
               {timing && (
                 <div className="col-span-3 bg-green-100 border border-green-300 rounded px-1 py-1 space-y-0.5">
-                  <div className="font-bold text-green-900 text-xs mb-0.5">⏱ Timing</div>
+                  <div className="font-bold text-green-900 text-xs mb-0.5">{t('analytics.timing_header')}</div>
                   <div className="grid grid-cols-3 gap-1">
-                    <div>Pace: <span className="font-semibold">{pace}/km</span></div>
-                    <div>Lap time: <span className="font-semibold">{formatMmSs(timing.lapSecs)}</span></div>
+                    <div>{t('analytics.pace')} <span className="font-semibold">{pace}/km</span></div>
+                    <div>{t('analytics.lap_time')} <span className="font-semibold">{formatMmSs(timing.lapSecs)}</span></div>
                     {timing.restSecs > 0 && (
-                      <div>Rest total: <span className="font-semibold">{formatDuration(timing.restSecs)}</span></div>
+                      <div>{t('analytics.rest_total')} <span className="font-semibold">{formatDuration(timing.restSecs)}</span></div>
                     )}
                     <div className="col-span-3 text-green-800">
-                      Total: <span className="font-bold">{formatDuration(timing.totalSecs)}</span>
+                      {t('analytics.total')} <span className="font-bold">{formatDuration(timing.totalSecs)}</span>
                       {selectedRoute.startTime && timing.finishTime && (
                         <span className="ml-2">
-                          Start: <span className="font-bold">{selectedRoute.startTime}</span>
-                          {' → '}Finish: <span className="font-bold">{timing.finishTime}</span>
+                          {t('analytics.start')} <span className="font-bold">{selectedRoute.startTime}</span>
+                          {' → '}{t('analytics.finish')} <span className="font-bold">{timing.finishTime}</span>
                         </span>
                       )}
                       {!selectedRoute.startTime && (
-                        <span className="text-green-600 ml-1">(set start time for finish)</span>
+                        <span className="text-green-600 ml-1">{t('analytics.set_start_time')}</span>
                       )}
                     </div>
                   </div>
                 </div>
               )}
-              <div>Density: <span className="font-semibold">{stats.avgWaypointDensity}/km</span></div>
-              <div>Complexity: <span className="font-semibold">{stats.complexity}</span></div>
-              <div>Efficiency: <span className="font-semibold">{stats.efficiency}%</span></div>
-              <div>Start Lat: <span className="font-semibold">{selectedRoute.waypoints[0]?.lat.toFixed(3)}</span></div>
-              <div>Start Lon: <span className="font-semibold">{selectedRoute.waypoints[0]?.lon.toFixed(3)}</span></div>
-              <div>End Lat: <span className="font-semibold">{selectedRoute.waypoints[selectedRoute.waypoints.length-1]?.lat.toFixed(3)}</span></div>
-              <div>North: <span className="font-semibold">{stats.bounds.n.toFixed(3)}</span></div>
-              <div>South: <span className="font-semibold">{stats.bounds.s.toFixed(3)}</span></div>
-              <div>East: <span className="font-semibold">{stats.bounds.e.toFixed(3)}</span></div>
-              <div>West: <span className="font-semibold">{stats.bounds.w.toFixed(3)}</span></div>
-              <div>Center Lat: <span className="font-semibold">{stats.center.lat.toFixed(3)}</span></div>
-              <div>Center Lon: <span className="font-semibold">{stats.center.lon.toFixed(3)}</span></div>
-              <div>Est Speed: <span className="font-semibold">{stats.speedIfKnown}</span></div>
+              <div>{t('labels.density')} <span className="font-semibold">{stats.avgWaypointDensity}/km</span></div>
+              <div>{t('labels.complexity')} <span className="font-semibold">{stats.complexity}</span></div>
+              <div>{t('labels.efficiency')} <span className="font-semibold">{stats.efficiency}%</span></div>
+              <div>{t('analytics.start_lat')} <span className="font-semibold">{selectedRoute.waypoints[0]?.lat.toFixed(3)}</span></div>
+              <div>{t('analytics.start_lon')} <span className="font-semibold">{selectedRoute.waypoints[0]?.lon.toFixed(3)}</span></div>
+              <div>{t('analytics.end_lat')} <span className="font-semibold">{selectedRoute.waypoints[selectedRoute.waypoints.length-1]?.lat.toFixed(3)}</span></div>
+              <div>{t('analytics.north')} <span className="font-semibold">{stats.bounds.n.toFixed(3)}</span></div>
+              <div>{t('analytics.south')} <span className="font-semibold">{stats.bounds.s.toFixed(3)}</span></div>
+              <div>{t('analytics.east')} <span className="font-semibold">{stats.bounds.e.toFixed(3)}</span></div>
+              <div>{t('analytics.west')} <span className="font-semibold">{stats.bounds.w.toFixed(3)}</span></div>
+              <div>{t('analytics.center_lat')} <span className="font-semibold">{stats.center.lat.toFixed(3)}</span></div>
+              <div>{t('analytics.center_lon')} <span className="font-semibold">{stats.center.lon.toFixed(3)}</span></div>
+              <div>{t('labels.est_speed')} <span className="font-semibold">{stats.speedIfKnown}</span></div>
               <div>Created: <span className="font-semibold">{new Date(selectedRoute.createdAt).toLocaleDateString()}</span></div>
               <div>Time: <span className="font-semibold">{new Date(selectedRoute.createdAt).toLocaleTimeString()}</span></div>
               <div>Name: <span className="font-semibold truncate">{selectedRoute.name}</span></div>
-              <div>Custom: <span className="font-semibold">{Object.keys(selectedRoute.options || {}).length} opts</span></div>
+              <div>{t('analytics.custom')} <span className="font-semibold">{Object.keys(selectedRoute.options || {}).length} opts</span></div>
             </div>
           </div>
         );

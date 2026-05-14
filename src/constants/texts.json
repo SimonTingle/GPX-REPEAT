@@ -74,6 +74,30 @@
       "export": "📤 Export GPX",
       "routes": "📋",
       "menu": "⚙️ MENU"
+    },
+    "analytics": {
+      "title": "Route Analytics",
+      "lap_dist": "Lap dist:",
+      "points": "Points:",
+      "reps": "Reps:",
+      "total": "Total:",
+      "timing_header": "⏱ Timing",
+      "pace": "Pace:",
+      "lap_time": "Lap time:",
+      "rest_total": "Rest total:",
+      "start": "Start:",
+      "finish": "Finish:",
+      "set_start_time": "(set start time for finish)",
+      "start_lat": "Start Lat:",
+      "start_lon": "Start Lon:",
+      "end_lat": "End Lat:",
+      "north": "North:",
+      "south": "South:",
+      "east": "East:",
+      "west": "West:",
+      "center_lat": "Center Lat:",
+      "center_lon": "Center Lon:",
+      "custom": "Custom:"
     }
   },
   "es": {
@@ -151,6 +175,30 @@
       "export": "📤 Exportar GPX",
       "routes": "📋",
       "menu": "⚙️ MENÚ"
+    },
+    "analytics": {
+      "title": "Análisis de ruta",
+      "lap_dist": "Dist. vuelta:",
+      "points": "Puntos:",
+      "reps": "Reps:",
+      "total": "Total:",
+      "timing_header": "⏱ Timing",
+      "pace": "Ritmo:",
+      "lap_time": "Tiempo vuelta:",
+      "rest_total": "Descanso total:",
+      "start": "Inicio:",
+      "finish": "Fin:",
+      "set_start_time": "(establece la hora de inicio para el fin)",
+      "start_lat": "Lat. inicio:",
+      "start_lon": "Lon. inicio:",
+      "end_lat": "Lat. fin:",
+      "north": "Norte:",
+      "south": "Sur:",
+      "east": "Este:",
+      "west": "Oeste:",
+      "center_lat": "Lat. centro:",
+      "center_lon": "Lon. centro:",
+      "custom": "Personalizado:"
     }
   },
   "fr": {
@@ -228,6 +276,30 @@
       "export": "📤 Exporter GPX",
       "routes": "📋",
       "menu": "⚙️ MENU"
+    },
+    "analytics": {
+      "title": "Analyse de l'itinéraire",
+      "lap_dist": "Dist. tour:",
+      "points": "Points:",
+      "reps": "Tours:",
+      "total": "Total:",
+      "timing_header": "⏱ Timing",
+      "pace": "Allure:",
+      "lap_time": "Temps tour:",
+      "rest_total": "Repos total:",
+      "start": "Début:",
+      "finish": "Fin:",
+      "set_start_time": "(définir l'heure de début pour la fin)",
+      "start_lat": "Lat. début:",
+      "start_lon": "Lon. début:",
+      "end_lat": "Lat. fin:",
+      "north": "Nord:",
+      "south": "Sud:",
+      "east": "Est:",
+      "west": "Ouest:",
+      "center_lat": "Lat. centre:",
+      "center_lon": "Lon. centre:",
+      "custom": "Personnalisé:"
     }
   },
   "de": {
@@ -305,6 +377,30 @@
       "export": "📤 GPX exportieren",
       "routes": "📋",
       "menu": "⚙️ MENÜ"
+    },
+    "analytics": {
+      "title": "Routenanalyse",
+      "lap_dist": "Rundenentf.:",
+      "points": "Punkte:",
+      "reps": "Runden:",
+      "total": "Gesamt:",
+      "timing_header": "⏱ Zeitliche Planung",
+      "pace": "Tempo:",
+      "lap_time": "Rundenzeit:",
+      "rest_total": "Gesamtruhe:",
+      "start": "Start:",
+      "finish": "Ziel:",
+      "set_start_time": "(Startzeit für das Ziel setzen)",
+      "start_lat": "Start Lat.:",
+      "start_lon": "Start Lon.:",
+      "end_lat": "End Lat.:",
+      "north": "Nord:",
+      "south": "Süd:",
+      "east": "Ost:",
+      "west": "West:",
+      "center_lat": "Mitte Lat.:",
+      "center_lon": "Mitte Lon.:",
+      "custom": "Benutzerdefiniert:"
     }
   },
   "it": {
@@ -382,6 +478,30 @@
       "export": "📤 Esporta GPX",
       "routes": "📋",
       "menu": "⚙️ MENU"
+    },
+    "analytics": {
+      "title": "Analisi del percorso",
+      "lap_dist": "Dist. giro:",
+      "points": "Punti:",
+      "reps": "Giri:",
+      "total": "Totale:",
+      "timing_header": "⏱ Timing",
+      "pace": "Ritmo:",
+      "lap_time": "Tempo giro:",
+      "rest_total": "Riposo totale:",
+      "start": "Inizio:",
+      "finish": "Fine:",
+      "set_start_time": "(imposta ora inizio per fine)",
+      "start_lat": "Lat. inizio:",
+      "start_lon": "Lon. inizio:",
+      "end_lat": "Lat. fine:",
+      "north": "Nord:",
+      "south": "Sud:",
+      "east": "Est:",
+      "west": "Ovest:",
+      "center_lat": "Lat. centro:",
+      "center_lon": "Lon. centro:",
+      "custom": "Personalizzato:"
     }
   },
   "pt": {
@@ -459,6 +579,30 @@
       "export": "📤 Exportar GPX",
       "routes": "📋",
       "menu": "⚙️ MENU"
+    },
+    "analytics": {
+      "title": "Análise da rota",
+      "lap_dist": "Dist. volta:",
+      "points": "Pontos:",
+      "reps": "Voltas:",
+      "total": "Total:",
+      "timing_header": "⏱ Timing",
+      "pace": "Ritmo:",
+      "lap_time": "Tempo volta:",
+      "rest_total": "Descanso total:",
+      "start": "Início:",
+      "finish": "Término:",
+      "set_start_time": "(defina hora de início para término)",
+      "start_lat": "Lat. início:",
+      "start_lon": "Lon. início:",
+      "end_lat": "Lat. fim:",
+      "north": "Norte:",
+      "south": "Sul:",
+      "east": "Leste:",
+      "west": "Oeste:",
+      "center_lat": "Lat. centro:",
+      "center_lon": "Lon. centro:",
+      "custom": "Personalizado:"
     }
   },
   "ja": {
@@ -536,6 +680,30 @@
       "export": "📤 GPXをエクスポート",
       "routes": "📋",
       "menu": "⚙️ メニュー"
+    },
+    "analytics": {
+      "title": "ルート分析",
+      "lap_dist": "ラップ距離:",
+      "points": "ポイント:",
+      "reps": "ラップ:",
+      "total": "合計:",
+      "timing_header": "⏱ タイミング",
+      "pace": "ペース:",
+      "lap_time": "ラップタイム:",
+      "rest_total": "合計休憩:",
+      "start": "開始:",
+      "finish": "終了:",
+      "set_start_time": "(終了時刻用に開始時刻を設定)",
+      "start_lat": "開始緯度:",
+      "start_lon": "開始経度:",
+      "end_lat": "終了緯度:",
+      "north": "北:",
+      "south": "南:",
+      "east": "東:",
+      "west": "西:",
+      "center_lat": "中心緯度:",
+      "center_lon": "中心経度:",
+      "custom": "カスタム:"
     }
   },
   "zh": {
@@ -613,6 +781,30 @@
       "export": "📤 导出GPX",
       "routes": "📋",
       "menu": "⚙️ 菜单"
+    },
+    "analytics": {
+      "title": "路线分析",
+      "lap_dist": "单圈距离:",
+      "points": "点数:",
+      "reps": "圈数:",
+      "total": "总计:",
+      "timing_header": "⏱ 计时",
+      "pace": "配速:",
+      "lap_time": "单圈用时:",
+      "rest_total": "总休息时间:",
+      "start": "开始:",
+      "finish": "结束:",
+      "set_start_time": "（设置开始时间以计算结束时间）",
+      "start_lat": "开始纬度:",
+      "start_lon": "开始经度:",
+      "end_lat": "结束纬度:",
+      "north": "北:",
+      "south": "南:",
+      "east": "东:",
+      "west": "西:",
+      "center_lat": "中心纬度:",
+      "center_lon": "中心经度:",
+      "custom": "自定义:"
     }
   }
 }
