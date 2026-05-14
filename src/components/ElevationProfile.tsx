@@ -1,4 +1,4 @@
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { useRef, useEffect, useState } from 'react';
 import { Waypoint } from '../types';
 import { useTexts } from '../contexts/TextContext';
 import { calculateGradient, gradientToColor } from '../utils/elevationColor';
@@ -7,7 +7,8 @@ const haversine = (lat1: number, lon1: number, lat2: number, lon2: number): numb
   const R = 6371;
   const dLat = (lat2 - lat1) * Math.PI / 180;
   const dLon = (lon2 - lon1) * Math.PI / 180;
-  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
     Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
     Math.sin(dLon / 2) * Math.sin(dLon / 2);
   return 2 * R * Math.asin(Math.sqrt(a));
@@ -19,129 +20,297 @@ interface DataPoint {
   color: string;
 }
 
-// Custom shape component that renders colored line segments
-const ColoredLineShape = (props: any) => {
-  const { points } = props;
-  if (!points || points.length < 2) return null;
+interface TooltipInfo {
+  x: number;
+  y: number;
+  distance: string;
+  elevation: string;
+}
 
-  // Draw line segments with colors from the data
-  return (
-    <g>
-      {points.map((point: any, idx: number) => {
-        if (idx === 0) return null;
-        const prevPoint = points[idx - 1];
-        const currentColor = point.payload?.color || '#16a34a';
-
-        return (
-          <line
-            key={idx}
-            x1={prevPoint.x}
-            y1={prevPoint.y}
-            x2={point.x}
-            y2={point.y}
-            stroke={currentColor}
-            strokeWidth={2.5}
-          />
-        );
-      })}
-    </g>
-  );
-};
+const M = { top: 12, right: 14, left: 55, bottom: 36 };
+const CHART_H = 160;
 
 export const ElevationProfile = ({ waypoints }: { waypoints: Waypoint[] }) => {
   const { t } = useTexts();
-  if (!waypoints || waypoints.length < 2) {
-    return null;
-  }
+  const containerRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
+  const [svgWidth, setSvgWidth] = useState(600);
+  const [tooltip, setTooltip] = useState<TooltipInfo | null>(null);
 
-  // Calculate cumulative distance for each point
+  useEffect(() => {
+    const update = () => {
+      if (containerRef.current) setSvgWidth(containerRef.current.clientWidth);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  if (!waypoints || waypoints.length < 2) return null;
+
+  // Cumulative distances
   const distances: number[] = [0];
   for (let i = 1; i < waypoints.length; i++) {
-    const dist = haversine(
-      waypoints[i - 1].lat,
-      waypoints[i - 1].lon,
-      waypoints[i].lat,
-      waypoints[i].lon
+    distances.push(
+      distances[i - 1] +
+        haversine(waypoints[i - 1].lat, waypoints[i - 1].lon, waypoints[i].lat, waypoints[i].lon),
     );
-    distances.push(distances[i - 1] + dist);
   }
 
-  // Build elevation profile data with color for each point based on gradient to next point
+  // Build data points with gradient colours
   const data: DataPoint[] = waypoints.map((wp, i) => {
     const wpAny = wp as any;
-    const elev = wpAny.ele !== undefined ?
-      (typeof wpAny.ele === 'number' ? wpAny.ele : parseFloat(wpAny.ele)) : 0;
+    const elev =
+      wpAny.ele !== undefined
+        ? typeof wpAny.ele === 'number'
+          ? wpAny.ele
+          : parseFloat(wpAny.ele)
+        : 0;
 
-    // Calculate gradient from this point to the next point (if not last point)
-    let color = '#CCCCCC'; // default gray
+    let color = '#CCCCCC';
     if (i < waypoints.length - 1) {
-      const wp1Any = wp as any;
       const wp2Any = waypoints[i + 1] as any;
-      const ele1 = wp1Any.ele !== undefined ? (typeof wp1Any.ele === 'number' ? wp1Any.ele : parseFloat(wp1Any.ele)) : undefined;
-      const ele2 = wp2Any.ele !== undefined ? (typeof wp2Any.ele === 'number' ? wp2Any.ele : parseFloat(wp2Any.ele)) : undefined;
-
-      const gradient = calculateGradient(wp.lat, wp.lon, ele1, waypoints[i + 1].lat, waypoints[i + 1].lon, ele2);
+      const ele1 =
+        wpAny.ele !== undefined
+          ? typeof wpAny.ele === 'number'
+            ? wpAny.ele
+            : parseFloat(wpAny.ele)
+          : undefined;
+      const ele2 =
+        wp2Any.ele !== undefined
+          ? typeof wp2Any.ele === 'number'
+            ? wp2Any.ele
+            : parseFloat(wp2Any.ele)
+          : undefined;
+      const gradient = calculateGradient(
+        wp.lat, wp.lon, ele1,
+        waypoints[i + 1].lat, waypoints[i + 1].lon, ele2,
+      );
       color = gradientToColor(gradient);
     }
 
     return {
-      distance: parseFloat(distances[i].toFixed(2)),
+      distance: parseFloat(distances[i].toFixed(3)),
       elevation: Math.round(elev),
       color,
     };
   });
 
-  // Get elevation range
   const elevations = data.map(d => d.elevation);
   const minElev = Math.min(...elevations);
   const maxElev = Math.max(...elevations);
-
-  // If all zeros, show basic profile anyway
   const hasData = maxElev > minElev;
 
-  const yDomain = hasData
-    ? [minElev - 20, maxElev + 20]
-    : [0, 100];
+  const yDomainMin = hasData ? minElev - 20 : 0;
+  const yDomainMax = hasData ? maxElev + 20 : 100;
+  const xMax = data[data.length - 1].distance || 1;
+
+  // Chart plot area
+  const innerW = Math.max(10, svgWidth - M.left - M.right);
+  const innerH = CHART_H - M.top - M.bottom;
+
+  // Linear scale helpers
+  const toX = (d: number) => M.left + (d / xMax) * innerW;
+  const toY = (e: number) =>
+    M.top + (1 - (e - yDomainMin) / (yDomainMax - yDomainMin)) * innerH;
+
+  // Ticks
+  const xTickCount = Math.max(2, Math.min(6, Math.floor(innerW / 70)));
+  const xTicks = Array.from({ length: xTickCount + 1 }, (_, i) => (i / xTickCount) * xMax);
+  const yTicks = Array.from({ length: 5 }, (_, i) =>
+    yDomainMin + (i / 4) * (yDomainMax - yDomainMin),
+  );
+
+  const handleMouseMove = (e: React.MouseEvent<SVGSVGElement>) => {
+    const svgEl = svgRef.current;
+    if (!svgEl) return;
+    const rect = svgEl.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+
+    if (mx < M.left || mx > svgWidth - M.right || my < M.top || my > CHART_H - M.bottom) {
+      setTooltip(null);
+      return;
+    }
+
+    const hoveredDist = ((mx - M.left) / innerW) * xMax;
+    let nearest = data[0];
+    let minDiff = Infinity;
+    for (const pt of data) {
+      const diff = Math.abs(pt.distance - hoveredDist);
+      if (diff < minDiff) { minDiff = diff; nearest = pt; }
+    }
+
+    setTooltip({
+      x: mx,
+      y: my,
+      distance: nearest.distance.toFixed(2),
+      elevation: String(nearest.elevation),
+    });
+  };
 
   return (
-    <div className="w-full bg-gradient-to-b from-amber-50 to-amber-100 p-4 border-t border-gray-300">
+    <div
+      ref={containerRef}
+      className="w-full bg-gradient-to-b from-amber-50 to-amber-100 p-4 border-t border-gray-300"
+    >
       <div className="text-xs font-semibold text-gray-700 mb-2">
-        Elevation Profile {hasData ? `(${minElev.toFixed(0)}m - ${maxElev.toFixed(0)}m)` : t('messages.no_elevation')}
+        Elevation Profile{' '}
+        {hasData
+          ? `(${minElev.toFixed(0)}m – ${maxElev.toFixed(0)}m)`
+          : t('messages.no_elevation')}
       </div>
-      <ResponsiveContainer width="100%" height={160}>
-        <LineChart data={data} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#d4a574" />
-          <XAxis
-            dataKey="distance"
-            label={{ value: 'Distance (km)', position: 'insideBottomRight', offset: -5, fontSize: 11 }}
-            tick={{ fontSize: 11 }}
-          />
-          <YAxis
-            domain={yDomain}
-            label={{ value: 'Elevation (m)', angle: -90, position: 'insideLeft', fontSize: 11 }}
-            tick={{ fontSize: 11 }}
-          />
-          <Tooltip
-            contentStyle={{ backgroundColor: '#fff', border: '1px solid #ccc', borderRadius: '4px', fontSize: 12 }}
-            formatter={(value: any) => {
-              const num = typeof value === 'number' ? value : parseFloat(value);
-              return `${num.toFixed(0)}m`;
-            }}
-            labelFormatter={(label) => `${parseFloat(label).toFixed(2)} km`}
-          />
 
-          {/* Use custom shape to render colored line segments */}
-          <Line
-            type="natural"
-            dataKey="elevation"
-            stroke="#16a34a"
-            dot={false}
-            strokeWidth={2.5}
-            isAnimationActive={false}
-            shape={<ColoredLineShape />}
+      <div style={{ position: 'relative' }}>
+        <svg
+          ref={svgRef}
+          width={svgWidth}
+          height={CHART_H}
+          style={{ display: 'block', userSelect: 'none' }}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={() => setTooltip(null)}
+        >
+          {/* Horizontal grid lines */}
+          {yTicks.map((tick, i) => (
+            <line
+              key={`yg${i}`}
+              x1={M.left} y1={toY(tick)}
+              x2={svgWidth - M.right} y2={toY(tick)}
+              stroke="#d4a574" strokeDasharray="3 3" strokeWidth={0.8}
+            />
+          ))}
+
+          {/* Vertical grid lines */}
+          {xTicks.map((tick, i) => (
+            <line
+              key={`xg${i}`}
+              x1={toX(tick)} y1={M.top}
+              x2={toX(tick)} y2={CHART_H - M.bottom}
+              stroke="#d4a574" strokeDasharray="3 3" strokeWidth={0.8}
+            />
+          ))}
+
+          {/* Coloured elevation segments */}
+          {data.map((pt, idx) => {
+            if (idx === 0) return null;
+            const prev = data[idx - 1];
+            return (
+              <line
+                key={`s${idx}`}
+                x1={toX(prev.distance)} y1={toY(prev.elevation)}
+                x2={toX(pt.distance)}  y2={toY(pt.elevation)}
+                stroke={pt.color}
+                strokeWidth={2.5}
+                strokeLinecap="round"
+              />
+            );
+          })}
+
+          {/* Y axis */}
+          <line
+            x1={M.left} y1={M.top}
+            x2={M.left} y2={CHART_H - M.bottom}
+            stroke="#aaa" strokeWidth={1}
           />
-        </LineChart>
-      </ResponsiveContainer>
+          {yTicks.map((tick, i) => (
+            <g key={`yt${i}`}>
+              <line
+                x1={M.left - 4} y1={toY(tick)}
+                x2={M.left}     y2={toY(tick)}
+                stroke="#aaa" strokeWidth={1}
+              />
+              <text
+                x={M.left - 6}
+                y={toY(tick)}
+                textAnchor="end"
+                dominantBaseline="middle"
+                fontSize={10}
+                fill="#666"
+              >
+                {Math.round(tick)}
+              </text>
+            </g>
+          ))}
+          {/* Y axis label */}
+          <text
+            x={11}
+            y={M.top + innerH / 2}
+            textAnchor="middle"
+            fontSize={10}
+            fill="#666"
+            transform={`rotate(-90, 11, ${M.top + innerH / 2})`}
+          >
+            Elevation (m)
+          </text>
+
+          {/* X axis */}
+          <line
+            x1={M.left} y1={CHART_H - M.bottom}
+            x2={svgWidth - M.right} y2={CHART_H - M.bottom}
+            stroke="#aaa" strokeWidth={1}
+          />
+          {xTicks.map((tick, i) => (
+            <g key={`xt${i}`}>
+              <line
+                x1={toX(tick)} y1={CHART_H - M.bottom}
+                x2={toX(tick)} y2={CHART_H - M.bottom + 4}
+                stroke="#aaa" strokeWidth={1}
+              />
+              <text
+                x={toX(tick)}
+                y={CHART_H - M.bottom + 14}
+                textAnchor="middle"
+                fontSize={10}
+                fill="#666"
+              >
+                {tick < 1 ? tick.toFixed(2) : tick.toFixed(1)}
+              </text>
+            </g>
+          ))}
+          {/* X axis label */}
+          <text
+            x={M.left + innerW / 2}
+            y={CHART_H - 3}
+            textAnchor="middle"
+            fontSize={10}
+            fill="#666"
+          >
+            Distance (km)
+          </text>
+
+          {/* Tooltip crosshair */}
+          {tooltip && (
+            <line
+              x1={tooltip.x} y1={M.top}
+              x2={tooltip.x} y2={CHART_H - M.bottom}
+              stroke="#666" strokeWidth={1} strokeDasharray="3 3"
+              pointerEvents="none"
+            />
+          )}
+        </svg>
+
+        {/* Tooltip popup */}
+        {tooltip && (
+          <div
+            style={{
+              position: 'absolute',
+              top: Math.max(4, tooltip.y - 50),
+              left: tooltip.x < svgWidth / 2 ? tooltip.x + 12 : tooltip.x - 115,
+              background: '#fff',
+              border: '1px solid #ccc',
+              borderRadius: 4,
+              padding: '3px 8px',
+              fontSize: 11,
+              pointerEvents: 'none',
+              whiteSpace: 'nowrap',
+              boxShadow: '0 1px 4px rgba(0,0,0,0.15)',
+            }}
+          >
+            <div><strong>{tooltip.distance} km</strong></div>
+            <div>Elevation: {tooltip.elevation} m</div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
