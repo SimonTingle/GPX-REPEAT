@@ -51,6 +51,47 @@ export function formatFinishTime(startMins: number, durationSecs: number): strin
   return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
 }
 
+/**
+ * Calculate adjusted pace for a specific elevation gradient.
+ * Adjusts target pace based on gradient difficulty:
+ * - Uphill: slower (add time)
+ * - Downhill: faster (subtract time)
+ * - Flat: maintain target pace
+ *
+ * @param targetPaceSecs - target pace in seconds per km (from parseMmSs)
+ * @param gradientPct - gradient percentage (positive=uphill, negative=downhill)
+ * @returns adjusted pace in seconds per km, rounded to nearest second
+ */
+export function calculatePaceForGradient(
+  targetPaceSecs: number,
+  gradientPct: number
+): number {
+  // No adjustment for 0 or invalid pace
+  if (!targetPaceSecs || targetPaceSecs <= 0) return 0;
+
+  const absGradient = Math.abs(gradientPct);
+  let adjustment = 1.0; // default: no adjustment
+
+  if (gradientPct > 0) {
+    // Uphill - slow down (multiply to increase time)
+    if (absGradient <= 1) adjustment = 1.05;      // +5% for very gentle
+    else if (absGradient <= 3) adjustment = 1.15; // +15% for gentle
+    else if (absGradient <= 6) adjustment = 1.30; // +30% for moderate
+    else if (absGradient <= 10) adjustment = 1.40; // +40% for steep
+    else adjustment = 1.50;                       // +50% for very steep
+  } else if (gradientPct < 0) {
+    // Downhill - speed up (multiply to decrease time)
+    if (absGradient <= 1) adjustment = 0.98;     // -2% for very gentle
+    else if (absGradient <= 3) adjustment = 0.90; // -10% for gentle
+    else if (absGradient <= 6) adjustment = 0.85; // -15% for moderate
+    else if (absGradient <= 10) adjustment = 0.82; // -18% for steep
+    else adjustment = 0.80;                      // -20% for very steep
+  }
+  // else: flat (adjustment = 1.0, maintain target pace)
+
+  return Math.round(targetPaceSecs * adjustment);
+}
+
 export interface TimingResult {
   lapSecs: number;      // duration of one lap
   restSecs: number;     // total rest across all gaps

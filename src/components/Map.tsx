@@ -9,6 +9,7 @@ import type { LanguageCode } from '../constants/languages';
 import { ElevationProfile } from './ElevationProfile';
 import { Route, MapStyle } from '../types';
 import { generateColoredSegments } from '../utils/elevationColor';
+import { calculatePaceForGradient, parseMmSs, formatMmSs } from '../utils/timeCalc';
 import 'leaflet/dist/leaflet.css';
 
 // Fix Leaflet marker icons
@@ -198,45 +199,52 @@ export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?
           </div>
         </div>
 
-        {/* Elevation gradient legend */}
-        {route && route.waypoints.length > 0 && (
-          <div
-            className="bg-white rounded shadow-lg p-3 opacity-50 hover:opacity-100 transition-opacity duration-200 pointer-events-auto"
-            style={{ zIndex: 1000 }}
-          >
-            <div className="text-xs font-bold text-gray-700 mb-2">{t('elevation.title')}</div>
-            <div className="space-y-1 text-xs">
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-2 rounded" style={{ backgroundColor: '#8B0000' }}></div>
-              <span>{t('elevation.very_steep_up')}</span>
+        {/* Elevation gradient legend with pace */}
+        {route && route.waypoints.length > 0 && (() => {
+          const targetPaceSecs = route.targetPace ? parseMmSs(route.targetPace) : 0;
+          const gradients = [
+            { label: t('elevation.very_steep_up'), color: '#8B0000', pct: 12 },
+            { label: t('elevation.steep_up'), color: '#FF4444', pct: 8.5 },
+            { label: t('elevation.gentle_up'), color: '#FFB3BA', pct: 2 },
+            { label: t('elevation.flat'), color: '#CCCCCC', pct: 0 },
+            { label: t('elevation.gentle_down'), color: '#87CEEB', pct: -2 },
+            { label: t('elevation.steep_down'), color: '#0047AB', pct: -8.5 },
+            { label: t('elevation.very_steep_down'), color: '#00008B', pct: -12 },
+          ];
+
+          return (
+            <div
+              className="bg-white rounded shadow-lg p-3 opacity-50 hover:opacity-100 transition-opacity duration-200 pointer-events-auto"
+              style={{ zIndex: 1000 }}
+            >
+              <div className="text-xs font-bold text-gray-700 mb-2">{t('elevation.title')}</div>
+
+              {/* Header row */}
+              <div className="grid grid-cols-2 gap-3 mb-1 px-1 text-xs font-semibold text-gray-600">
+                <div>Gradient</div>
+                <div className="text-right">Pace</div>
+              </div>
+
+              {/* Data rows */}
+              <div className="space-y-1 text-xs">
+                {gradients.map((g, idx) => {
+                  const adjustedPace = targetPaceSecs > 0 ? calculatePaceForGradient(targetPaceSecs, g.pct) : 0;
+                  const paceStr = adjustedPace > 0 ? formatMmSs(adjustedPace) : '—';
+
+                  return (
+                    <div key={idx} className="grid grid-cols-2 gap-3 items-center">
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-2 rounded" style={{ backgroundColor: g.color }}></div>
+                        <span className="truncate">{g.label}</span>
+                      </div>
+                      <div className="text-right font-mono text-gray-700">{paceStr}</div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-2 rounded" style={{ backgroundColor: '#FF4444' }}></div>
-              <span>{t('elevation.steep_up')}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-2 rounded" style={{ backgroundColor: '#FFB3BA' }}></div>
-              <span>{t('elevation.gentle_up')}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-2 rounded" style={{ backgroundColor: '#CCCCCC' }}></div>
-              <span>{t('elevation.flat')}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-2 rounded" style={{ backgroundColor: '#87CEEB' }}></div>
-              <span>{t('elevation.gentle_down')}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-2 rounded" style={{ backgroundColor: '#0047AB' }}></div>
-              <span>{t('elevation.steep_down')}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-2 rounded" style={{ backgroundColor: '#00008B' }}></div>
-              <span>{t('elevation.very_steep_down')}</span>
-            </div>
-          </div>
-          </div>
-        )}
+          );
+        })()}
       </div>
     </div>
   );
