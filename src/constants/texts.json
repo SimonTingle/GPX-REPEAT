@@ -32,10 +32,13 @@
       "elevation_loss": "Loss",
       "elevation_max": "Max",
       "elevation_min": "Min",
+      "elevation_avg": "Avg",
       "density": "Density",
       "complexity": "Complexity",
       "efficiency": "Efficiency",
-      "est_speed": "Est. Speed"
+      "est_speed": "Est. Speed",
+      "custom_options": "Custom Options",
+      "elevation_stats": "📊 Elevation Stats"
     },
     "placeholders": {
       "pace_format": "MM:SS",
@@ -133,10 +136,13 @@
       "elevation_loss": "Pérdida",
       "elevation_max": "Máximo",
       "elevation_min": "Mínimo",
+      "elevation_avg": "Promedio",
       "density": "Densidad",
       "complexity": "Complejidad",
       "efficiency": "Eficiencia",
-      "est_speed": "Vel. est."
+      "est_speed": "Vel. est.",
+      "custom_options": "Opciones personalizadas",
+      "elevation_stats": "📊 Estadísticas de elevación"
     },
     "placeholders": {
       "pace_format": "MM:SS",
@@ -234,10 +240,13 @@
       "elevation_loss": "Perte",
       "elevation_max": "Maximum",
       "elevation_min": "Minimum",
+      "elevation_avg": "Moyenne",
       "density": "Densité",
       "complexity": "Complexité",
       "efficiency": "Efficacité",
-      "est_speed": "Vit. est."
+      "est_speed": "Vit. est.",
+      "custom_options": "Options personnalisées",
+      "elevation_stats": "📊 Statistiques d'altitude"
     },
     "placeholders": {
       "pace_format": "MM:SS",
@@ -335,10 +344,13 @@
       "elevation_loss": "Höhenverlust",
       "elevation_max": "Maximum",
       "elevation_min": "Minimum",
+      "elevation_avg": "Durchschnitt",
       "density": "Dichte",
       "complexity": "Komplexität",
       "efficiency": "Effizienz",
-      "est_speed": "Geschätzte Geschwindigkeit"
+      "est_speed": "Geschätzte Geschwindigkeit",
+      "custom_options": "Benutzerdefinierte Optionen",
+      "elevation_stats": "📊 Höhenstatistiken"
     },
     "placeholders": {
       "pace_format": "MM:SS",
@@ -436,10 +448,13 @@
       "elevation_loss": "Dislivello negativo",
       "elevation_max": "Massimo",
       "elevation_min": "Minimo",
+      "elevation_avg": "Media",
       "density": "Densità",
       "complexity": "Complessità",
       "efficiency": "Efficienza",
-      "est_speed": "Vel. stimata"
+      "est_speed": "Vel. stimata",
+      "custom_options": "Opzioni personalizzate",
+      "elevation_stats": "📊 Statistiche di elevazione"
     },
     "placeholders": {
       "pace_format": "MM:SS",
@@ -537,10 +552,13 @@
       "elevation_loss": "Perda de elevação",
       "elevation_max": "Máximo",
       "elevation_min": "Mínimo",
+      "elevation_avg": "Média",
       "density": "Densidade",
       "complexity": "Complexidade",
       "efficiency": "Eficiência",
-      "est_speed": "Vel. estimada"
+      "est_speed": "Vel. estimada",
+      "custom_options": "Opções personalizadas",
+      "elevation_stats": "📊 Estatísticas de elevação"
     },
     "placeholders": {
       "pace_format": "MM:SS",
@@ -638,10 +656,13 @@
       "elevation_loss": "下降",
       "elevation_max": "最大",
       "elevation_min": "最小",
+      "elevation_avg": "平均",
       "density": "密度",
       "complexity": "複雑さ",
       "efficiency": "効率",
-      "est_speed": "推定速度"
+      "est_speed": "推定速度",
+      "custom_options": "カスタムオプション",
+      "elevation_stats": "📊 標高統計"
     },
     "placeholders": {
       "pace_format": "MM:SS",
@@ -739,10 +760,13 @@
       "elevation_loss": "下降",
       "elevation_max": "最大值",
       "elevation_min": "最小值",
+      "elevation_avg": "平均值",
       "density": "密度",
       "complexity": "复杂度",
       "efficiency": "效率",
-      "est_speed": "估计速度"
+      "est_speed": "估计速度",
+      "custom_options": "自定义选项",
+      "elevation_stats": "📊 高度统计"
     },
     "placeholders": {
       "pace_format": "MM:SS",

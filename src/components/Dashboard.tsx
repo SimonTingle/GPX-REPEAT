@@ -388,18 +388,18 @@ export const Dashboard = ({
           {/* Elevation Stats (Read-Only) */}
           {editRoute.elevationStats && (
             <div className="p-2 bg-gray-50 rounded text-xs">
-              <div className="font-semibold mb-1">📊 Elevation Stats</div>
+              <div className="font-semibold mb-1">{t('labels.elevation_stats')}</div>
               <div className="grid grid-cols-2 gap-1 text-xs text-gray-700">
-                <div>Gain: <span className="font-mono">{editRoute.elevationStats.elevationGain.toFixed(0)}m</span></div>
-                <div>Loss: <span className="font-mono">{editRoute.elevationStats.elevationLoss.toFixed(0)}m</span></div>
-                <div>Max: <span className="font-mono">{editRoute.elevationStats.maxElevation.toFixed(0)}m</span></div>
-                <div>Min: <span className="font-mono">{editRoute.elevationStats.minElevation.toFixed(0)}m</span></div>
+                <div>{t('labels.elevation_gain')}: <span className="font-mono">{editRoute.elevationStats.elevationGain.toFixed(0)}m</span></div>
+                <div>{t('labels.elevation_loss')}: <span className="font-mono">{editRoute.elevationStats.elevationLoss.toFixed(0)}m</span></div>
+                <div>{t('labels.elevation_max')}: <span className="font-mono">{editRoute.elevationStats.maxElevation.toFixed(0)}m</span></div>
+                <div>{t('labels.elevation_min')}: <span className="font-mono">{editRoute.elevationStats.minElevation.toFixed(0)}m</span></div>
               </div>
             </div>
           )}
 
           {/* Custom Options */}
-          <div className="text-xs font-semibold">Custom Options</div>
+          <div className="text-xs font-semibold">{t('labels.custom_options')}</div>
           {newOptions.map((opt, i) => (
             <div key={opt.id} className="space-y-1">
               <label className="text-xs text-gray-600">{opt.label}</label>
