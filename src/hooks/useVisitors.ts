@@ -8,10 +8,22 @@ interface VisitorCounts {
 
 const PING_INTERVAL_MS = 30_000; // 30 seconds
 
+function uuidv4(): string {
+  // crypto.randomUUID() requires a secure context (HTTPS).
+  // Fall back to Math.random-based UUID v4 for plain HTTP (Docker local).
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+  });
+}
+
 function getOrCreateSessionId(): string {
   let id = sessionStorage.getItem('visitor_id');
   if (!id) {
-    id = crypto.randomUUID();
+    id = uuidv4();
     sessionStorage.setItem('visitor_id', id);
   }
   return id;
