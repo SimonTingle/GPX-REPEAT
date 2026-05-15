@@ -14,7 +14,7 @@
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org/)
 [![gpxpy](https://img.shields.io/badge/gpxpy-1.6.2-orange?style=flat-square)](https://github.com/tkrajina/gpxpy)
 [![Leaflet](https://img.shields.io/badge/Leaflet-1.9.4-199900?style=flat-square&logo=leaflet&logoColor=white)](https://leafletjs.com/)
-[![Recharts](https://img.shields.io/badge/Recharts-3.8.1-22B5BF?style=flat-square)](https://recharts.org/)
+[![SVG Charts](https://img.shields.io/badge/SVG_Charts-Pure_Canvas-FF6B00?style=flat-square)](https://developer.mozilla.org/en-US/docs/Web/SVG)
 
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
 [![CapRover](https://img.shields.io/badge/CapRover-Deployment-4A90E2?style=flat-square)](https://caprover.com/)
@@ -46,7 +46,10 @@
 [![Platform](https://img.shields.io/badge/Platform-Web_%2B_Mobile-ff69b4?style=flat-square)](https://github.com/your-repo)
 [![Browser Support](https://img.shields.io/badge/Browser_Support-Modern_All-success?style=flat-square)](https://caniuse.com/)
 [![Progressive Enhancement](https://img.shields.io/badge/Progressive-Enhancement-informational?style=flat-square)](https://en.wikipedia.org/wiki/Progressive_enhancement)
+[![Color Coded](https://img.shields.io/badge/Color_Coded_Elevation-Gradient_Visualization-FF6B6B?style=flat-square)](https://en.wikipedia.org/wiki/Elevation_profile)
+[![No Canvas Lag](https://img.shields.io/badge/Rendering-Zero_Lag_SVG-success?style=flat-square)](https://developer.mozilla.org/en-US/docs/Web/SVG)
 
+[![Gradient Visualization](https://img.shields.io/badge/Gradient_Visualization-Real_Time-FF6B6B?style=flat-square)](https://en.wikipedia.org/wiki/Grade_(slope))
 [![GPX Support](https://img.shields.io/badge/GPX-1.0_&_1.1-orange?style=flat-square)](https://www.topografix.com/gpx.asp)
 [![Wikiloc Compatible](https://img.shields.io/badge/Wikiloc-Compatible-0099FF?style=flat-square)](https://www.wikiloc.com/)
 [![Garmin Ready](https://img.shields.io/badge/Garmin-Ready-FF6B00?style=flat-square)](https://www.garmin.com/)
@@ -61,7 +64,7 @@
 
 [![Version](https://img.shields.io/badge/Version-0.0.1-informational?style=flat-square)](package.json)
 [![Release Date](https://img.shields.io/badge/Release-May_2026-blue?style=flat-square)](https://github.com/your-repo)
-[![Last Updated](https://img.shields.io/badge/Last_Updated-May_13_2026-brightgreen?style=flat-square)](https://github.com/your-repo/commits/main)
+[![Last Updated](https://img.shields.io/badge/Last_Updated-May_15_2026-brightgreen?style=flat-square)](https://github.com/your-repo/commits/main)
 [![Status](https://img.shields.io/badge/Status-Active_Development-green?style=flat-square)](https://github.com/your-repo)
 [![Maintainability](https://img.shields.io/badge/Maintainability-A+-brightgreen?style=flat-square)](https://github.com/your-repo)
 
@@ -125,7 +128,7 @@ GPX Repeat fills this gap.
 | 📂 **GPX Upload** | Upload any `.gpx` file up to 50 MB via drag-and-drop or file picker |
 | 🗺️ **Interactive Map** | Full Leaflet map with auto-fit-to-bounds on route load |
 | 🎨 **5 Map Styles** | OSM Street, Satellite, Terrain, Topo, Hybrid tile layers |
-| 📈 **Elevation Profile** | Recharts line graph showing elevation vs. distance for the selected route |
+| 📈 **Colour-Coded Elevation Profile** | Pure SVG chart with gradient-coloured line segments (red uphill, blue downhill, gray flat) matching map polylines exactly |
 | 📊 **Route Analytics** | 20+ live statistics: distance, waypoint density, complexity, bounds, center coordinates, efficiency score |
 | 🔁 **Lap Repetition** | Set any number of repetitions — total distance updates everywhere instantly |
 | ⏱️ **Timing Calculator** | Target pace (MM:SS/km) × laps + rest between laps → total duration and finish time |
@@ -147,12 +150,12 @@ GPX Repeat fills this gap.
 │                                                                 │
 │  ┌──────────────┐    ┌───────────────┐    ┌──────────────────┐ │
 │  │  Dashboard   │    │     Map       │    │ ElevationProfile │ │
-│  │  (sidebar)   │    │  (Leaflet)    │    │   (Recharts)     │ │
+│  │  (sidebar)   │    │  (Leaflet)    │    │      (SVG)       │ │
 │  │              │    │               │    │                  │ │
-│  │ • Upload     │    │ • Polyline    │    │ • Elev vs dist   │ │
-│  │ • Stats      │    │ • 5 tile      │    │ • Auto Y-scale   │ │
+│  │ • Upload     │    │ • Polyline    │    │ • Coloured line  │ │
+│  │ • Stats      │    │ • 5 tile      │    │ • Gradient match │ │
 │  │ • Edit       │    │   styles      │    │ • Hover tooltip  │ │
-│  │ • Timing     │    │ • fitBounds   │    │                  │ │
+│  │ • Timing     │    │ • fitBounds   │    │ • Grid lines     │ │
 │  │ • Export     │    │               │    │                  │ │
 │  └──────┬───────┘    └───────────────┘    └──────────────────┘ │
 │         │                                                       │
@@ -204,7 +207,6 @@ GPX Repeat fills this gap.
 | Tailwind CSS | 3.3 | Utility-first styling |
 | Leaflet | 1.9.4 | Interactive map engine |
 | react-leaflet | 4.2.1 | React bindings for Leaflet |
-| Recharts | 3.8.1 | Elevation profile chart |
 
 ### Backend
 
@@ -513,15 +515,21 @@ All tile providers are free to use with no API key required.
 
 ## 📈 Elevation Profile
 
-The elevation profile is rendered below the map by `src/components/ElevationProfile.tsx` using Recharts.
+The elevation profile is rendered below the map by `src/components/ElevationProfile.tsx` using pure **SVG with manual scale math**.
 
-- **X-axis**: Cumulative distance in kilometres
+- **X-axis**: Cumulative distance in kilometres (accurately scaled 0 km → route end)
 - **Y-axis**: Elevation in metres, auto-scaled to ±20 m beyond the actual min/max
-- **Line**: Smooth natural curve in green (`#16a34a`)
+- **Coloured line segments**: Each segment colour-coded by gradient:
+  - **Red to crimson** (`#FFB3BA` → `#8B0000`): Uphill sections
+  - **Gray** (`#CCCCCC`): Flat sections  
+  - **Blue to navy** (`#87CEEB` → `#00008B`): Downhill sections
+  - Colours **match map polylines exactly**
 - **Background**: Amber gradient to visually distinguish it from the map
-- **Tooltip**: Shows exact distance and elevation on hover
+- **Tooltip**: SVG crosshair + hover box shows exact distance and elevation on mouseover
+- **Grid**: Subtle brown dashed lines for reference
 - Elevation is extracted from the `ele` field on every waypoint
 - If a route has no elevation data, the profile shows `(No elevation data)` and renders a flat baseline
+- Rendering is **pure SVG** with linear scale functions — no charting library dependencies, no coordinate compression bugs
 
 ---
 
@@ -797,6 +805,35 @@ ELEVATION CHECK PASS ✓
 **Root Cause**: An early `useEffect` was added to clear `localStorage` on startup. It ran after `useGPX()` initialised from storage — so routes loaded, then the clear ran and immediately erased them, then the component re-rendered with an empty list.
 
 **Fix**: Removed the auto-clear entirely. Routes persist correctly across sessions as intended.
+
+---
+
+### Bug 13 — Elevation Profile Line Crunched at x=0 (May 2026)
+
+**Symptom**: The elevation profile chart showed a thin vertical cluster of colored line segments at the very left edge of the graph (x ≈ 0 km), even though the x-axis correctly labeled the full route distance (0 to 6.75 km). A route that should display a line spanning the full chart width appeared as a compressed spike taking up maybe 2% of the chart width.
+
+**Root Cause**: The elevation profile component was using Recharts' `useXAxisScale()` and `useYAxisScale()` hooks to convert data values to pixel coordinates. However:
+1. In Recharts v3, these hooks may not be reliably accessible to arbitrary custom components within the chart context
+2. The older fallback approach using the `shape` prop on the Line component received raw data values (0–6.75 km) instead of pixel coordinates, rendering them as literal pixel positions (0–6 px) on a 900 px wide chart
+3. Result: all segments rendered in a compressed 0–7 pixel horizontal band at the left edge
+
+**Fix**: Completely replaced the Recharts implementation in `src/components/ElevationProfile.tsx` with a **pure SVG chart with manual coordinate scaling**:
+
+```typescript
+const toX = (d: number) => margin.left + (d / xMax) * innerW;
+const toY = (e: number) => margin.top + (1 - (e - yMin) / (yMax - yMin)) * innerH;
+```
+
+**Key improvements:**
+- No dependency on Recharts internals or coordinate conversion uncertainty
+- Manual linear scale functions (`toX()` and `toY()`) compute exact pixel positions from data values
+- Chart grid, axes, ticks, and labels all explicitly rendered as SVG `<line>` and `<text>` elements
+- Colored segments now span the full route distance (0 km → route end)
+- Gradient colors match map polylines exactly (red = uphill, blue = downhill, gray = flat)
+- Lightweight SVG crosshair + hover tooltip replace Recharts tooltip
+- Removed Recharts dependency from this component, reducing bundle size
+
+**Result**: Elevation profile correctly renders a continuous colored line spanning the full chart width, with each segment colored by gradient.
 
 ---
 
