@@ -62,7 +62,7 @@
 [![Bundle Size](https://img.shields.io/badge/Bundle_Size-Optimized-success?style=flat-square)](https://bundlephobia.com/)
 [![Lazy Loading](https://img.shields.io/badge/Lazy_Loading-Enabled-green?style=flat-square)](https://developer.mozilla.org/en-US/docs/Web/Performance/Lazy_loading)
 
-[![Version](https://img.shields.io/badge/Version-0.7.0-informational?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-0.8.0-informational?style=flat-square)](CHANGELOG.md)
 [![Release Date](https://img.shields.io/badge/Release-May_2026-blue?style=flat-square)](https://github.com/your-repo)
 [![Last Updated](https://img.shields.io/badge/Last_Updated-May_15_2026-brightgreen?style=flat-square)](https://github.com/your-repo/commits/main)
 [![Status](https://img.shields.io/badge/Status-Active_Development-green?style=flat-square)](https://github.com/your-repo)

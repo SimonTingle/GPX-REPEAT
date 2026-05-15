@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.8.0] - 2026-05-15
+
+### Added
+- mobile refinements - tiny dashboard, centered map selector, no zoom buttons
+
 ## [0.7.0] - 2026-05-15
 
 ### Added
