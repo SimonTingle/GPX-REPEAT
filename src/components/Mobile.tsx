@@ -8,16 +8,27 @@ import { MobileRouteListModal } from './MobileRouteListModal';
 import { downloadGPX } from '../utils/gpxExport';
 import { useTexts } from '../contexts/TextContext';
 
+interface HoverData {
+  distance: number;
+  elevation: number;
+  lat: number;
+  lon: number;
+}
+
 export const Mobile = ({
   routes,
   selectedRoute,
   onSelectRoute,
   updateRoute,
+  hoverPosition,
+  onHoverElevation,
 }: {
   routes: Route[];
   selectedRoute?: Route;
   onSelectRoute: (route: Route) => void;
   updateRoute: (id: string, updates: Partial<Route>) => void;
+  hoverPosition?: { lat: number; lon: number } | null;
+  onHoverElevation?: (data: HoverData | null) => void;
 }) => {
   const { t } = useTexts();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -56,7 +67,12 @@ export const Mobile = ({
 
       {/* Map Area (full screen with safe area padding) */}
       <div className="flex-1 relative overflow-hidden pb-safe">
-        <Map routes={routes} selectedRoute={selectedRoute} />
+        <Map
+          routes={routes}
+          selectedRoute={selectedRoute}
+          hoverPosition={hoverPosition}
+          onHoverElevation={onHoverElevation}
+        />
 
         {/* Floating Control Buttons (bottom-right, above elevation profile) */}
         <div className="absolute bottom-44 right-4 flex flex-col gap-3 items-end pointer-events-auto" style={{ zIndex: 1000 }}>

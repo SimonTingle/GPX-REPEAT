@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { MapContainer, TileLayer, Polyline, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Polyline, Popup, Marker, useMap } from 'react-leaflet';
 import { LatLngBounds } from 'leaflet';
 import { useMapStyle } from '../hooks/useMapStyle';
 import { useIsMobile } from '../hooks/useMediaQuery';
@@ -28,6 +28,19 @@ const DefaultIcon = L.icon({
   shadowSize: [41, 41],
 });
 L.Marker.prototype.setIcon(DefaultIcon);
+
+// Create a hollow white dot icon for hover position marker
+const HOLLOW_DOT_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <circle cx="12" cy="12" r="10" fill="none" stroke="white" stroke-width="2"/>
+  <circle cx="12" cy="12" r="10" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="0.5"/>
+</svg>`;
+
+const HoverMarkerIcon = L.icon({
+  iconUrl: `data:image/svg+xml;base64,${btoa(HOLLOW_DOT_SVG)}`,
+  iconSize: [24, 24],
+  iconAnchor: [12, 12],
+  popupAnchor: [0, -12],
+});
 
 const MapUpdater = ({ route }: { route?: Route }) => {
   const map = useMap();
@@ -59,7 +72,24 @@ const MapUpdater = ({ route }: { route?: Route }) => {
   return null;
 };
 
-export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?: Route }) => {
+interface HoverData {
+  distance: number;
+  elevation: number;
+  lat: number;
+  lon: number;
+}
+
+export const Map = ({
+  routes,
+  selectedRoute,
+  hoverPosition,
+  onHoverElevation,
+}: {
+  routes: Route[];
+  selectedRoute?: Route;
+  hoverPosition?: { lat: number; lon: number } | null;
+  onHoverElevation?: (data: HoverData | null) => void;
+}) => {
   const { style, setStyle, getTileUrl, getAttribution } = useMapStyle();
   const { t, currentLanguage, setLanguage, allLanguages } = useTexts();
   const isMobile = useIsMobile();
@@ -131,11 +161,16 @@ export const Map = ({ routes, selectedRoute }: { routes: Route[]; selectedRoute?
         {polyline.length > 0 && (
           <Popup position={[polyline[0][0], polyline[0][1]]}>{route?.name || 'Route'}</Popup>
         )}
+
+        {/* Hover position marker */}
+        {hoverPosition && (
+          <Marker position={[hoverPosition.lat, hoverPosition.lon]} icon={HoverMarkerIcon} />
+        )}
       </MapContainer>
 
       {/* Elevation Profile */}
       {route && route.waypoints.length > 0 && (
-        <ElevationProfile waypoints={route.waypoints} />
+        <ElevationProfile waypoints={route.waypoints} onHover={onHoverElevation} />
       )}
 
       {!route && (

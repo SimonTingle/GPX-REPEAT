@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from 'react';
 import { Waypoint } from '../types';
 import { useTexts } from '../contexts/TextContext';
 import { calculateGradient, gradientToColor } from '../utils/elevationColor';
+import { distanceToCoordinate } from '../utils/waypointInterpolation';
 
 const haversine = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
   const R = 6371;
@@ -27,10 +28,22 @@ interface TooltipInfo {
   elevation: string;
 }
 
+interface HoverData {
+  distance: number;  // km (actual hovered distance)
+  elevation: number; // meters
+  lat: number;       // interpolated coordinate
+  lon: number;       // interpolated coordinate
+}
+
 const M = { top: 12, right: 14, left: 55, bottom: 36 };
 const CHART_H = 160;
 
-export const ElevationProfile = ({ waypoints }: { waypoints: Waypoint[] }) => {
+interface Props {
+  waypoints: Waypoint[];
+  onHover?: (data: HoverData | null) => void;
+}
+
+export const ElevationProfile = ({ waypoints, onHover }: Props) => {
   const { t } = useTexts();
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
@@ -130,6 +143,7 @@ export const ElevationProfile = ({ waypoints }: { waypoints: Waypoint[] }) => {
 
     if (mx < M.left || mx > svgWidth - M.right || my < M.top || my > CHART_H - M.bottom) {
       setTooltip(null);
+      onHover?.(null);
       return;
     }
 
@@ -147,6 +161,17 @@ export const ElevationProfile = ({ waypoints }: { waypoints: Waypoint[] }) => {
       distance: nearest.distance.toFixed(2),
       elevation: String(nearest.elevation),
     });
+
+    // Calculate interpolated coordinates for map hover marker
+    const coords = distanceToCoordinate(hoveredDist, waypoints, xMax);
+    if (coords && onHover) {
+      onHover({
+        distance: hoveredDist,
+        elevation: nearest.elevation,
+        lat: coords.lat,
+        lon: coords.lon,
+      });
+    }
   };
 
   return (

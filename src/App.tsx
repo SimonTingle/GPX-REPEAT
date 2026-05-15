@@ -9,6 +9,7 @@ import { TextProvider } from './contexts/TextContext';
 const AppContent = () => {
   const { routes, updateRoute, deleteRoute } = useGPX();
   const [selectedRoute, setSelectedRoute] = useState(routes[0]);
+  const [hoverPosition, setHoverPosition] = useState<{ lat: number; lon: number } | null>(null);
   const isMobile = useIsMobile();
 
   // Sync selectedRoute with updated route from useGPX
@@ -29,6 +30,10 @@ const AppContent = () => {
         selectedRoute={selectedRoute}
         onSelectRoute={setSelectedRoute}
         updateRoute={updateRoute}
+        hoverPosition={hoverPosition}
+        onHoverElevation={(data) =>
+          setHoverPosition(data ? { lat: data.lat, lon: data.lon } : null)
+        }
       />
     );
   }
@@ -44,7 +49,14 @@ const AppContent = () => {
         deleteRoute={deleteRoute}
       />
       <div className="flex-1">
-        <Map routes={routes} selectedRoute={selectedRoute} />
+        <Map
+          routes={routes}
+          selectedRoute={selectedRoute}
+          hoverPosition={hoverPosition}
+          onHoverElevation={(data) =>
+            setHoverPosition(data ? { lat: data.lat, lon: data.lon } : null)
+          }
+        />
       </div>
     </div>
   );
