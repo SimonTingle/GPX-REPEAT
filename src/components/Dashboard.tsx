@@ -12,12 +12,14 @@ export const Dashboard = ({
   onSelectRoute,
   updateRoute,
   deleteRoute,
+  isMobile = false,
 }: {
   routes: Route[];
   selectedRoute?: Route;
   onSelectRoute: (route: Route) => void;
   updateRoute: (id: string, updates: Partial<Route>) => void;
   deleteRoute: (id: string) => void;
+  isMobile?: boolean;
 }) => {
   const { t } = useTexts();
   const visitors = useVisitors();
@@ -166,15 +168,17 @@ export const Dashboard = ({
   };
 
   return (
-    <div className="w-80 bg-gray-100 border-r border-gray-300 flex flex-col h-full overflow-hidden">
+    <div className={`${isMobile ? 'w-full' : 'w-80'} bg-gray-100 border-r border-gray-300 flex flex-col h-full overflow-hidden ${isMobile ? 'text-[8px]' : ''}`}>
       {/* Upload */}
-      <div className="p-4 border-b space-y-2">
+      <div className={`border-b ${isMobile ? 'p-1 space-y-0.5' : 'p-4 space-y-2'}`}>
         {/* Visitor stats */}
-        <p className="text-[9px] text-gray-400 text-center leading-none tracking-tight">
-          {visitors
-            ? `${visitors.current} online · ${visitors.today} today · ${visitors.lifetime.toLocaleString()} total`
-            : '· · ·'}
-        </p>
+        {!isMobile && (
+          <p className="text-[9px] text-gray-400 text-center leading-none tracking-tight">
+            {visitors
+              ? `${visitors.current} online · ${visitors.today} today · ${visitors.lifetime.toLocaleString()} total`
+              : '· · ·'}
+          </p>
+        )}
         <input
           ref={fileInputRef}
           type="file"
@@ -186,29 +190,29 @@ export const Dashboard = ({
         <button
           onClick={() => fileInputRef.current?.click()}
           disabled={loading}
-          className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          className={`w-full bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 ${isMobile ? 'px-1 py-0.5' : 'px-4 py-2'}`}
         >
-          {loading && <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />}
+          {loading && <div className={`animate-spin border-2 border-white border-t-transparent rounded-full ${isMobile ? 'w-2 h-2' : 'w-4 h-4'}`} />}
           {loading ? t('messages.loading') : t('buttons.upload')}
         </button>
 
         {/* Progress Bar */}
         {loading && progress > 0 && (
-          <div className="space-y-1">
-            <div className="w-full bg-gray-300 rounded-full h-2 overflow-hidden">
+          <div className={isMobile ? 'space-y-0.5' : 'space-y-1'}>
+            <div className={`w-full bg-gray-300 rounded-full overflow-hidden ${isMobile ? 'h-1' : 'h-2'}`}>
               <div
-                className="bg-blue-500 h-full transition-all duration-300"
-                style={{ width: `${progress}%` }}
+                className="bg-blue-500 transition-all duration-300"
+                style={{ width: `${progress}%`, height: '100%' }}
               />
             </div>
-            <p className="text-xs text-gray-600 text-center">{Math.round(progress)}%</p>
+            <p className={`text-gray-600 text-center ${isMobile ? 'text-[6px]' : 'text-xs'}`}>{Math.round(progress)}%</p>
           </div>
         )}
 
         {/* Status Messages */}
         {message && (
           <div
-            className={`text-xs p-2 rounded ${
+            className={`rounded ${isMobile ? 'p-0.5' : 'p-2'} ${
               message.type === 'success'
                 ? 'bg-green-100 text-green-700 border border-green-300'
                 : 'bg-red-100 text-red-700 border border-red-300'
@@ -234,9 +238,9 @@ export const Dashboard = ({
           : null;
 
         return (
-          <div className="p-2 bg-blue-50 border-b max-h-48 overflow-y-auto text-xs space-y-1">
+          <div className={`bg-blue-50 border-b overflow-y-auto ${isMobile ? 'p-0.5 max-h-24 space-y-0.5 text-[6px]' : 'p-2 max-h-48 space-y-1 text-xs'}`}>
             <div className="font-bold text-blue-900">{t('analytics.title')}</div>
-            <div className="grid grid-cols-3 gap-1 text-xs">
+            <div className={`grid gap-1 ${isMobile ? 'grid-cols-2 gap-0.5 text-[6px]' : 'grid-cols-3 gap-1 text-xs'}`}>
               <div>{t('analytics.lap_dist')} <span className="font-semibold">{stats.distance.toFixed(2)}km</span></div>
               <div>{t('analytics.points')} <span className="font-semibold">{stats.waypoints}</span></div>
               <div>{t('analytics.reps')} <span className="font-semibold">{reps}x</span></div>
@@ -291,7 +295,7 @@ export const Dashboard = ({
       })()}
 
       {/* Route List */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-2">
+      <div className={`flex-1 overflow-y-auto ${isMobile ? 'p-1 space-y-0.5' : 'p-4 space-y-2'}`}>
         {routes.map(route => (
           <div
             key={route.id}
@@ -305,13 +309,13 @@ export const Dashboard = ({
           >
             <div
               onClick={() => onSelectRoute(route)}
-              className={`p-3 rounded cursor-pointer transition-transform ${
+              className={`rounded cursor-pointer transition-transform ${isMobile ? 'p-0.5' : 'p-3'} ${
                 swiped === route.id ? 'translate-x-0' : 'translate-x-0'
               } ${
                 selectedRoute?.id === route.id
                   ? 'bg-blue-500 text-white'
                   : 'bg-white hover:bg-gray-200'
-              }`}
+              } ${isMobile ? 'text-[7px]' : 'text-sm'}`}
             >
               <div className="font-semibold text-sm">{route.name}</div>
               <div className="text-xs opacity-75">
@@ -337,12 +341,12 @@ export const Dashboard = ({
 
       {/* Edit Panel */}
       {editRoute ? (
-        <div className="p-4 border-t bg-white space-y-3 max-h-80 overflow-y-auto">
+        <div className={`border-t bg-white overflow-y-auto ${isMobile ? 'p-1 space-y-1 max-h-40 text-[7px]' : 'p-4 space-y-3 max-h-80 text-sm'}`}>
           <input
             type="text"
             value={editRoute.name}
             onChange={e => setEditRoute({ ...editRoute, name: e.target.value })}
-            className="w-full px-2 py-1 border rounded text-sm"
+            className={`w-full border rounded ${isMobile ? 'px-1 py-0.5 text-[6px]' : 'px-2 py-1 text-sm'}`}
             placeholder={t('labels.route_name')}
           />
 
@@ -352,7 +356,7 @@ export const Dashboard = ({
               type="number"
               value={editRoute.repetitions}
               onChange={e => setEditRoute({ ...editRoute, repetitions: parseInt(e.target.value) || 1 })}
-              className="w-full px-2 py-1 border rounded text-sm"
+              className={`w-full border rounded ${isMobile ? 'px-1 py-0.5 text-[6px]' : 'px-2 py-1 text-sm'}`}
               min="1"
             />
           </div>
@@ -420,31 +424,31 @@ export const Dashboard = ({
                   setNewOptions(updated);
                 }}
                 placeholder={opt.label}
-                className="w-full px-2 py-1 border rounded text-sm"
+                className={`w-full border rounded ${isMobile ? 'px-1 py-0.5 text-[6px]' : 'px-2 py-1 text-sm'}`}
               />
             </div>
           ))}
 
-          <div className="flex gap-2">
+          <div className={`flex ${isMobile ? 'gap-0.5' : 'gap-2'}`}>
             <input
               type="text"
               value={newOptionId}
               onChange={e => setNewOptionId(e.target.value)}
               placeholder={t('placeholders.custom_option')}
-              className="flex-1 px-2 py-1 border rounded text-xs"
+              className={`flex-1 border rounded ${isMobile ? 'px-1 py-0.5 text-[6px]' : 'px-2 py-1 text-xs'}`}
             />
             <button
               onClick={handleAddOption}
-              className="px-2 py-1 bg-green-500 text-white rounded text-xs hover:bg-green-600"
+              className={`bg-green-500 text-white rounded hover:bg-green-600 ${isMobile ? 'px-1 py-0.5 text-[6px]' : 'px-2 py-1 text-xs'}`}
             >
               {t('buttons.add')}
             </button>
           </div>
 
-          <div className="flex gap-2">
+          <div className={`flex ${isMobile ? 'gap-0.5' : 'gap-2'}`}>
             <button
               onClick={handleSaveRoute}
-              className="flex-1 px-2 py-1 bg-blue-500 text-white rounded text-sm hover:bg-blue-600"
+              className={`flex-1 bg-blue-500 text-white rounded hover:bg-blue-600 ${isMobile ? 'px-1 py-0.5 text-[6px]' : 'px-2 py-1 text-sm'}`}
             >
               {t('buttons.save')}
             </button>
@@ -453,14 +457,14 @@ export const Dashboard = ({
                 setEditRoute(null);
                 setNewOptions([]);
               }}
-              className="flex-1 px-2 py-1 bg-gray-400 text-white rounded text-sm hover:bg-gray-500"
+              className={`flex-1 bg-gray-400 text-white rounded hover:bg-gray-500 ${isMobile ? 'px-1 py-0.5 text-[6px]' : 'px-2 py-1 text-sm'}`}
             >
               {t('buttons.cancel')}
             </button>
           </div>
         </div>
       ) : (
-        <div className="p-4 border-t space-y-2">
+        <div className={`border-t ${isMobile ? 'p-1 space-y-0.5' : 'p-4 space-y-2'}`}>
           <button
             onClick={() => {
               if (selectedRoute) {
@@ -486,7 +490,7 @@ export const Dashboard = ({
               }
             }}
             disabled={!selectedRoute}
-            className="w-full px-3 py-2 bg-yellow-500 text-white rounded text-sm hover:bg-yellow-600 disabled:opacity-50"
+            className={`w-full bg-yellow-500 text-white rounded hover:bg-yellow-600 disabled:opacity-50 ${isMobile ? 'px-1 py-0.5 text-[6px]' : 'px-3 py-2 text-sm'}`}
           >
             {t('buttons.edit')}
           </button>
@@ -495,7 +499,7 @@ export const Dashboard = ({
               if (selectedRoute) downloadGPX(selectedRoute);
             }}
             disabled={!selectedRoute}
-            className="w-full px-3 py-2 bg-green-500 text-white rounded text-sm hover:bg-green-600 disabled:opacity-50"
+            className={`w-full bg-green-500 text-white rounded hover:bg-green-600 disabled:opacity-50 ${isMobile ? 'px-1 py-0.5 text-[6px]' : 'px-3 py-2 text-sm'}`}
           >
             {t('buttons.export')}
           </button>
@@ -504,7 +508,7 @@ export const Dashboard = ({
               if (selectedRoute) deleteRoute(selectedRoute.id);
             }}
             disabled={!selectedRoute}
-            className="w-full px-3 py-2 bg-red-500 text-white rounded text-sm hover:bg-red-600 disabled:opacity-50"
+            className={`w-full bg-red-500 text-white rounded hover:bg-red-600 disabled:opacity-50 ${isMobile ? 'px-1 py-0.5 text-[6px]' : 'px-3 py-2 text-sm'}`}
           >
             {t('buttons.delete')}
           </button>

@@ -132,8 +132,8 @@ export const Map = ({
   // Map style identifiers are not translatable text — they are fixed across all languages
   const styleButtons: MapStyle[] = ['osm', 'satellite', 'terrain', 'topo', 'hybrid'];
 
-  // Responsive positioning: desktop top-right, mobile fullscreen top-left, mobile bottom-left (above elevation profile)
-  const controlPosition = mobileFullscreen ? 'top-4 left-4' : (isMobile ? 'bottom-24 left-4' : 'top-4 right-4');
+  // Responsive positioning: desktop top-right, mobile fullscreen centered top, mobile bottom-left (above elevation profile)
+  const controlPosition = mobileFullscreen ? 'top-4 left-1/2 -translate-x-1/2' : (isMobile ? 'bottom-24 left-4' : 'top-4 right-4');
 
   // Handle language selection
   const handleLanguageSelect = (lang: LanguageCode) => {
@@ -166,6 +166,7 @@ export const Map = ({
         touchZoom={true}
         doubleClickZoom={true}
         scrollWheelZoom={true}
+        zoomControl={!isMobile}
       >
         <TileLayer url={getTileUrl()} attribution={getAttribution()} />
         <MapUpdater route={route} />
@@ -212,7 +213,7 @@ export const Map = ({
       {/* Map style selector and language selector (responsive positioning) */}
       <div className={`absolute flex flex-col gap-3 pointer-events-auto ${controlPosition}`} style={{ zIndex: 1000 }}>
         {/* Map style buttons and language selector container */}
-        <div className="bg-white rounded shadow-lg flex gap-2 p-2">
+        <div className="bg-white rounded shadow-lg flex gap-2 p-2 opacity-50 hover:opacity-100 transition-opacity duration-200 pointer-events-auto">
           {/* Map style buttons */}
           {styleButtons.map(s => (
             <button

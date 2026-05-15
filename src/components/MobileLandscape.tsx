@@ -135,6 +135,7 @@ export const MobileLandscape = ({
           onSelectRoute={handleSelectRoute}
           updateRoute={updateRoute}
           deleteRoute={deleteRoute}
+          isMobile={true}
         />
       </div>
 
