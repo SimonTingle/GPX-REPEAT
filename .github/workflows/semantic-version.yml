@@ -13,9 +13,6 @@ jobs:
   version-bump:
     runs-on: ubuntu-latest
 
-    # Prevent infinite loops from auto-commits
-    if: ${{ !contains(github.event.head_commit.message, 'chore: bump version via GitHub Actions') }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -57,14 +54,3 @@ jobs:
       - name: Push tags
         if: steps.check-changes.outputs.has-changes == 'true'
         run: git push --tags || true
-
-      - name: Create GitHub Release
-        if: steps.check-changes.outputs.has-changes == 'true'
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ env.NEW_VERSION_TAG }}
-          release_name: Release ${{ env.NEW_VERSION_TAG }}
-          draft: false
-          prerelease: false
