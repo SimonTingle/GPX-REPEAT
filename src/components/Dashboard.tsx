@@ -248,6 +248,20 @@ export const Dashboard = ({
                 {t('analytics.total')} <span className="font-bold text-blue-800">{totalDistance.toFixed(2)}km</span>
                 {reps > 0 && <span className="text-blue-600 ml-1">({stats.distance.toFixed(2)} × {reps})</span>}
               </div>
+              {selectedRoute.elevationStats && (
+                <div className="col-span-3 bg-orange-100 border border-orange-300 rounded px-1 py-1 space-y-0.5">
+                  <div className="font-bold text-orange-900 text-xs mb-0.5">{t('analytics.elevation_header')}</div>
+                  <div className="grid grid-cols-3 gap-1">
+                    <div>{t('labels.elevation_gain')} <span className="font-semibold">{Math.round(selectedRoute.elevationStats.elevationGain)}m</span></div>
+                    <div>{t('labels.elevation_loss')} <span className="font-semibold">{Math.round(selectedRoute.elevationStats.elevationLoss)}m</span></div>
+                    <div>{t('labels.elevation_avg')} <span className="font-semibold">{Math.round(selectedRoute.elevationStats.avgElevation)}m</span></div>
+                    <div className="col-span-3 text-orange-800">
+                      {t('labels.elevation_max')} <span className="font-bold">{Math.round(selectedRoute.elevationStats.maxElevation)}m</span>
+                      {' · '}{t('labels.elevation_min')} <span className="font-bold">{Math.round(selectedRoute.elevationStats.minElevation)}m</span>
+                    </div>
+                  </div>
+                </div>
+              )}
               {timing && (
                 <div className="col-span-3 bg-green-100 border border-green-300 rounded px-1 py-1 space-y-0.5">
                   <div className="font-bold text-green-900 text-xs mb-0.5">{t('analytics.timing_header')}</div>
