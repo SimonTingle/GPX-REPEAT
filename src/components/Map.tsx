@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { MapContainer, TileLayer, Polyline, Popup, Marker, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Polyline, Marker, useMap } from 'react-leaflet';
 import { LatLngBounds, LeafletMouseEvent } from 'leaflet';
 import { useMapStyle } from '../hooks/useMapStyle';
 import { useIsMobile } from '../hooks/useMediaQuery';
@@ -122,9 +122,6 @@ export const Map = ({
   const center: [number, number] = route && route.waypoints.length > 0
     ? [route.waypoints[0].lat, route.waypoints[0].lon]
     : [20, 0];
-  const polyline = route && route.waypoints.length > 0
-    ? route.waypoints.map(w => [w.lat, w.lon] as [number, number])
-    : [];
 
   // Map style identifiers are not translatable text — they are fixed across all languages
   const styleButtons: MapStyle[] = ['osm', 'satellite', 'terrain', 'topo', 'hybrid'];
