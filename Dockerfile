@@ -38,6 +38,9 @@ RUN pip install --no-cache-dir -r backend/requirements.txt
 # Copy built frontend from stage 1
 COPY --from=frontend-builder /app/dist ./frontend/dist
 
+# Ensure data directory exists for persistent volume mount
+RUN mkdir -p /app/data
+
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:5000/health || exit 1
