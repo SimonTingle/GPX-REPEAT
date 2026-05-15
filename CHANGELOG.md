@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.10.0] - 2026-05-15
+
+### Added
+- add pace calculation to elevation profile hover tooltip
+
 ## [0.9.1] - 2026-05-15
 
 ### Fixed
