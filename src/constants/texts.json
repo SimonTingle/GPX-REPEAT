@@ -109,6 +109,53 @@
       "center_lat": "Center Lat:",
       "center_lon": "Center Lon:",
       "custom": "Custom:"
+    },
+    "ui": {
+      "toggle_dashboard_open": "Open dashboard",
+      "toggle_dashboard_close": "Close dashboard",
+      "toggle_legend_show": "Show legend",
+      "toggle_legend_hide": "Hide legend",
+      "toggle_elevation_show": "Show elevation profile",
+      "toggle_elevation_hide": "Hide elevation profile",
+      "change_language": "Change language",
+      "legend_label": "≡ Legend",
+      "profile_label": "📈 Profile"
+    },
+    "mobile": {
+      "rotate_device": "Rotate your device",
+      "landscape_mode": "This app works best in landscape mode"
+    },
+    "sections": {
+      "route_details": "Route Details",
+      "elevation_stats_readonly": "Elevation Stats (read-only)",
+      "statistics": "Statistics",
+      "location": "Location",
+      "elevation_profile": "Elevation Profile",
+      "timing": "Timing"
+    },
+    "legend": {
+      "gradient": "Gradient",
+      "pace": "Pace"
+    },
+    "empty": {
+      "no_route_selected": "No route selected"
+    },
+    "units": {
+      "km": " km",
+      "per_km": " /km",
+      "meters": " m"
+    },
+    "metadata": {
+      "created": "Created",
+      "time": "Time",
+      "name": "Name",
+      "elevation": "Elevation",
+      "start": "Start",
+      "center": "Center",
+      "bounds": "Bounds"
+    },
+    "aria": {
+      "change_language": "Change language"
     }
   },
   "es": {
@@ -185,13 +232,6 @@
     },
     "map_styles": {
       "osm": "OpenStreetMap",
-      "satellite": "Satellite",
-      "terrain": "Terrain",
-      "topo": "Topographic",
-      "hybrid": "Hybrid"
-    },
-    "map_styles": {
-      "osm": "OpenStreetMap",
       "satellite": "Satélite",
       "terrain": "Terreno",
       "topo": "Topográfico",
@@ -228,6 +268,53 @@
       "center_lat": "Lat. centro:",
       "center_lon": "Lon. centro:",
       "custom": "Personalizado:"
+    },
+    "ui": {
+      "toggle_dashboard_open": "Open dashboard",
+      "toggle_dashboard_close": "Close dashboard",
+      "toggle_legend_show": "Show legend",
+      "toggle_legend_hide": "Hide legend",
+      "toggle_elevation_show": "Show elevation profile",
+      "toggle_elevation_hide": "Hide elevation profile",
+      "change_language": "Change language",
+      "legend_label": "≡ Legend",
+      "profile_label": "📈 Profile"
+    },
+    "mobile": {
+      "rotate_device": "Rotate your device",
+      "landscape_mode": "This app works best in landscape mode"
+    },
+    "sections": {
+      "route_details": "Route Details",
+      "elevation_stats_readonly": "Elevation Stats (read-only)",
+      "statistics": "Statistics",
+      "location": "Location",
+      "elevation_profile": "Elevation Profile",
+      "timing": "Timing"
+    },
+    "legend": {
+      "gradient": "Gradient",
+      "pace": "Pace"
+    },
+    "empty": {
+      "no_route_selected": "No route selected"
+    },
+    "units": {
+      "km": " km",
+      "per_km": " /km",
+      "meters": " m"
+    },
+    "metadata": {
+      "created": "Created",
+      "time": "Time",
+      "name": "Name",
+      "elevation": "Elevation",
+      "start": "Start",
+      "center": "Center",
+      "bounds": "Bounds"
+    },
+    "aria": {
+      "change_language": "Change language"
     }
   },
   "fr": {
@@ -306,13 +393,6 @@
       "osm": "OpenStreetMap",
       "satellite": "Satellite",
       "terrain": "Terrain",
-      "topo": "Topographic",
-      "hybrid": "Hybrid"
-    },
-    "map_styles": {
-      "osm": "OpenStreetMap",
-      "satellite": "Satellite",
-      "terrain": "Terrain",
       "topo": "Topographique",
       "hybrid": "Hybride"
     },
@@ -347,6 +427,53 @@
       "center_lat": "Lat. centre:",
       "center_lon": "Lon. centre:",
       "custom": "Personnalisé:"
+    },
+    "ui": {
+      "toggle_dashboard_open": "Open dashboard",
+      "toggle_dashboard_close": "Close dashboard",
+      "toggle_legend_show": "Show legend",
+      "toggle_legend_hide": "Hide legend",
+      "toggle_elevation_show": "Show elevation profile",
+      "toggle_elevation_hide": "Hide elevation profile",
+      "change_language": "Change language",
+      "legend_label": "≡ Legend",
+      "profile_label": "📈 Profile"
+    },
+    "mobile": {
+      "rotate_device": "Rotate your device",
+      "landscape_mode": "This app works best in landscape mode"
+    },
+    "sections": {
+      "route_details": "Route Details",
+      "elevation_stats_readonly": "Elevation Stats (read-only)",
+      "statistics": "Statistics",
+      "location": "Location",
+      "elevation_profile": "Elevation Profile",
+      "timing": "Timing"
+    },
+    "legend": {
+      "gradient": "Gradient",
+      "pace": "Pace"
+    },
+    "empty": {
+      "no_route_selected": "No route selected"
+    },
+    "units": {
+      "km": " km",
+      "per_km": " /km",
+      "meters": " m"
+    },
+    "metadata": {
+      "created": "Created",
+      "time": "Time",
+      "name": "Name",
+      "elevation": "Elevation",
+      "start": "Start",
+      "center": "Center",
+      "bounds": "Bounds"
+    },
+    "aria": {
+      "change_language": "Change language"
     }
   },
   "de": {
@@ -423,13 +550,6 @@
     },
     "map_styles": {
       "osm": "OpenStreetMap",
-      "satellite": "Satellite",
-      "terrain": "Terrain",
-      "topo": "Topographic",
-      "hybrid": "Hybrid"
-    },
-    "map_styles": {
-      "osm": "OpenStreetMap",
       "satellite": "Satellit",
       "terrain": "Gelände",
       "topo": "Topographisch",
@@ -466,6 +586,53 @@
       "center_lat": "Mitte Lat.:",
       "center_lon": "Mitte Lon.:",
       "custom": "Benutzerdefiniert:"
+    },
+    "ui": {
+      "toggle_dashboard_open": "Open dashboard",
+      "toggle_dashboard_close": "Close dashboard",
+      "toggle_legend_show": "Show legend",
+      "toggle_legend_hide": "Hide legend",
+      "toggle_elevation_show": "Show elevation profile",
+      "toggle_elevation_hide": "Hide elevation profile",
+      "change_language": "Change language",
+      "legend_label": "≡ Legend",
+      "profile_label": "📈 Profile"
+    },
+    "mobile": {
+      "rotate_device": "Rotate your device",
+      "landscape_mode": "This app works best in landscape mode"
+    },
+    "sections": {
+      "route_details": "Route Details",
+      "elevation_stats_readonly": "Elevation Stats (read-only)",
+      "statistics": "Statistics",
+      "location": "Location",
+      "elevation_profile": "Elevation Profile",
+      "timing": "Timing"
+    },
+    "legend": {
+      "gradient": "Gradient",
+      "pace": "Pace"
+    },
+    "empty": {
+      "no_route_selected": "No route selected"
+    },
+    "units": {
+      "km": " km",
+      "per_km": " /km",
+      "meters": " m"
+    },
+    "metadata": {
+      "created": "Created",
+      "time": "Time",
+      "name": "Name",
+      "elevation": "Elevation",
+      "start": "Start",
+      "center": "Center",
+      "bounds": "Bounds"
+    },
+    "aria": {
+      "change_language": "Change language"
     }
   },
   "it": {
@@ -543,13 +710,6 @@
     "map_styles": {
       "osm": "OpenStreetMap",
       "satellite": "Satellite",
-      "terrain": "Terrain",
-      "topo": "Topographic",
-      "hybrid": "Hybrid"
-    },
-    "map_styles": {
-      "osm": "OpenStreetMap",
-      "satellite": "Satellite",
       "terrain": "Terreno",
       "topo": "Topografico",
       "hybrid": "Ibrido"
@@ -585,6 +745,53 @@
       "center_lat": "Lat. centro:",
       "center_lon": "Lon. centro:",
       "custom": "Personalizzato:"
+    },
+    "ui": {
+      "toggle_dashboard_open": "Open dashboard",
+      "toggle_dashboard_close": "Close dashboard",
+      "toggle_legend_show": "Show legend",
+      "toggle_legend_hide": "Hide legend",
+      "toggle_elevation_show": "Show elevation profile",
+      "toggle_elevation_hide": "Hide elevation profile",
+      "change_language": "Change language",
+      "legend_label": "≡ Legend",
+      "profile_label": "📈 Profile"
+    },
+    "mobile": {
+      "rotate_device": "Rotate your device",
+      "landscape_mode": "This app works best in landscape mode"
+    },
+    "sections": {
+      "route_details": "Route Details",
+      "elevation_stats_readonly": "Elevation Stats (read-only)",
+      "statistics": "Statistics",
+      "location": "Location",
+      "elevation_profile": "Elevation Profile",
+      "timing": "Timing"
+    },
+    "legend": {
+      "gradient": "Gradient",
+      "pace": "Pace"
+    },
+    "empty": {
+      "no_route_selected": "No route selected"
+    },
+    "units": {
+      "km": " km",
+      "per_km": " /km",
+      "meters": " m"
+    },
+    "metadata": {
+      "created": "Created",
+      "time": "Time",
+      "name": "Name",
+      "elevation": "Elevation",
+      "start": "Start",
+      "center": "Center",
+      "bounds": "Bounds"
+    },
+    "aria": {
+      "change_language": "Change language"
     }
   },
   "pt": {
@@ -661,13 +868,6 @@
     },
     "map_styles": {
       "osm": "OpenStreetMap",
-      "satellite": "Satellite",
-      "terrain": "Terrain",
-      "topo": "Topographic",
-      "hybrid": "Hybrid"
-    },
-    "map_styles": {
-      "osm": "OpenStreetMap",
       "satellite": "Satélite",
       "terrain": "Terreno",
       "topo": "Topográfico",
@@ -704,6 +904,53 @@
       "center_lat": "Lat. centro:",
       "center_lon": "Lon. centro:",
       "custom": "Personalizado:"
+    },
+    "ui": {
+      "toggle_dashboard_open": "Open dashboard",
+      "toggle_dashboard_close": "Close dashboard",
+      "toggle_legend_show": "Show legend",
+      "toggle_legend_hide": "Hide legend",
+      "toggle_elevation_show": "Show elevation profile",
+      "toggle_elevation_hide": "Hide elevation profile",
+      "change_language": "Change language",
+      "legend_label": "≡ Legend",
+      "profile_label": "📈 Profile"
+    },
+    "mobile": {
+      "rotate_device": "Rotate your device",
+      "landscape_mode": "This app works best in landscape mode"
+    },
+    "sections": {
+      "route_details": "Route Details",
+      "elevation_stats_readonly": "Elevation Stats (read-only)",
+      "statistics": "Statistics",
+      "location": "Location",
+      "elevation_profile": "Elevation Profile",
+      "timing": "Timing"
+    },
+    "legend": {
+      "gradient": "Gradient",
+      "pace": "Pace"
+    },
+    "empty": {
+      "no_route_selected": "No route selected"
+    },
+    "units": {
+      "km": " km",
+      "per_km": " /km",
+      "meters": " m"
+    },
+    "metadata": {
+      "created": "Created",
+      "time": "Time",
+      "name": "Name",
+      "elevation": "Elevation",
+      "start": "Start",
+      "center": "Center",
+      "bounds": "Bounds"
+    },
+    "aria": {
+      "change_language": "Change language"
     }
   },
   "ja": {
@@ -780,13 +1027,6 @@
     },
     "map_styles": {
       "osm": "OpenStreetMap",
-      "satellite": "Satellite",
-      "terrain": "Terrain",
-      "topo": "Topographic",
-      "hybrid": "Hybrid"
-    },
-    "map_styles": {
-      "osm": "OpenStreetMap",
       "satellite": "衛星画像",
       "terrain": "地形",
       "topo": "地形図",
@@ -823,6 +1063,53 @@
       "center_lat": "中心緯度:",
       "center_lon": "中心経度:",
       "custom": "カスタム:"
+    },
+    "ui": {
+      "toggle_dashboard_open": "Open dashboard",
+      "toggle_dashboard_close": "Close dashboard",
+      "toggle_legend_show": "Show legend",
+      "toggle_legend_hide": "Hide legend",
+      "toggle_elevation_show": "Show elevation profile",
+      "toggle_elevation_hide": "Hide elevation profile",
+      "change_language": "Change language",
+      "legend_label": "≡ Legend",
+      "profile_label": "📈 Profile"
+    },
+    "mobile": {
+      "rotate_device": "Rotate your device",
+      "landscape_mode": "This app works best in landscape mode"
+    },
+    "sections": {
+      "route_details": "Route Details",
+      "elevation_stats_readonly": "Elevation Stats (read-only)",
+      "statistics": "Statistics",
+      "location": "Location",
+      "elevation_profile": "Elevation Profile",
+      "timing": "Timing"
+    },
+    "legend": {
+      "gradient": "Gradient",
+      "pace": "Pace"
+    },
+    "empty": {
+      "no_route_selected": "No route selected"
+    },
+    "units": {
+      "km": " km",
+      "per_km": " /km",
+      "meters": " m"
+    },
+    "metadata": {
+      "created": "Created",
+      "time": "Time",
+      "name": "Name",
+      "elevation": "Elevation",
+      "start": "Start",
+      "center": "Center",
+      "bounds": "Bounds"
+    },
+    "aria": {
+      "change_language": "Change language"
     }
   },
   "zh": {
@@ -899,13 +1186,6 @@
     },
     "map_styles": {
       "osm": "OpenStreetMap",
-      "satellite": "Satellite",
-      "terrain": "Terrain",
-      "topo": "Topographic",
-      "hybrid": "Hybrid"
-    },
-    "map_styles": {
-      "osm": "OpenStreetMap",
       "satellite": "卫星",
       "terrain": "地形",
       "topo": "地形图",
@@ -942,6 +1222,53 @@
       "center_lat": "中心纬度:",
       "center_lon": "中心经度:",
       "custom": "自定义:"
+    },
+    "ui": {
+      "toggle_dashboard_open": "Open dashboard",
+      "toggle_dashboard_close": "Close dashboard",
+      "toggle_legend_show": "Show legend",
+      "toggle_legend_hide": "Hide legend",
+      "toggle_elevation_show": "Show elevation profile",
+      "toggle_elevation_hide": "Hide elevation profile",
+      "change_language": "Change language",
+      "legend_label": "≡ Legend",
+      "profile_label": "📈 Profile"
+    },
+    "mobile": {
+      "rotate_device": "Rotate your device",
+      "landscape_mode": "This app works best in landscape mode"
+    },
+    "sections": {
+      "route_details": "Route Details",
+      "elevation_stats_readonly": "Elevation Stats (read-only)",
+      "statistics": "Statistics",
+      "location": "Location",
+      "elevation_profile": "Elevation Profile",
+      "timing": "Timing"
+    },
+    "legend": {
+      "gradient": "Gradient",
+      "pace": "Pace"
+    },
+    "empty": {
+      "no_route_selected": "No route selected"
+    },
+    "units": {
+      "km": " km",
+      "per_km": " /km",
+      "meters": " m"
+    },
+    "metadata": {
+      "created": "Created",
+      "time": "Time",
+      "name": "Name",
+      "elevation": "Elevation",
+      "start": "Start",
+      "center": "Center",
+      "bounds": "Bounds"
+    },
+    "aria": {
+      "change_language": "Change language"
     }
   }
 }
