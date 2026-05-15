@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.1] - 2026-05-15
+
+### Fixed
+- ensure /app/data directory exists in Docker image for persistent visitor data
+
 ## [0.6.0] - 2026-05-15
 
 ### Added
