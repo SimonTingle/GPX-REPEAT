@@ -87,6 +87,9 @@ export const Map = ({
   onHoverElevation,
   mapHoverDistance,
   onMapHover,
+  showElevation = true,
+  showLegend = true,
+  mobileFullscreen = false,
 }: {
   routes: Route[];
   selectedRoute?: Route;
@@ -94,6 +97,9 @@ export const Map = ({
   onHoverElevation?: (data: HoverData | null) => void;
   mapHoverDistance?: number | null;
   onMapHover?: (distance: number | null) => void;
+  showElevation?: boolean;
+  showLegend?: boolean;
+  mobileFullscreen?: boolean;
 }) => {
   const { style, setStyle, getTileUrl, getAttribution } = useMapStyle();
   const { t, currentLanguage, setLanguage, allLanguages } = useTexts();
@@ -126,8 +132,8 @@ export const Map = ({
   // Map style identifiers are not translatable text — they are fixed across all languages
   const styleButtons: MapStyle[] = ['osm', 'satellite', 'terrain', 'topo', 'hybrid'];
 
-  // Responsive positioning: desktop top-right, mobile bottom-left (above elevation profile)
-  const controlPosition = isMobile ? 'bottom-24 left-4' : 'top-4 right-4';
+  // Responsive positioning: desktop top-right, mobile fullscreen top-left, mobile bottom-left (above elevation profile)
+  const controlPosition = mobileFullscreen ? 'top-4 left-4' : (isMobile ? 'bottom-24 left-4' : 'top-4 right-4');
 
   // Handle language selection
   const handleLanguageSelect = (lang: LanguageCode) => {
@@ -187,7 +193,7 @@ export const Map = ({
       </MapContainer>
 
       {/* Elevation Profile */}
-      {route && route.waypoints.length > 0 && (
+      {showElevation && route && route.waypoints.length > 0 && (
         <ElevationProfile
           waypoints={route.waypoints}
           onHover={onHoverElevation}
@@ -257,7 +263,7 @@ export const Map = ({
         </div>
 
         {/* Elevation gradient legend with pace */}
-        {route && route.waypoints.length > 0 && (() => {
+        {showLegend && route && route.waypoints.length > 0 && (() => {
           const targetPaceSecs = route.targetPace ? parseMmSs(route.targetPace) : 0;
           const gradients = [
             { label: t('elevation.very_steep_up'), color: '#8B0000', pct: 12 },

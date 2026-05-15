@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Map } from './components/Map';
 import { Dashboard } from './components/Dashboard';
 import { PortraitPrompt } from './components/PortraitPrompt';
-import { ScaledDesktopMobile } from './components/ScaledDesktopMobile';
+import { MobileLandscape } from './components/MobileLandscape';
 import { useGPX } from './hooks/useGPX';
 import { useMobileOrientation } from './hooks/useMediaQuery';
 import { TextProvider } from './contexts/TextContext';
@@ -32,7 +32,7 @@ const AppContent = () => {
   // Landscape mobile → exact desktop layout scaled to fit screen
   if (isMobile && isLandscape) {
     return (
-      <ScaledDesktopMobile
+      <MobileLandscape
         routes={routes}
         selectedRoute={selectedRoute}
         onSelectRoute={setSelectedRoute}
