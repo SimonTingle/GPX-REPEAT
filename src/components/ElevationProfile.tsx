@@ -336,10 +336,10 @@ export const ElevationProfile = ({ waypoints, onHover, mapHoverDistance }: Props
               <circle
                 cx={toX(mapHoverDistance)}
                 cy={toY(markerElevation)}
-                r={4}
+                r={10}
                 fill="white"
                 stroke="black"
-                strokeWidth={1}
+                strokeWidth={1.5}
                 pointerEvents="none"
               />
             ) : null;

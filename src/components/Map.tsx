@@ -182,9 +182,6 @@ export const Map = ({
             />
           ));
         })()}
-        {polyline.length > 0 && (
-          <Popup position={[polyline[0][0], polyline[0][1]]}>{route?.name || 'Route'}</Popup>
-        )}
 
         {/* Hover position marker */}
         {hoverPosition && (
