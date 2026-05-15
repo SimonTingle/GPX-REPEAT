@@ -4,6 +4,7 @@ import { downloadGPX } from '../utils/gpxExport';
 import { calculateStats } from '../utils/stats';
 import { calcTiming, formatDuration, formatMmSs, parseMmSs } from '../utils/timeCalc';
 import { useTexts } from '../contexts/TextContext';
+import { useVisitors } from '../hooks/useVisitors';
 
 export const Dashboard = ({
   routes,
@@ -19,6 +20,7 @@ export const Dashboard = ({
   deleteRoute: (id: string) => void;
 }) => {
   const { t } = useTexts();
+  const visitors = useVisitors();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [editRoute, setEditRoute] = useState<Route | null>(null);
   const [newOptions, setNewOptions] = useState<Option[]>([]);
@@ -167,6 +169,12 @@ export const Dashboard = ({
     <div className="w-80 bg-gray-100 border-r border-gray-300 flex flex-col h-full overflow-hidden">
       {/* Upload */}
       <div className="p-4 border-b space-y-2">
+        {/* Visitor stats */}
+        <p className="text-[9px] text-gray-400 text-center leading-none tracking-tight">
+          {visitors
+            ? `${visitors.current} online · ${visitors.today} today · ${visitors.lifetime.toLocaleString()} total`
+            : '· · ·'}
+        </p>
         <input
           ref={fileInputRef}
           type="file"

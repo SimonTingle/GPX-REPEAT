@@ -3,10 +3,97 @@ from flask_cors import CORS
 import gpxpy
 import gpxpy.gpx
 import math
-from datetime import datetime
+import os
+import json
+import threading
+from datetime import datetime, timezone, timedelta
 
 app = Flask(__name__)
 CORS(app)
+
+# ─── Visitor tracking ────────────────────────────────────────────────────────
+
+DATA_DIR = os.environ.get('DATA_DIR', '/app/data')
+VISITORS_FILE = os.path.join(DATA_DIR, 'visitors.json')
+_visitors_lock = threading.Lock()
+ACTIVE_WINDOW_MINUTES = 5   # sessions seen within this window count as "current"
+SESSION_PRUNE_HOURS   = 24  # prune sessions older than this
+
+
+def _load_visitors():
+    """Load visitors data from disk, returning defaults if missing."""
+    if not os.path.exists(VISITORS_FILE):
+        return {'lifetime': 0, 'daily': {}, 'sessions': {}}
+    try:
+        with open(VISITORS_FILE, 'r') as f:
+            return json.load(f)
+    except Exception:
+        return {'lifetime': 0, 'daily': {}, 'sessions': {}}
+
+
+def _save_visitors(data):
+    """Persist visitors data to disk, creating the directory if needed."""
+    os.makedirs(DATA_DIR, exist_ok=True)
+    with open(VISITORS_FILE, 'w') as f:
+        json.dump(data, f)
+
+
+def _get_counts(data, now_iso):
+    """Return (current, today, lifetime) from the data dict."""
+    now = datetime.fromisoformat(now_iso)
+    cutoff = now - timedelta(minutes=ACTIVE_WINDOW_MINUTES)
+    today_str = now.strftime('%Y-%m-%d')
+
+    current = sum(
+        1 for ts in data['sessions'].values()
+        if datetime.fromisoformat(ts) >= cutoff
+    )
+    today = data['daily'].get(today_str, 0)
+    lifetime = data['lifetime']
+    return current, today, lifetime
+
+
+@app.route('/api/visitors/ping', methods=['POST'])
+def visitors_ping():
+    body = request.get_json(silent=True) or {}
+    session_id = str(body.get('session_id', ''))[:64]   # sanitise length
+    if not session_id:
+        return jsonify({'error': 'session_id required'}), 400
+
+    now = datetime.now(timezone.utc)
+    now_iso = now.isoformat()
+    today_str = now.strftime('%Y-%m-%d')
+
+    with _visitors_lock:
+        data = _load_visitors()
+
+        is_new = session_id not in data['sessions']
+        if is_new:
+            data['lifetime'] += 1
+            data['daily'][today_str] = data['daily'].get(today_str, 0) + 1
+
+        data['sessions'][session_id] = now_iso
+
+        # Prune stale sessions
+        cutoff = now - timedelta(hours=SESSION_PRUNE_HOURS)
+        data['sessions'] = {
+            sid: ts for sid, ts in data['sessions'].items()
+            if datetime.fromisoformat(ts) >= cutoff
+        }
+
+        _save_visitors(data)
+        current, today, lifetime = _get_counts(data, now_iso)
+
+    return jsonify({'current': current, 'today': today, 'lifetime': lifetime})
+
+
+@app.route('/api/visitors', methods=['GET'])
+def visitors_get():
+    now_iso = datetime.now(timezone.utc).isoformat()
+    with _visitors_lock:
+        data = _load_visitors()
+    current, today, lifetime = _get_counts(data, now_iso)
+    return jsonify({'current': current, 'today': today, 'lifetime': lifetime})
 
 def haversine(lat1, lon1, lat2, lon2):
     R = 6371
