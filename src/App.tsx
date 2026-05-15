@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Map } from './components/Map';
 import { Dashboard } from './components/Dashboard';
-import { Mobile } from './components/Mobile';
+import { PortraitPrompt } from './components/PortraitPrompt';
+import { ScaledDesktopMobile } from './components/ScaledDesktopMobile';
 import { useGPX } from './hooks/useGPX';
-import { useIsMobile } from './hooks/useMediaQuery';
+import { useMobileOrientation } from './hooks/useMediaQuery';
 import { TextProvider } from './contexts/TextContext';
 
 const AppContent = () => {
@@ -11,7 +12,7 @@ const AppContent = () => {
   const [selectedRoute, setSelectedRoute] = useState(routes[0]);
   const [hoverPosition, setHoverPosition] = useState<{ lat: number; lon: number } | null>(null);
   const [mapHoverDistance, setMapHoverDistance] = useState<number | null>(null);
-  const isMobile = useIsMobile();
+  const { isMobile, isPortrait, isLandscape } = useMobileOrientation();
 
   // Sync selectedRoute with updated route from useGPX
   useEffect(() => {
@@ -23,14 +24,20 @@ const AppContent = () => {
     }
   }, [routes]);
 
-  // Render mobile or desktop layout based on viewport size
-  if (isMobile) {
+  // Portrait mobile → ask user to rotate
+  if (isMobile && isPortrait) {
+    return <PortraitPrompt />;
+  }
+
+  // Landscape mobile → exact desktop layout scaled to fit screen
+  if (isMobile && isLandscape) {
     return (
-      <Mobile
+      <ScaledDesktopMobile
         routes={routes}
         selectedRoute={selectedRoute}
         onSelectRoute={setSelectedRoute}
         updateRoute={updateRoute}
+        deleteRoute={deleteRoute}
         hoverPosition={hoverPosition}
         onHoverElevation={(data) =>
           setHoverPosition(data ? { lat: data.lat, lon: data.lon } : null)
@@ -41,7 +48,7 @@ const AppContent = () => {
     );
   }
 
-  // Desktop layout
+  // Desktop layout — completely unchanged
   return (
     <div className="flex w-screen h-screen bg-white">
       <Dashboard

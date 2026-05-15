@@ -57,3 +57,32 @@ export function useIsMobile(): boolean {
 export function useIsDesktop(): boolean {
   return useMediaQuery('(min-width: 768px)');
 }
+
+/**
+ * Hook that returns mobile status and orientation.
+ * Mobile = viewport width < 1024px (below Tailwind lg breakpoint).
+ * Updates on resize and orientationchange events.
+ */
+export function useMobileOrientation() {
+  const getState = () => ({
+    windowWidth: window.innerWidth,
+    windowHeight: window.innerHeight,
+    isMobile: window.innerWidth < 1024,
+    isPortrait: window.innerHeight >= window.innerWidth,
+    isLandscape: window.innerWidth > window.innerHeight,
+  });
+
+  const [state, setState] = useState(() => getState());
+
+  useEffect(() => {
+    const handleChange = () => setState(getState());
+    window.addEventListener('resize', handleChange);
+    window.addEventListener('orientationchange', handleChange);
+    return () => {
+      window.removeEventListener('resize', handleChange);
+      window.removeEventListener('orientationchange', handleChange);
+    };
+  }, []);
+
+  return state;
+}
