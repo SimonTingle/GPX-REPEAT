@@ -3,6 +3,7 @@ import { Waypoint } from '../types';
 import { useTexts } from '../contexts/TextContext';
 import { calculateGradient, gradientToColor } from '../utils/elevationColor';
 import { distanceToCoordinate } from '../utils/waypointInterpolation';
+import { calculatePaceForGradient, parseMmSs, formatMmSs } from '../utils/timeCalc';
 
 const haversine = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
   const R = 6371;
@@ -19,6 +20,7 @@ interface DataPoint {
   distance: number;
   elevation: number;
   color: string;
+  gradient: number;
 }
 
 interface TooltipInfo {
@@ -26,6 +28,7 @@ interface TooltipInfo {
   y: number;
   distance: string;
   elevation: string;
+  pace: string;
 }
 
 interface HoverData {
@@ -42,9 +45,10 @@ interface Props {
   waypoints: Waypoint[];
   onHover?: (data: HoverData | null) => void;
   mapHoverDistance?: number | null;
+  targetPace?: string;
 }
 
-export const ElevationProfile = ({ waypoints, onHover, mapHoverDistance }: Props) => {
+export const ElevationProfile = ({ waypoints, onHover, mapHoverDistance, targetPace }: Props) => {
   const { t } = useTexts();
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
@@ -82,6 +86,7 @@ export const ElevationProfile = ({ waypoints, onHover, mapHoverDistance }: Props
         : 0;
 
     let color = '#CCCCCC';
+    let gradient = 0;
     if (i < waypoints.length - 1) {
       const wp2Any = waypoints[i + 1] as any;
       const ele1 =
@@ -96,7 +101,7 @@ export const ElevationProfile = ({ waypoints, onHover, mapHoverDistance }: Props
             ? wp2Any.ele
             : parseFloat(wp2Any.ele)
           : undefined;
-      const gradient = calculateGradient(
+      gradient = calculateGradient(
         wp.lat, wp.lon, ele1,
         waypoints[i + 1].lat, waypoints[i + 1].lon, ele2,
       );
@@ -107,6 +112,7 @@ export const ElevationProfile = ({ waypoints, onHover, mapHoverDistance }: Props
       distance: parseFloat(distances[i].toFixed(3)),
       elevation: Math.round(elev),
       color,
+      gradient,
     };
   });
 
@@ -156,11 +162,20 @@ export const ElevationProfile = ({ waypoints, onHover, mapHoverDistance }: Props
       if (diff < minDiff) { minDiff = diff; nearest = pt; }
     }
 
+    // Parse target pace and calculate adjusted pace for this gradient
+    const targetPaceSecs = targetPace ? parseMmSs(targetPace) : 0;
+    let pace = '';
+    if (targetPaceSecs > 0) {
+      const adjustedPaceSecs = calculatePaceForGradient(targetPaceSecs, nearest.gradient);
+      pace = formatMmSs(adjustedPaceSecs);
+    }
+
     setTooltip({
       x: mx,
       y: my,
       distance: nearest.distance.toFixed(2),
       elevation: String(nearest.elevation),
+      pace,
     });
 
     // Calculate interpolated coordinates for map hover marker
@@ -365,6 +380,7 @@ export const ElevationProfile = ({ waypoints, onHover, mapHoverDistance }: Props
           >
             <div><strong>{tooltip.distance} km</strong></div>
             <div>Elevation: {tooltip.elevation} m</div>
+            {tooltip.pace && <div>Pace: {tooltip.pace}/km</div>}
           </div>
         )}
       </div>

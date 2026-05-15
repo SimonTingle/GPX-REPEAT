@@ -201,6 +201,7 @@ export const Map = ({
           waypoints={route.waypoints}
           onHover={onHoverElevation}
           mapHoverDistance={mapHoverDistance}
+          targetPace={selectedRoute?.targetPace}
         />
       )}
 
