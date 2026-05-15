@@ -54,6 +54,9 @@ coverage/
 temp/
 .cache/
 
+# Runtime data
+data/
+
 # Build artifacts
 *.zip
 *.tar.gz
