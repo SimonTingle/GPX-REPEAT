@@ -267,11 +267,13 @@ export const Map = ({
           const targetPaceSecs = route.targetPace ? parseMmSs(route.targetPace) : 0;
           const gradients = [
             { label: t('elevation.very_steep_up'), color: '#8B0000', pct: 12 },
-            { label: t('elevation.steep_up'), color: '#FF4444', pct: 8.5 },
+            { label: t('elevation.steep_up'), color: '#FF4444', pct: 8 },
+            { label: t('elevation.moderate_up'), color: '#FF7F80', pct: 4.5 },
             { label: t('elevation.gentle_up'), color: '#FFB3BA', pct: 2 },
             { label: t('elevation.flat'), color: '#CCCCCC', pct: 0 },
             { label: t('elevation.gentle_down'), color: '#87CEEB', pct: -2 },
-            { label: t('elevation.steep_down'), color: '#0047AB', pct: -8.5 },
+            { label: t('elevation.moderate_down'), color: '#4A90E2', pct: -4.5 },
+            { label: t('elevation.steep_down'), color: '#0047AB', pct: -8 },
             { label: t('elevation.very_steep_down'), color: '#00008B', pct: -12 },
           ];
 

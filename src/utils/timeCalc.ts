@@ -72,20 +72,22 @@ export function calculatePaceForGradient(
   const absGradient = Math.abs(gradientPct);
   let adjustment = 1.0; // default: no adjustment
 
+  // Tier boundaries use < (exclusive upper) to match gradientToColor() exactly.
+  // 5 tiers per direction: flat (<1%), gentle (1-3%), moderate (3-6%), steep (6-10%), very steep (10%+).
   if (gradientPct > 0) {
     // Uphill - slow down (multiply to increase time)
-    if (absGradient <= 1) adjustment = 1.05;      // +5% for very gentle
-    else if (absGradient <= 3) adjustment = 1.15; // +15% for gentle
-    else if (absGradient <= 6) adjustment = 1.30; // +30% for moderate
-    else if (absGradient <= 10) adjustment = 1.40; // +40% for steep
-    else adjustment = 1.50;                       // +50% for very steep
+    if (absGradient < 1) adjustment = 1.00;       // flat
+    else if (absGradient < 3) adjustment = 1.15;  // +15% gentle
+    else if (absGradient < 6) adjustment = 1.25;  // +25% moderate
+    else if (absGradient < 10) adjustment = 1.40; // +40% steep
+    else adjustment = 1.50;                       // +50% very steep
   } else if (gradientPct < 0) {
     // Downhill - speed up (multiply to decrease time)
-    if (absGradient <= 1) adjustment = 0.98;     // -2% for very gentle
-    else if (absGradient <= 3) adjustment = 0.90; // -10% for gentle
-    else if (absGradient <= 6) adjustment = 0.85; // -15% for moderate
-    else if (absGradient <= 10) adjustment = 0.82; // -18% for steep
-    else adjustment = 0.80;                      // -20% for very steep
+    if (absGradient < 1) adjustment = 1.00;       // flat
+    else if (absGradient < 3) adjustment = 0.92;  // -8%  gentle
+    else if (absGradient < 6) adjustment = 0.85;  // -15% moderate
+    else if (absGradient < 10) adjustment = 0.82; // -18% steep
+    else adjustment = 0.80;                       // -20% very steep
   }
   // else: flat (adjustment = 1.0, maintain target pace)
 

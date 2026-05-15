@@ -61,13 +61,15 @@
     },
     "elevation": {
       "title": "📈 Elevation Gradient",
-      "very_steep_up": "Very steep uphill (11%+)",
-      "steep_up": "Steep uphill (7-10%)",
+      "very_steep_up": "Very steep uphill (10%+)",
+      "steep_up": "Steep uphill (6-10%)",
+      "moderate_up": "Moderate uphill (3-6%)",
       "gentle_up": "Gentle uphill (1-3%)",
-      "flat": "Flat (±1%)",
+      "flat": "Flat (<1%)",
       "gentle_down": "Gentle downhill (1-3%)",
-      "steep_down": "Steep downhill (7-10%)",
-      "very_steep_down": "Very steep downhill (11%+)"
+      "moderate_down": "Moderate downhill (3-6%)",
+      "steep_down": "Steep downhill (6-10%)",
+      "very_steep_down": "Very steep downhill (10%+)"
     },
     "map_styles": {
       "osm": "OpenStreetMap",
@@ -171,13 +173,15 @@
     },
     "elevation": {
       "title": "📈 Gradiente de elevación",
-      "very_steep_up": "Subida muy pronunciada (11%+)",
-      "steep_up": "Subida pronunciada (7-10%)",
+      "very_steep_up": "Subida muy pronunciada (10%+)",
+      "steep_up": "Subida pronunciada (6-10%)",
+      "moderate_up": "Subida moderada (3-6%)",
       "gentle_up": "Subida suave (1-3%)",
-      "flat": "Plano (±1%)",
+      "flat": "Plano (<1%)",
       "gentle_down": "Bajada suave (1-3%)",
-      "steep_down": "Bajada pronunciada (7-10%)",
-      "very_steep_down": "Bajada muy pronunciada (11%+)"
+      "moderate_down": "Bajada moderada (3-6%)",
+      "steep_down": "Bajada pronunciada (6-10%)",
+      "very_steep_down": "Bajada muy pronunciada (10%+)"
     },
     "map_styles": {
       "osm": "OpenStreetMap",
@@ -288,13 +292,15 @@
     },
     "elevation": {
       "title": "📈 Gradient d'altitude",
-      "very_steep_up": "Montée très raide (11%+)",
-      "steep_up": "Montée raide (7-10%)",
+      "very_steep_up": "Montée très raide (10%+)",
+      "steep_up": "Montée raide (6-10%)",
+      "moderate_up": "Montée modérée (3-6%)",
       "gentle_up": "Montée douce (1-3%)",
-      "flat": "Plat (±1%)",
+      "flat": "Plat (<1%)",
       "gentle_down": "Descente douce (1-3%)",
-      "steep_down": "Descente raide (7-10%)",
-      "very_steep_down": "Descente très raide (11%+)"
+      "moderate_down": "Descente modérée (3-6%)",
+      "steep_down": "Descente raide (6-10%)",
+      "very_steep_down": "Descente très raide (10%+)"
     },
     "map_styles": {
       "osm": "OpenStreetMap",
@@ -405,13 +411,15 @@
     },
     "elevation": {
       "title": "📈 Höhenprofil",
-      "very_steep_up": "Sehr steile Steigung (11%+)",
-      "steep_up": "Steile Steigung (7-10%)",
+      "very_steep_up": "Sehr steile Steigung (10%+)",
+      "steep_up": "Steile Steigung (6-10%)",
+      "moderate_up": "Mäßige Steigung (3-6%)",
       "gentle_up": "Sanfte Steigung (1-3%)",
-      "flat": "Flach (±1%)",
+      "flat": "Flach (<1%)",
       "gentle_down": "Sanftes Gefälle (1-3%)",
-      "steep_down": "Steiles Gefälle (7-10%)",
-      "very_steep_down": "Sehr steiles Gefälle (11%+)"
+      "moderate_down": "Mäßiges Gefälle (3-6%)",
+      "steep_down": "Steiles Gefälle (6-10%)",
+      "very_steep_down": "Sehr steiles Gefälle (10%+)"
     },
     "map_styles": {
       "osm": "OpenStreetMap",
@@ -522,13 +530,15 @@
     },
     "elevation": {
       "title": "📈 Profilo altimetrico",
-      "very_steep_up": "Salita molto ripida (11%+)",
-      "steep_up": "Salita ripida (7-10%)",
+      "very_steep_up": "Salita molto ripida (10%+)",
+      "steep_up": "Salita ripida (6-10%)",
+      "moderate_up": "Salita moderata (3-6%)",
       "gentle_up": "Salita dolce (1-3%)",
-      "flat": "Pianeggiante (±1%)",
+      "flat": "Pianeggiante (<1%)",
       "gentle_down": "Discesa dolce (1-3%)",
-      "steep_down": "Discesa ripida (7-10%)",
-      "very_steep_down": "Discesa molto ripida (11%+)"
+      "moderate_down": "Discesa moderata (3-6%)",
+      "steep_down": "Discesa ripida (6-10%)",
+      "very_steep_down": "Discesa molto ripida (10%+)"
     },
     "map_styles": {
       "osm": "OpenStreetMap",
@@ -639,13 +649,15 @@
     },
     "elevation": {
       "title": "📈 Perfil de elevação",
-      "very_steep_up": "Subida muito íngreme (11%+)",
-      "steep_up": "Subida íngreme (7-10%)",
+      "very_steep_up": "Subida muito íngreme (10%+)",
+      "steep_up": "Subida íngreme (6-10%)",
+      "moderate_up": "Subida moderada (3-6%)",
       "gentle_up": "Subida suave (1-3%)",
-      "flat": "Plano (±1%)",
+      "flat": "Plano (<1%)",
       "gentle_down": "Descida suave (1-3%)",
-      "steep_down": "Descida íngreme (7-10%)",
-      "very_steep_down": "Descida muito íngreme (11%+)"
+      "moderate_down": "Descida moderada (3-6%)",
+      "steep_down": "Descida íngreme (6-10%)",
+      "very_steep_down": "Descida muito íngreme (10%+)"
     },
     "map_styles": {
       "osm": "OpenStreetMap",
@@ -756,13 +768,15 @@
     },
     "elevation": {
       "title": "📈 標高勾配",
-      "very_steep_up": "非常に急な上り坂（11%以上）",
-      "steep_up": "急な上り坂（7-10%）",
+      "very_steep_up": "非常に急な上り坂（10%以上）",
+      "steep_up": "急な上り坂（6-10%）",
+      "moderate_up": "中程度の上り坂（3-6%）",
       "gentle_up": "緩い上り坂（1-3%）",
-      "flat": "平坦（±1%）",
+      "flat": "平坦（1%未満）",
       "gentle_down": "緩い下り坂（1-3%）",
-      "steep_down": "急な下り坂（7-10%）",
-      "very_steep_down": "非常に急な下り坂（11%以上）"
+      "moderate_down": "中程度の下り坂（3-6%）",
+      "steep_down": "急な下り坂（6-10%）",
+      "very_steep_down": "非常に急な下り坂（10%以上）"
     },
     "map_styles": {
       "osm": "OpenStreetMap",
@@ -873,13 +887,15 @@
     },
     "elevation": {
       "title": "📈 海拔梯度",
-      "very_steep_up": "非常陡峭上升（11%以上）",
-      "steep_up": "陡峭上升（7-10%）",
+      "very_steep_up": "非常陡峭上升（10%以上）",
+      "steep_up": "陡峭上升（6-10%）",
+      "moderate_up": "中等上升（3-6%）",
       "gentle_up": "缓和上升（1-3%）",
-      "flat": "平坦（±1%）",
+      "flat": "平坦（小于1%）",
       "gentle_down": "缓和下降（1-3%）",
-      "steep_down": "陡峭下降（7-10%）",
-      "very_steep_down": "非常陡峭下降（11%以上）"
+      "moderate_down": "中等下降（3-6%）",
+      "steep_down": "陡峭下降（6-10%）",
+      "very_steep_down": "非常陡峭下降（10%以上）"
     },
     "map_styles": {
       "osm": "OpenStreetMap",
