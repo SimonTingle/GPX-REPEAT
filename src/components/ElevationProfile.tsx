@@ -41,9 +41,10 @@ const CHART_H = 160;
 interface Props {
   waypoints: Waypoint[];
   onHover?: (data: HoverData | null) => void;
+  mapHoverDistance?: number | null;
 }
 
-export const ElevationProfile = ({ waypoints, onHover }: Props) => {
+export const ElevationProfile = ({ waypoints, onHover, mapHoverDistance }: Props) => {
   const { t } = useTexts();
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
@@ -312,6 +313,37 @@ export const ElevationProfile = ({ waypoints, onHover }: Props) => {
               pointerEvents="none"
             />
           )}
+
+          {/* Map hover marker */}
+          {mapHoverDistance !== undefined && mapHoverDistance !== null && (() => {
+            let markerElevation: number | undefined;
+            for (const pt of data) {
+              if (Math.abs(pt.distance - mapHoverDistance) < 0.01) {
+                markerElevation = pt.elevation;
+                break;
+              }
+            }
+            if (markerElevation === undefined) {
+              let nearest = data[0];
+              let minDiff = Infinity;
+              for (const pt of data) {
+                const diff = Math.abs(pt.distance - mapHoverDistance);
+                if (diff < minDiff) { minDiff = diff; nearest = pt; }
+              }
+              markerElevation = nearest.elevation;
+            }
+            return markerElevation !== undefined ? (
+              <circle
+                cx={toX(mapHoverDistance)}
+                cy={toY(markerElevation)}
+                r={4}
+                fill="white"
+                stroke="black"
+                strokeWidth={1}
+                pointerEvents="none"
+              />
+            ) : null;
+          })()}
         </svg>
 
         {/* Tooltip popup */}

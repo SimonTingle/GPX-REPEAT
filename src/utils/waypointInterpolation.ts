@@ -134,3 +134,37 @@ export function distanceToCoordinate(
   // Interpolate between them
   return interpolateCoordinate(waypoints[prevIndex], waypoints[nextIndex], progress);
 }
+
+/**
+ * Finds the closest point on the route to a given coordinate.
+ * Returns the cumulative distance to that waypoint, or null if waypoints insufficient.
+ *
+ * @param targetLat Latitude to find
+ * @param targetLon Longitude to find
+ * @param waypoints Array of waypoints defining the route
+ * @param cumulativeDistances Pre-computed cumulative distances
+ * @returns Distance in km from start of route, or null if invalid
+ */
+export function coordinateToDistance(
+  targetLat: number,
+  targetLon: number,
+  waypoints: Waypoint[],
+  cumulativeDistances: number[]
+): number | null {
+  if (waypoints.length < 1) return null;
+
+  // Find closest waypoint using haversine distance
+  let closestIdx = 0;
+  let minDist = Infinity;
+
+  for (let i = 0; i < waypoints.length; i++) {
+    const d = haversine(targetLat, targetLon, waypoints[i].lat, waypoints[i].lon);
+    if (d < minDist) {
+      minDist = d;
+      closestIdx = i;
+    }
+  }
+
+  // Return cumulative distance to that waypoint
+  return cumulativeDistances[closestIdx];
+}

@@ -22,6 +22,8 @@ export const Mobile = ({
   updateRoute,
   hoverPosition,
   onHoverElevation,
+  mapHoverDistance,
+  onMapHover,
 }: {
   routes: Route[];
   selectedRoute?: Route;
@@ -29,6 +31,8 @@ export const Mobile = ({
   updateRoute: (id: string, updates: Partial<Route>) => void;
   hoverPosition?: { lat: number; lon: number } | null;
   onHoverElevation?: (data: HoverData | null) => void;
+  mapHoverDistance?: number | null;
+  onMapHover?: (distance: number | null) => void;
 }) => {
   const { t } = useTexts();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -72,6 +76,8 @@ export const Mobile = ({
           selectedRoute={selectedRoute}
           hoverPosition={hoverPosition}
           onHoverElevation={onHoverElevation}
+          mapHoverDistance={mapHoverDistance}
+          onMapHover={onMapHover}
         />
 
         {/* Floating Control Buttons (bottom-right, above elevation profile) */}

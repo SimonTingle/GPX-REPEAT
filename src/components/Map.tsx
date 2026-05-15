@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { MapContainer, TileLayer, Polyline, Popup, Marker, useMap } from 'react-leaflet';
-import { LatLngBounds } from 'leaflet';
+import { LatLngBounds, LeafletMouseEvent } from 'leaflet';
 import { useMapStyle } from '../hooks/useMapStyle';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import { useTexts } from '../contexts/TextContext';
@@ -10,6 +10,7 @@ import { ElevationProfile } from './ElevationProfile';
 import { Route, MapStyle } from '../types';
 import { generateColoredSegments } from '../utils/elevationColor';
 import { calculatePaceForGradient, parseMmSs, formatMmSs } from '../utils/timeCalc';
+import { buildCumulativeDistances, coordinateToDistance } from '../utils/waypointInterpolation';
 import 'leaflet/dist/leaflet.css';
 
 // Fix Leaflet marker icons
@@ -84,11 +85,15 @@ export const Map = ({
   selectedRoute,
   hoverPosition,
   onHoverElevation,
+  mapHoverDistance,
+  onMapHover,
 }: {
   routes: Route[];
   selectedRoute?: Route;
   hoverPosition?: { lat: number; lon: number } | null;
   onHoverElevation?: (data: HoverData | null) => void;
+  mapHoverDistance?: number | null;
+  onMapHover?: (distance: number | null) => void;
 }) => {
   const { style, setStyle, getTileUrl, getAttribution } = useMapStyle();
   const { t, currentLanguage, setLanguage, allLanguages } = useTexts();
@@ -133,6 +138,21 @@ export const Map = ({
     setShowLanguageMenu(false);
   };
 
+  const handlePolylineHover = (e: LeafletMouseEvent) => {
+    const { lat, lng } = e.latlng;
+    if (selectedRoute && selectedRoute.waypoints && onMapHover) {
+      const cumulativeDistances = buildCumulativeDistances(selectedRoute.waypoints);
+      const dist = coordinateToDistance(lat, lng, selectedRoute.waypoints, cumulativeDistances);
+      if (dist !== null) {
+        onMapHover(dist);
+      }
+    }
+  };
+
+  const handlePolylineLeave = () => {
+    onMapHover?.(null);
+  };
+
   return (
     <div className="relative w-full h-full flex flex-col" style={{ touchAction: 'none' }}>
       <MapContainer
@@ -155,6 +175,10 @@ export const Map = ({
               color={seg.color}
               weight={3}
               opacity={0.8}
+              eventHandlers={{
+                mouseover: handlePolylineHover,
+                mouseout: handlePolylineLeave,
+              }}
             />
           ));
         })()}
@@ -170,7 +194,11 @@ export const Map = ({
 
       {/* Elevation Profile */}
       {route && route.waypoints.length > 0 && (
-        <ElevationProfile waypoints={route.waypoints} onHover={onHoverElevation} />
+        <ElevationProfile
+          waypoints={route.waypoints}
+          onHover={onHoverElevation}
+          mapHoverDistance={mapHoverDistance}
+        />
       )}
 
       {!route && (

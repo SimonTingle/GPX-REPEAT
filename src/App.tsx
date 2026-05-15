@@ -10,6 +10,7 @@ const AppContent = () => {
   const { routes, updateRoute, deleteRoute } = useGPX();
   const [selectedRoute, setSelectedRoute] = useState(routes[0]);
   const [hoverPosition, setHoverPosition] = useState<{ lat: number; lon: number } | null>(null);
+  const [mapHoverDistance, setMapHoverDistance] = useState<number | null>(null);
   const isMobile = useIsMobile();
 
   // Sync selectedRoute with updated route from useGPX
@@ -34,6 +35,8 @@ const AppContent = () => {
         onHoverElevation={(data) =>
           setHoverPosition(data ? { lat: data.lat, lon: data.lon } : null)
         }
+        mapHoverDistance={mapHoverDistance}
+        onMapHover={setMapHoverDistance}
       />
     );
   }
@@ -56,6 +59,8 @@ const AppContent = () => {
           onHoverElevation={(data) =>
             setHoverPosition(data ? { lat: data.lat, lon: data.lon } : null)
           }
+          mapHoverDistance={mapHoverDistance}
+          onMapHover={setMapHoverDistance}
         />
       </div>
     </div>
