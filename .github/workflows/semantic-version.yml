@@ -9,6 +9,10 @@ on:
       - 'CHANGELOG.md'
       - 'package.json'
 
+permissions:
+  contents: write
+  actions: read
+
 jobs:
   version-bump:
     runs-on: ubuntu-latest
@@ -18,7 +22,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Full history to parse all commits
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
