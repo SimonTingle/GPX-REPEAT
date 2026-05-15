@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.9.1] - 2026-05-15
+
+### Fixed
+- ensure zoom buttons are hidden on mobile landscape
+
 ## [0.9.0] - 2026-05-15
 
 ### Added
