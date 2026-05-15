@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.9.0] - 2026-05-15
+
+### Added
+- add 31 missing translation keys for new mobile UI elements
+
 ## [0.8.0] - 2026-05-15
 
 ### Added
