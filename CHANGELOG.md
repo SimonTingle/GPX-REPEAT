@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.11.0] - 2026-05-15
+
+### Added
+- add elevation stats to route analytics section
+
 ## [0.10.0] - 2026-05-15
 
 ### Added
