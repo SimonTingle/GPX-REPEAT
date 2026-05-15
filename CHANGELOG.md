@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.0] - 2026-05-15
+
+### Added
+- mobile landscape shows scaled desktop; portrait shows rotate prompt
+
 ## [0.5.2] - 2026-05-15
 
 ### Fixed
