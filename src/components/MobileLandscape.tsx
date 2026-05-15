@@ -67,6 +67,7 @@ export const MobileLandscape = ({
           showElevation={false}
           showLegend={legendOpen}
           mobileFullscreen={true}
+          hideZoom={true}
         />
       </div>
 

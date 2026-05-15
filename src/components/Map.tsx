@@ -90,6 +90,7 @@ export const Map = ({
   showElevation = true,
   showLegend = true,
   mobileFullscreen = false,
+  hideZoom = false,
 }: {
   routes: Route[];
   selectedRoute?: Route;
@@ -100,6 +101,7 @@ export const Map = ({
   showElevation?: boolean;
   showLegend?: boolean;
   mobileFullscreen?: boolean;
+  hideZoom?: boolean;
 }) => {
   const { style, setStyle, getTileUrl, getAttribution } = useMapStyle();
   const { t, currentLanguage, setLanguage, allLanguages } = useTexts();
@@ -166,7 +168,7 @@ export const Map = ({
         touchZoom={true}
         doubleClickZoom={true}
         scrollWheelZoom={true}
-        zoomControl={!isMobile}
+        zoomControl={!isMobile && !hideZoom}
       >
         <TileLayer url={getTileUrl()} attribution={getAttribution()} />
         <MapUpdater route={route} />
